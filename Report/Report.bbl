@@ -1,0 +1,165 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{christopherburgesRankNetLambdaRankLambdaMART2010}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d66c4b884057887b53819bd6feef8736}{%
+           family={{Christopher Burges}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Microsoft Research Technical Report}%
+      }
+      \strng{namehash}{d66c4b884057887b53819bd6feef8736}
+      \strng{fullhash}{d66c4b884057887b53819bd6feef8736}
+      \strng{bibnamehash}{d66c4b884057887b53819bd6feef8736}
+      \strng{authorbibnamehash}{d66c4b884057887b53819bd6feef8736}
+      \strng{authornamehash}{d66c4b884057887b53819bd6feef8736}
+      \strng{authorfullhash}{d66c4b884057887b53819bd6feef8736}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{From RankNet to LambdaRank toLambdaMART: An OverviewChristopher J.C. BurgesMicrosoft Research Technical Report MSR-TR-2010-82AbstractLambdaMART is the boosted tree version of LambdaRank, which is based onRankNet. RankNet, LambdaRank, and LambdaMART have proven to be very suc-cessful algorithms for solving real world ranking problems: for example an ensem-ble of LambdaMART rankers won Track 1 of the 2010 Yahoo! Learning To RankChallenge. The details of these algorithms are spread across several papers and re-ports, and so here we give a self-contained, detailed and complete description ofthem.}
+      \field{day}{1}
+      \field{month}{1}
+      \field{title}{From {{RankNet}} to {{LambdaRank}} to {{LambdaMART}}: {{An Overview}} ({{MSR}}-{{TR}}-2010-82}
+      \field{year}{2010}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf
+      \endverb
+    \endentry
+    \entry{nicodemiIntroductionAbstractAlgebra2007a}{book}{}
+      \name{author}{3}{}{%
+        {{hash=c4c18a360dba4df7294730d2aa312b46}{%
+           family={Nicodemi},
+           familyi={N\bibinitperiod},
+           given={Olympia},
+           giveni={O\bibinitperiod}}}%
+        {{hash=251e87cdbe6e2d924c77289bb1ee47d6}{%
+           family={Sutherland},
+           familyi={S\bibinitperiod},
+           given={Melissa\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=085b8b7f038738c294ca1b1711b92971}{%
+           family={Towsley},
+           familyi={T\bibinitperiod},
+           given={Gary\bibnamedelima W.},
+           giveni={G\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Upper Saddle River, NJ}%
+      }
+      \list{publisher}{1}{%
+        {Pearson Prentice Hall}%
+      }
+      \strng{namehash}{c65809013899687a317846080ba75019}
+      \strng{fullhash}{c65809013899687a317846080ba75019}
+      \strng{bibnamehash}{c65809013899687a317846080ba75019}
+      \strng{authorbibnamehash}{c65809013899687a317846080ba75019}
+      \strng{authornamehash}{c65809013899687a317846080ba75019}
+      \strng{authorfullhash}{c65809013899687a317846080ba75019}
+      \field{sortinit}{N}
+      \field{sortinithash}{98cf339a479c0454fe09153a08675a15}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{annotation}{OCLC: 253915717}
+      \field{isbn}{978-0-13-101963-8}
+      \field{langid}{english}
+      \field{note}{Includes bibliographic references (S. 391-394) and index}
+      \field{pagetotal}{436}
+      \field{title}{An Introduction to Abstract Algebra with Notes to the Future Teacher}
+      \field{year}{2007}
+      \field{dateera}{ce}
+    \endentry
+    \entry{tuGraphBasedSemiSupervisedNearestNeighbor2016a}{online}{}
+      \name{author}{5}{}{%
+        {{hash=c7c25b970967a55a64bd48f85e7f6886}{%
+           family={Tu},
+           familyi={T\bibinitperiod},
+           given={Enmei},
+           giveni={E\bibinitperiod}}}%
+        {{hash=135caf0b4d2118747726b4ac29ab4614}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yaqian},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=3cd58d79a8c7a988278e4d5d4c5cd55e}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Lin},
+           giveni={L\bibinitperiod}}}%
+        {{hash=4656453b716273b4ea07ab731e9b6dd5}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Jie},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e9449f8f815b6f64bf83ee7f76682448}{%
+           family={Kasabov},
+           familyi={K\bibinitperiod},
+           given={Nikola},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{b154ad709eac035b9421987c9020cff5}
+      \strng{fullhash}{b3696ab677f78151e3a48a75e99b0856}
+      \strng{bibnamehash}{b154ad709eac035b9421987c9020cff5}
+      \strng{authorbibnamehash}{b154ad709eac035b9421987c9020cff5}
+      \strng{authornamehash}{b154ad709eac035b9421987c9020cff5}
+      \strng{authorfullhash}{b3696ab677f78151e3a48a75e99b0856}
+      \field{sortinit}{T}
+      \field{sortinithash}{51f9faf24c60c62ca764a77f78cf5666}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{\$k\$ Nearest Neighbors (\$k\$NN) is one of the most widely used supervised learning algorithms to classify Gaussian distributed data, but it does not achieve good results when it is applied to nonlinear manifold distributed data, especially when a very limited amount of labeled samples are available. In this paper, we propose a new graph-based \$k\$NN algorithm which can effectively handle both Gaussian distributed data and nonlinear manifold distributed data. To achieve this goal, we first propose a constrained Tired Random Walk (TRW) by constructing an \$R\$-level nearest-neighbor strengthened tree over the graph, and then compute a TRW matrix for similarity measurement purposes. After this, the nearest neighbors are identified according to the TRW matrix and the class label of a query point is determined by the sum of all the TRW weights of its nearest neighbors. To deal with online situations, we also propose a new algorithm to handle sequential samples based a local neighborhood reconstruction. Comparison experiments are conducted on both synthetic data sets and real-world data sets to demonstrate the validity of the proposed new \$k\$NN algorithm and its improvements to other version of \$k\$NN algorithms. Given the widespread appearance of manifold structures in real-world problems and the popularity of the traditional \$k\$NN algorithm, the proposed manifold version \$k\$NN shows promising potential for classifying manifold-distributed data.}
+      \field{day}{3}
+      \field{eprintclass}{cs, stat}
+      \field{eprinttype}{arxiv}
+      \field{month}{6}
+      \field{note}{Comment: 32 pages, 12 figures, 7 tables}
+      \field{title}{A {{Graph}}-{{Based Semi}}-{{Supervised}} k {{Nearest}}-{{Neighbor Method}} for {{Nonlinear Manifold Distributed Data Classification}}}
+      \field{urlday}{2}
+      \field{urlmonth}{12}
+      \field{urlyear}{2020}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{eprint}
+      \verb 1606.00985
+      \endverb
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/G9DGWTE3/tuGraphBasedSemiSupervisedNearestNeighbor2016a.pdf;/home/ryan/Zotero/storage/L85BD4UL/1606.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1606.00985
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1606.00985
+      \endverb
+      \keyw{Computer Science - Machine Learning,Statistics - Machine Learning}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

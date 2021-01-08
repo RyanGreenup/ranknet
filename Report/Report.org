@@ -1,0 +1,49 @@
+#+TITLE: RankNet Investigatoin
+:PREAMBLE:
+#+OPTIONS: broken-links:auto todo:nil H:9 tags:t tex:t
+#+STARTUP: overview
+#+AUTHOR: Ryan Greenup
+#+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
+# #+TODO: TODO IN-PROGRESS WAITING DONE
+#+CATEGORY: TAD
+:END:
+:HTML:
+#+INFOJS_OPT: view:info toc:3
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="./resources/style.css">
+# #+CSL_STYLE: /home/ryan/Templates/CSL/nature.csl
+:END:
+:R:
+#+PROPERTY: header-args:R :session TADMain :dir ./ :cache yes :eval never-export :exports both
+#+PROPERTY: :eval never
+# exports: both (or code or whatever)
+# results: table (or output or whatever)
+:END:
+:LATEX:
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,11pt,twoside]
+#+LATEX_HEADER: \IfFileExists{./resources/style.sty}{\usepackage{./resources/style}}{}
+#+LATEX_HEADER: \IfFileExists{./resources/referencing.sty}{\usepackage{./resources/referencing}}{}
+#+LATEX_HEADER: \addbibresource{../resources/references.bib}
+#+LATEX_HEADER: \usepackage[mode=buildnew]{standalone}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{decorations.fractals}
+#+LATEX_HEADER: \usetikzlibrary{lindenmayersystems}
+:END:
+@@latex: \newpage @@
+* Text and References
+Fractals are complex shapes that often occur from natural processes, in this
+report we hope to investigate the emergence of patterns and complex structures
+from natural phenomena. We begin with an investigation into fractals and the
+concept of dimension and then discuss links between fractal patterns and natural
+processes.
+
+This is a Reference cite:tuGraphBasedSemiSupervisedNearestNeighbor2016a and another cite:nicodemiIntroductionAbstractAlgebra2007a and yet another cite:christopherburgesRankNetLambdaRankLambdaMART2010.
+
+* Fractals
+Images are shown in figure [[imtest]].
+
+#+NAME: imtest
+#+CAPTION: This is a test image showing the outline of a Julia set
+#+attr_html: :width 400px
+#+attr_latex: :width 0.5\textwidth
+[[file:media/outline-rabbit.png]]
