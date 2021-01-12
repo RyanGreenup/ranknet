@@ -46,46 +46,6 @@ p = (
 
 # * Define the function we are going to use
 # we want to use yhat = 1/(1+e^-x)
-class sigmoid(torch.autograd.Function):
-    """
-    The Sigmoid Curve, this will calculate the output and contain the partial derivative
-    """
-    @staticmethod
-    def forward(ctx, sigma, input):
-        """
-        The forward pass receives an input tensor and outputs the
-        value of the sigmoid function applied to each element.
-
-        ctx is a context object that can be used to cache arbitrary objects for
-        use in the backward pass (e.g. maybe to save a variable like sqrt() which is
-        computationally expensive and could be used in the backward pass)
-
-        additional parameters can also be defined, but, input must be last.
-        """
-        ctx.save_for_backward(input, sigma)
-        return 1/(1+torch.exp(-input*sigma))
-
-    @staticmethod
-    def backward(ctx, grad_output):
-        """
-        The backward pass returns the partial derivative of the function with
-        respect to the Error.
-
-        To do this calculate ∂f/∂x then return:
-
-            grad_output*∂f/∂x
-
-        because grad_output will be equal to ∂E/∂f the chain rule will cancel it out.
-
-        but each input must have a gradient returned.
-        """
-        input, sigma = ctx.saved_tensors                             # The comma unpacks the list item
-        grad_sigma = x*torch.exp(-sigma*x)/((1+torch.exp(-sigma*x)).pow(2))
-        grad_input = torch.exp(-input)/((1+torch.exp(-input)).pow(2))
-
-        #
-        return grad_sigma, grad_input
-
 
 # * Implement the Neural Network
 # Use the `.apply` method to call the function, `.forward` can't be used because the
@@ -96,21 +56,62 @@ sigma = torch.randn((), device=device, dtype=dtype, requires_grad=True)
 print(sigma)
 eta   = 1e-6
 
+print('iterations', '\t', 'loss')
+print('----------------\n')
+learning_rate = 1e-6
+for t in range(2000):
+    # Forward pass: compute predicted y using operations on Tensors.
+    y_pred = 1/(1+torch.exp(-x*sigma))
+
+    # Compute and print loss using operations on Tensors.
+    # Now loss is a Tensor of shape (1,)
+    # loss.item() gets the scalar value held in the loss.
+    loss = (y_pred - y).pow(2).sum()
+    if t % 100 == 99:
+        print(t, '\t', loss.item())
+
+
+    # Use autograd to compute the backward pass. This call will compute the
+    # gradient of loss with respect to all Tensors with requires_grad=True.
+    # After this call a.grad, b.grad. c.grad and d.grad will be Tensors holding
+    # the gradient of the loss with respect to a, b, c, d respectively.
+    loss.backward()
+
+    # Manually update weights using gradient descent. Wrap in torch.no_grad()
+    # because weights have requires_grad=True, but we don't need to track this
+    # in autograd.
+    with torch.no_grad():
+        sigma -= learning_rate * sigma.grad
+
+        # Manually zero the gradients after updating weights
+        sigma.grad = None
+
+print('\n')
+print(f'Result: y = 1/(1+torch.exp(-x * {round(sigma.item())}))')
+
+
+#########################################3
 # ** Start the Loop
 # *** Forward Pass; Calculate y
-y_pred = sigmoid.apply(x, sigma)
+y_pred = 1/(1+torch.exp(-x*sigma))
 
 # *** Calculate the Loss
-loss = (y_pred - y).pow(2).sum()
+loss = (y_pred - y).pow(2).sum().item()
+print(y_pred)
 
 # *** Backward Pass; Calculate the gradients and store in `.grad`
 loss.backward()
 print(loss.item())
+print(sigma.grad)
 
 # *** Adjust the Weights
-sigma = sigma - eta * sigma.grad
+with torch.no_grad():
+    sigma = sigma - eta * sigma.grad
 
-print(sigma)
+    # *** Reset the Gradient to None
+    sigma.grad = None
+
+    print(sigma)
 
 #############################################
 #############################################
