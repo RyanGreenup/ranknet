@@ -56,10 +56,11 @@ sigma = torch.randn((), device=device, dtype=dtype, requires_grad=True)
 print(sigma)
 eta   = 1e-6
 
+# ** Begin the Loop
 print('iterations', '\t', 'loss')
 print('----------------\n')
-learning_rate = 1e-6
-for t in range(2000):
+eta = 1e-6
+for t in range(5000):
     # Forward pass: compute predicted y using operations on Tensors.
     y_pred = 1/(1+torch.exp(-x*sigma))
 
@@ -67,7 +68,7 @@ for t in range(2000):
     # Now loss is a Tensor of shape (1,)
     # loss.item() gets the scalar value held in the loss.
     loss = (y_pred - y).pow(2).sum()
-    if t % 100 == 99:
+    if t % 1000 == 0:
         print(t, '\t', loss.item())
 
 
@@ -81,7 +82,7 @@ for t in range(2000):
     # because weights have requires_grad=True, but we don't need to track this
     # in autograd.
     with torch.no_grad():
-        sigma -= learning_rate * sigma.grad
+        sigma -= eta * sigma.grad
 
         # Manually zero the gradients after updating weights
         sigma.grad = None
@@ -89,30 +90,22 @@ for t in range(2000):
 print('\n')
 print(f'Result: y = 1/(1+torch.exp(-x * {round(sigma.item())}))')
 
+# ** Plot the fitted Model
+# create the Column
+#
+df['Prediction'] = y_pred.detach().numpy()
+# Pivot the Data Frame to be longer
+df_melt = pd.melt(df, id_vars = ['Input'], value_vars = ['Output', 'Prediction'], var_name = "Output_Type", value_name = "Output_Value")
+print(df_melt.head(3))
+# Make the Plot
+p2 = (
+    ggplot(df_melt, aes(x = 'Input', y = 'Output_Value', color = 'Output_Type')) +
+        geom_point() +
+        theme_bw() +
+        labs(x = "Output", y = "Input") +
+        ggtitle('Periodic Data')
 
-#########################################3
-# ** Start the Loop
-# *** Forward Pass; Calculate y
-y_pred = 1/(1+torch.exp(-x*sigma))
+)
 
-# *** Calculate the Loss
-loss = (y_pred - y).pow(2).sum().item()
-print(y_pred)
-
-# *** Backward Pass; Calculate the gradients and store in `.grad`
-loss.backward()
-print(loss.item())
-print(sigma.grad)
-
-# *** Adjust the Weights
-with torch.no_grad():
-    sigma = sigma - eta * sigma.grad
-
-    # *** Reset the Gradient to None
-    sigma.grad = None
-
-    print(sigma)
-
-#############################################
-#############################################
-#############################################
+fig2 = p2.draw()
+fig2.show()
