@@ -1,0 +1,37 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Let's try and use a neural network to predict how many cylinders a car has:
+
+```{r}
+X <- mtcars[names(mtcars) != 'cyl' ]
+y <- mtcars$cyl
+```
+
+Create a `dataset()` object:
+
+```{r}
+dataset(
+  name = "mtcars",
+  
+  initialize = function(indices) {
+    self$x <- X
+    self$y <- y
+  }
+  
+  .getitem = function(i) {
+    x <- self$x[i, ]
+    y <- self$y[i, ]
+    
+    list(x = x, y = y)
+  }
+  
+  .length = function() {
+    dim(self$x)[1]
+  }
+)
+```
+
+
