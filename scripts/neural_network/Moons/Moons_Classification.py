@@ -12,6 +12,7 @@ y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
 
 # Plot the Generated Data -----------------------------------
     # Make an empty figure
+# plt.ion()
 p = plt.figure()
     # Create the Scatter Plot
 plt.scatter(X[:,0], X[:, 1], c = y)
@@ -141,83 +142,3 @@ misclassification_rate_tree = tools.misclassification_rate(clf.predict(X), y)
 
 print("The misclassification rate tree is:\n", misclassification_rate_tree)
 print("The misclassification rate network is:\n", misclassification_rate_nn)
-
-
-
-
-
-
-#     ____                 _                 
-#    / __ \________ _   __(_)___  __  _______
-#   / /_/ / ___/ _ \ | / / / __ \/ / / / ___/
-#  / ____/ /  /  __/ |/ / / /_/ / /_/ (__  ) 
-# /_/   /_/   \___/|___/_/\____/\__,_/____/  
-#                                            
-#                                            __       
-#   ____ _____  ____  _________  ____ ______/ /_      
-#  / __ `/ __ \/ __ \/ ___/ __ \/ __ `/ ___/ __ \     
-# / /_/ / /_/ / /_/ / /  / /_/ / /_/ / /__/ / / /     
-# \__,_/ .___/ .___/_/   \____/\__,_/\___/_/ /_/      
-#     /_/   /_/                                       
-
-# using Sequential Module
-
-# TODO Perhaps this approach actually worked and I was measuring the misclassification rate incorrectly?
-# TODO Perhaps the Loss function is why this approach performed so poorly?
-
-
-
-
-
-
-
-
-
-
-
-
-# ## Define a model
-# model = nn.Sequential(
-#     nn.Linear(in_features=2, out_features=2),
-#     nn.Sigmoid(),
-#     nn.Linear(2, 1),
-#     nn.Sigmoid(),
-#     nn.Flatten(start_dim=0, end_dim=1)
-# )
-
-
-
-
-
-
-# ## Define a Loss Function
-# loss_fn = torch.nn.L1Loss()
-
-# ## Define an Optimizer
-# optimizer = torch.optim.RMSprop(model.parameters(), lr = 1e-6)
-
-# ## Train the Model
-# for t in range(50000):
-#     # Forward Pass: Compute predicted y value
-#     y_pred = model(X.float())
-
-#     # Measure the Loss
-#     loss = loss_fn(y_pred, y.float()) 
-#     if t % 1000 == 999:
-#         print(t, '\t', loss.item())
-
-#     # Backward Pass; Compute the Partial Derivatives
-#     ## First Zero the Gradients, otherwise the can't be overwritten
-#     optimizer.zero_grad()
-#     ## Now calculate the gradients
-#     loss.backward()
-
-#     # Adjust the Weights
-#     optimizer.step()
-
-# yhat = model(X)
-# yhat = yhat > 0.5
-# yhat = yhat.detach().numpy()
-
-
-# model
