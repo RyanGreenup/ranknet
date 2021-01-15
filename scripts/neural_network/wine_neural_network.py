@@ -132,33 +132,23 @@ criterion(net(X), y.reshape((-1, 1))).item()
 #   | || | | (_| | | | | | | |_| | | |  __/ | |  | | (_) | (_| |  __/ |
 #   |_||_|  \__,_|_|_| |_|  \__|_| |_|\___| |_|  |_|\___/ \__,_|\___|_|
                                                                      
-for epoch in range(10):  # loop over the dataset multiple times
-    running_loss=0
-    for i in range(X.shape[0]):
-        # Get the input and desired output
-        input   = X[i,:]
-        target  = y[i]
+for t in range(1000):  # loop over the dataset multiple times
+    # Forward Pass; Calculate the Prediction
+    y_pred = net(X)
 
-        # Zero the parameter gradients
-        optimizer.zero_grad()
+    # Zero the Gradients
+    optimizer.zero_grad()
 
-        # Forward, then backward, then optimize
-        ## Calculate output
-        outputs = net(input)
-        ## Measure the Loss
-        loss   = criterion(outputs, target)
-        ## Calculate the Gradients
-        loss.backward()
-        ## Adjust the weights
-        optimizer.step()
+    # Measure the Loss
+    loss = criterion(y, y_pred)
+    if t % 100 == 0:
+        print(loss.item())
 
-        # print(loss.item())
+    # Backward Pass; Calculate the Gradients
+    loss.backward()
 
-        ## Print any Statistics
-        running_loss += loss.item()
-        # # print(loss.item())
-        if i % 200 == 0:    # print every 200 mini-batches
-            print(loss.item())
-   
+    # update the Weights
+    optimizer.step()
+
 criterion(net(X), y.reshape((-1, 1))).item()
 misclassification_rate(X, y)
