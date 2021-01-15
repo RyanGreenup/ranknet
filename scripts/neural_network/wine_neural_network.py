@@ -96,7 +96,7 @@ class Network(nn.Module):
         x = self.hidden_mid(x)  # Linear Combination of input-> hidden
         x = self.sigmoid(x) # Activation Function
         x = self.output(x)  # Linear Combination of hidden -> output
-#        x = self.sigmoid(x) # Activation Function
+        x = self.sigmoid(x) # Activation Function
         x = torch.flatten(x, start_dim=0, end_dim=-1)
 
         return x
@@ -122,7 +122,7 @@ print(out)
 # | |__| (_) \__ \__ \ |  _|| |_| | | | | (__| |_| | (_) | | | |
 # |_____\___/|___/___/ |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|
                                                               
-eta = 1/10
+eta = 1/1000
 
 import torch.optim as optim
 
@@ -131,10 +131,6 @@ optimizer = optim.SGD(net.parameters(), lr=eta, momentum = 0.9)
 
 # loss_fn = nn.BCEWithLogitsLoss()
 optimizer = optim.RMSprop(net.parameters(), lr = eta)
-
-## Print THe Misclassication rate
-loss_fn(net(X), y.reshape((-1, 1))).item()
-
 
 # |_   _| __ __ _(_)_ __   | |_| |__   ___  |  \/  | ___   __| | ___| |
 #   | || '__/ _` | | '_ \  | __| '_ \ / _ \ | |\/| |/ _ \ / _` |/ _ \ |
