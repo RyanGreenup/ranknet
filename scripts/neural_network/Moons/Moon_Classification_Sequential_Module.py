@@ -69,14 +69,14 @@ model = nn.Sequential(
     nn.Linear(3, 3),
     nn.Sigmoid(),
     nn.Linear(3, 1),
-    nn.Sigmoid(),
+    # nn.Sigmoid(),
 )
 
 ## Define a Loss Function
-loss_fn = torch.nn.MSELoss()
+loss_fn = torch.nn.BCEWithLogitsLoss()
 ## Define an Optimizer
 eta = 1e-1
-optimizer = torch.optim.SGD(model.parameters(), lr = eta)
+optimizer = torch.optim.RMSprop(model.parameters(), lr = eta)
 ## Train the Model
 for t in range(10000):
     # Forward Pass: Compute predicted y value
