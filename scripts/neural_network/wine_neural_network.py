@@ -79,7 +79,8 @@ class Network(nn.Module):
 
         # Inputs to hidden layer linear transformation
         # Create the input layer and the hidden layer
-        self.hidden = nn.Linear(11, 5)
+        self.hidden_1 = nn.Linear(11, 5)
+        self.hidden_mid = nn.Linear(5, 5)
         self.output = nn.Linear(5, 1)
 
         # Define the activation functions that will be used
@@ -88,10 +89,15 @@ class Network(nn.Module):
 
     def forward(self, x):
         # Take input
-        x = self.hidden(x)  # Linear Combination of input-> hidden
+        x = self.hidden_1(x)  # Linear Combination of input-> hidden
+        x = self.sigmoid(x) # Activation Function
+        x = self.hidden_mid(x)  # Linear Combination of input-> hidden
+        x = self.sigmoid(x) # Activation Function
+        x = self.hidden_mid(x)  # Linear Combination of input-> hidden
         x = self.sigmoid(x) # Activation Function
         x = self.output(x)  # Linear Combination of hidden -> output
-        x = self.sigmoid(x) # Activation Function
+#        x = self.sigmoid(x) # Activation Function
+        x = torch.flatten(x, start_dim=0, end_dim=-1)
 
         return x
 
@@ -116,15 +122,18 @@ print(out)
 # | |__| (_) \__ \__ \ |  _|| |_| | | | | (__| |_| | (_) | | | |
 # |_____\___/|___/___/ |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|
                                                               
-eta = 1/1000
+eta = 1/10
 
 import torch.optim as optim
 
-criterion = nn.L1Loss()
+loss_fn = nn.L1Loss()
 optimizer = optim.SGD(net.parameters(), lr=eta, momentum = 0.9)
 
+# loss_fn = nn.BCEWithLogitsLoss()
+optimizer = optim.RMSprop(net.parameters(), lr = eta)
+
 ## Print THe Misclassication rate
-criterion(net(X), y.reshape((-1, 1))).item()
+loss_fn(net(X), y.reshape((-1, 1))).item()
 
 
 # |_   _| __ __ _(_)_ __   | |_| |__   ___  |  \/  | ___   __| | ___| |
@@ -132,7 +141,7 @@ criterion(net(X), y.reshape((-1, 1))).item()
 #   | || | | (_| | | | | | | |_| | | |  __/ | |  | | (_) | (_| |  __/ |
 #   |_||_|  \__,_|_|_| |_|  \__|_| |_|\___| |_|  |_|\___/ \__,_|\___|_|
                                                                      
-for t in range(1000):  # loop over the dataset multiple times
+for t in range(10000):  # loop over the dataset multiple times
     # Forward Pass; Calculate the Prediction
     y_pred = net(X)
 
@@ -140,7 +149,7 @@ for t in range(1000):  # loop over the dataset multiple times
     optimizer.zero_grad()
 
     # Measure the Loss
-    loss = criterion(y, y_pred)
+    loss = loss_fn(y, y_pred)
     if t % 100 == 0:
         print(loss.item())
 
@@ -150,5 +159,5 @@ for t in range(1000):  # loop over the dataset multiple times
     # update the Weights
     optimizer.step()
 
-criterion(net(X), y.reshape((-1, 1))).item()
+loss_fn(net(X), y.reshape((-1, 1))).item()
 misclassification_rate(X, y)
