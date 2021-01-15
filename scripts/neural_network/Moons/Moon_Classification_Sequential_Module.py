@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 # TODO Perhaps this approach actually worked and I was measuring the misclassification rate incorrectly?
 # TODO Perhaps the Loss function is why this approach performed so poorly?
@@ -68,19 +69,16 @@ model = nn.Sequential(
     nn.Linear(3, 3),
     nn.Sigmoid(),
     nn.Linear(3, 1),
-#    nn.Sigmoid(),
-   nn.Flatten(start_dim=0, end_dim=1)
+    nn.Sigmoid(),
 )
 
 ## Define a Loss Function
-# loss_fn = torch.nn.CrossEntropyLoss() # Requires number of outputs to equal number of classes
-loss_fn = torch.nn.L1Loss()
-loss_fn = torch.nn.BCEWithLogitsLoss()
-y = torch.flatten(y, 0, -1)
+loss_fn = torch.nn.MSELoss()
 ## Define an Optimizer
-optimizer = torch.optim.RMSprop(model.parameters(), lr = 1e-6)
+eta = 1e-1
+optimizer = torch.optim.SGD(model.parameters(), lr = eta)
 ## Train the Model
-for t in range(1000):
+for t in range(10000):
     # Forward Pass: Compute predicted y value
     y_pred = model(X.float())
 
@@ -98,55 +96,7 @@ for t in range(1000):
 
     # Adjust the Weights
     optimizer.step()
-
-
-
-# Measure the Misclassification Rate ------------------------
-yhat = model.forward(X).detach().numpy().reshape((1, -1))
-yhat = [i>0.5 for i in yhat ]
-yhat = np.array(yhat).astype(int)
-y = y.detach().numpy().reshape(1, -1).astype(int)
-
-import tools
-misclassification_rate_nn = tools.misclassification_rate(yhat, y)
-misclassification_rate_tree = tools.misclassification_rate(clf.predict(X), y)
-
-# misclassification_rate_nn = np.average(yhat == y.reshape(1, -1))
-# [i == j for i in yhat for j in y.reshape(1, -1)]
-
-print("The misclassification rate tree is:\n", misclassification_rate_tree)
-print("The misclassification rate network is:\n", misclassification_rate_nn)
-
-
-
-
-
-
-# 
-
-
-
-
-
-
-
-
-
-
-
-input_size = 2 
-hidden_size = 3 # randomly chosen
-output_size = 1 # we want it to return a number that can be used to calculate the difference from the actual numberclass NeuralNetwork():
-
-epochs = 10000
-learning_rate = 0.005
-inputs = torch.tensor(X, dtype=torch.float)
-labels = torch.tensor(y, dtype=torch.float)#store all the loss values
-losses = []
-
-# print("Final loss: ", losses[-1])
-plt.plot(losses)
-plt.show()
+    
 
 # Measure the Misclassification Rate ------------------------
 yhat = model.forward(X).detach().numpy().reshape((1, -1))
@@ -163,21 +113,3 @@ misclassification_rate_tree = tools.misclassification_rate(clf.predict(X), y)
 
 print("The misclassification rate tree is:\n", misclassification_rate_tree)
 print("The misclassification rate network is:\n", misclassification_rate_nn)
-
-misclassification_rate_nn
-model(X)
-
-model.forward(X).mean()
-model.forward(X).std()
-
-
-
-y = torch.flatten(y, 0, -1)
-loss = nn.CrossEntropyLoss()
-input = torch.randn(3, 5, requires_grad=True)
-target = torch.empty(3, dtype=torch.long).random_(5)
-target
-input
-output = loss(input, target)
-output.backward()
-
