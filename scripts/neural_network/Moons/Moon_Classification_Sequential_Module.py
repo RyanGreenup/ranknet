@@ -20,7 +20,7 @@ y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
 
 # Plot the Generated Data -----------------------------------
     # Make an empty figure
-plt.ion()
+# plt.ion()
 p = plt.figure()
     # Create the Scatter Plot
 plt.scatter(X[:,0], X[:, 1], c = y)
@@ -76,8 +76,10 @@ model = nn.Sequential(
 loss_fn = torch.nn.BCEWithLogitsLoss()
 ## Define an Optimizer
 eta = 1e-1
+eta = 0.005
 optimizer = torch.optim.RMSprop(model.parameters(), lr = eta)
 ## Train the Model
+losses = []
 for t in range(10000):
     # Forward Pass: Compute predicted y value
     y_pred = model(X.float())
@@ -86,6 +88,8 @@ for t in range(10000):
     loss = loss_fn(y_pred, y)
     if t % 100 == 0:
         print(t, '\t', loss.item())
+    # Log the Loss
+    losses.append(loss.item())
 
     # Backward Pass; Compute the Partial Derivatives
     ## First Zero the Gradients, otherwise the can't be overwritten
@@ -113,3 +117,8 @@ misclassification_rate_tree = tools.misclassification_rate(clf.predict(X), y)
 
 print("The misclassification rate tree is:\n", misclassification_rate_tree)
 print("The misclassification rate network is:\n", misclassification_rate_nn)
+
+
+# print("Final loss: ", losses[-1])
+plt.plot(losses)
+plt.show()
