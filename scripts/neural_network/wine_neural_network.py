@@ -18,7 +18,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+import sys
 
 #  _                    _   ____        _        
 # | |    ___   __ _  __| | |  _ \  __ _| |_ __ _ 
@@ -157,3 +157,5 @@ for t in range(10000):  # loop over the dataset multiple times
 
 loss_fn(net(X), y.reshape((-1, 1))).item()
 misclassification_rate(X, y)
+
+sys.exit(0)
