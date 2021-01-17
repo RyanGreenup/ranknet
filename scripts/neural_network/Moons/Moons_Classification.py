@@ -1,3 +1,4 @@
+
 #-- Import Packages -------------------------------------------
 import numpy as np
 import sklearn
@@ -7,7 +8,7 @@ from sklearn import tree
 import matplotlib.pyplot as plt
 
 #-- Generate Two Moons Data -----------------------------------
-X, y = datasets.make_moons(n_samples = 1000, noise = 0.3, random_state = 0)
+X, y = datasets.make_moons(n_samples = 400, noise = 0.4, random_state = 3141, shuffle=True)
 y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
 
 # Plot the Generated Data -----------------------------------
@@ -80,7 +81,6 @@ class NeuralNetwork():
         return output
 
 
-model = NeuralNetwork(input_size, hidden_size, output_size)
 input_size = 2 
 hidden_size = 3 # randomly chosen
 output_size = 1 # we want it to return a number that can be used to calculate the difference from the actual numberclass NeuralNetwork():
@@ -137,8 +137,6 @@ import tools
 misclassification_rate_nn = tools.misclassification_rate(yhat, y)
 misclassification_rate_tree = tools.misclassification_rate(clf.predict(X), y)
 
-# misclassification_rate_nn = np.average(yhat == y.reshape(1, -1))
-# [i == j for i in yhat for j in y.reshape(1, -1)]
 
-print("The misclassification rate tree is:\n", misclassification_rate_tree)
-print("The misclassification rate network is:\n", misclassification_rate_nn)
+print("The misclassification rate for the tree based model is:\n", misclassification_rate_tree)
+print("The misclassification rate for the neural network model is:\n", misclassification_rate_nn)
