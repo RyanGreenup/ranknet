@@ -64,7 +64,7 @@ X, X_test, y, y_test = train_test_split(X, y, test_size = 0.1)
 
 def misclassification_rate(X, y):
     yhat = net(X)
-    yhat = yhat.detach().numpy().reshape(-1) > 0.3
+    yhat = yhat.detach().numpy().reshape(-1) > 0.5
 
     y=np.array(y)
 
