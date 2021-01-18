@@ -37,10 +37,11 @@ clf.fit(X_train, y_train)
 
 #. Test the Model
 score = clf.score(X_test, y_test) # mean accuracy (TP+TN)/(P+N)
-misclassification_rate_tree = np.average(clf.predict(X) == y)
+misclassification_rate_tree_train  = np.average(clf.predict(X_train) != y_train.reshape(1, -1)[0])
+misclassification_rate_tree_test  = np.average(clf.predict(X_test) != y_test.reshape(1, -1)[0])
 
 print("The performance is:\n" + str(score*100) + "%")
-print("The misclassification rate is:\n", misclassification_rate_tree)
+print("The misclassification rate is:\n", misclassification_rate_tree_test)
 
 # Fit the Neural Network ------------------------------------
 ## Import the Packages
@@ -50,8 +51,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 ## Create Tensors
-X = torch.from_numpy(X.astype(np.float32))
-y = torch.from_numpy(y.astype(np.float32))
+X_train = torch.from_numpy(X_train.astype(np.float32))
+y_train = torch.from_numpy(y_train.astype(np.float32))
+X_test = torch.from_numpy(X_test.astype(np.float32))
+y_test = torch.from_numpy(y_test.astype(np.float32))
 ## Define a Model as a class
 input_size = 2
 hidden_size = 3 # This is arbitrary
@@ -88,8 +91,8 @@ output_size = 1 # we want it to return a number that can be used to calculate th
 epochs = 10000
 learning_rate = 0.005
 model = NeuralNetwork(input_size, hidden_size, output_size)
-inputs = torch.tensor(X, dtype=torch.float)
-labels = torch.tensor(y, dtype=torch.float)#store all the loss values
+inputs = torch.tensor(X_train, dtype=torch.float)
+labels = torch.tensor(y_train, dtype=torch.float)#store all the loss values
 losses = []
 
 
@@ -128,15 +131,32 @@ plt.plot(losses)
 plt.show()
 
 # Measure the Misclassification Rate ------------------------
-yhat = model.forward(X).detach().numpy().reshape((1, -1))
-yhat = [i>0.5 for i in yhat ]
-yhat = np.array(yhat).astype(int)
-y = y.detach().numpy().reshape(1, -1).astype(int)
+def misclassification_rate(yhat, y):
+#    yhat = model.forward(X)
+#    yhat = yhat.detach().numpy().reshape(-1) > 0.5
+#    y=np.array(y)
+    return np.average(y != yhat)
 
-import tools
-misclassification_rate_nn = tools.misclassification_rate(yhat, y)
-misclassification_rate_tree = tools.misclassification_rate(clf.predict(X), y)
+print('-------------')
+
+misclassification_rate_network_train = np.average((model.forward(X_train) > 0.5) != y_train)
+misclassification_rate_network_test  = np.average((model.forward(X_test)  > 0.5) != y_test)
+# misclassification_rate_tree_train = np.average((clf.predict(X_train.numpy()) > 0.05) != y_train.numpy())
+# misclassification_rate_tree_test  = np.average((clf.predict(X_test.numpy()) > 0.5)  != y_test.numpy())
+
+print(misclassification_rate_network_train)
+
+print(np.average((model.forward(X_train) > 0.5) != y_train))
 
 
-print("The misclassification rate for the tree based model is:\n", misclassification_rate_tree)
-print("The misclassification rate for the neural network model is:\n", misclassification_rate_nn)
+print('Misclassification Rates\n',
+      '-------------------------\n',
+      'Network \t Train \t',
+      misclassification_rate_network_train, '\n',
+      'Network \t Test \t',
+      misclassification_rate_network_test,  '\n',
+      'Tree    \t Train \t',
+      misclassification_rate_tree_train, '\n',
+      'Tree    \t Test \t',
+      misclassification_rate_tree_test,  '\n',
+    )
