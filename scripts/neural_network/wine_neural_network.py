@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+import os, sys
+os.chdir(os.path.dirname(sys.argv[0]))
+# os.chdir("/home/ryan/Studies/2020ResearchTraining/ranknet/scripts/neural_network/")
 
 #    _  _     ___                            _   
 #  _| || |_  |_ _|_ __ ___  _ __   ___  _ __| |_ 
@@ -15,10 +18,13 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import sys
+
+from sklearn.model_selection import train_test_split
 
 #  _                    _   ____        _        
 # | |    ___   __ _  __| | |  _ \  __ _| |_ __ _ 
@@ -40,6 +46,8 @@ y = y>5
 X = torch.from_numpy(X.astype(np.float32))
 y = torch.from_numpy(y.astype(np.float32))
 
+#-- Split data into Training and Test Sets --------------------
+X, X_test, y, y_test = train_test_split(X, y, test_size = 0.1)
 
 
 # |  \/  (_)___  ___| | __ _ ___ ___(_)/ _(_) ___ __ _| |_(_) ___  _ __  
@@ -136,8 +144,9 @@ optimizer = optim.RMSprop(net.parameters(), lr = eta)
 #   | || '__/ _` | | '_ \  | __| '_ \ / _ \ | |\/| |/ _ \ / _` |/ _ \ |
 #   | || | | (_| | | | | | | |_| | | |  __/ | |  | | (_) | (_| |  __/ |
 #   |_||_|  \__,_|_|_| |_|  \__|_| |_|\___| |_|  |_|\___/ \__,_|\___|_|
-                                                                     
-for t in range(10000):  # loop over the dataset multiple times
+
+losses = []
+for t in range(4000):  # loop over the dataset multiple times
     # Forward Pass; Calculate the Prediction
     y_pred = net(X)
 
@@ -148,6 +157,7 @@ for t in range(10000):  # loop over the dataset multiple times
     loss = loss_fn(y, y_pred)
     if t % 100 == 0:
         print(loss.item())
+    losses.append(loss.item())
 
     # Backward Pass; Calculate the Gradients
     loss.backward()
@@ -155,7 +165,11 @@ for t in range(10000):  # loop over the dataset multiple times
     # update the Weights
     optimizer.step()
 
-loss_fn(net(X), y.reshape((-1, 1))).item()
+print('\n----------------------------\n')
+print("The Training Missclassification rate is:\n")
 misclassification_rate(X, y)
-
-sys.exit(0)
+print('\n----------------------------\n')
+print("The Testing Missclassification rate is:\n")
+misclassification_rate(X_test, y_test)
+plt.plot(losses)
+plt.show()
