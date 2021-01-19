@@ -14,40 +14,80 @@ os.chdir(os.path.dirname(sys.argv[0]))
 # | |_) / _` |/ __| |/ / _` |/ _` |/ _ \/ __|
 # |  __/ (_| | (__|   < (_| | (_| |  __/\__ \
 # |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
-#                            |___/           
+#                            |___/
 
+# Typical stuff
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+
+# OS Stuff
+import sys, os
+
+# Torch Stuff
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import sys
 
-from sklearn.model_selection import train_test_split
+#  __  __       _
+# |  \/  | __ _(_)_ __
+# | |\/| |/ _` | | '_ \
+# | |  | | (_| | | | | |
+# |_|  |_|\__,_|_|_| |_|
+
+
+def main():
+    X, X_test, y, y_test = load_data()
+
+    # Assign the model object
+    net = Network()
+    print('The Neural Network is described as:\n')
+    print(net)
+
+    # Define the Loss Function
+    loss_fn = nn.L1Loss()
+    eta = 1/1000
+
+    # Define the Optimizer
+    optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
+
+    train_model(net, optimizer, loss_fn, X, y)
+
+    ## Print the Model Output
+    print('The current output of the neural network with random weights are:')
+    out = net(X)
+    print(out)
+
+    plt.plot(losses)
+    plt.show()
+
+
 
 #  _                    _   ____        _        
 # | |    ___   __ _  __| | |  _ \  __ _| |_ __ _ 
 # | |   / _ \ / _` |/ _` | | | | |/ _` | __/ _` |
 # | |__| (_) | (_| | (_| | | |_| | (_| | || (_| |
 # |_____\___/ \__,_|\__,_| |____/ \__,_|\__\__,_|
-                                               
-df=pd.read_csv('./DataSets/winequality-red.csv', sep=';')
-df=np.array(df.values)
 
-# Extract the Features
-y = df[:,-1]
-X = df[:,range(df.shape[1]-1)]
+def load_data(datafile='./DataSets/winequality-red.csv'):
+    df=pd.read_csv(datafile, sep=';')
+    df=np.array(df.values)
 
-# Make the data categorical
-y = y>5
+    # Extract the Features
+    y = df[:,-1]
+    X = df[:,range(df.shape[1]-1)]
 
-# Transfom the Data into Tensors
-X = torch.from_numpy(X.astype(np.float32))
-y = torch.from_numpy(y.astype(np.float32))
+    # Make the data categorical
+    y = y>5
 
-#-- Split data into Training and Test Sets --------------------
-X, X_test, y, y_test = train_test_split(X, y, test_size = 0.1)
+    # Transfom the Data into Tensors
+    X = torch.from_numpy(X.astype(np.float32))
+    y = torch.from_numpy(y.astype(np.float32))
+
+    #-- Split data into Training and Test Sets --------------------
+    X, X_test, y, y_test = train_test_split(X, y, test_size = 0.1)
+    return X, X_test, y, y_test
 
 
 # |  \/  (_)___  ___| | __ _ ___ ___(_)/ _(_) ___ __ _| |_(_) ___  _ __  
@@ -109,67 +149,40 @@ class Network(nn.Module):
 
         return x
 
-# Assign the model object
-
-net = Network()
-print('The Neural Network is described as:\n')
-print(net)
-
-
-## Print the Model Output
-print('The current output of the neural network with random weights are:')
-out = net(X)
-print(out)
-
-
-
-
-#  _                    _____                 _   _             
-# | |    ___  ___ ___  |  ___|   _ _ __   ___| |_(_) ___  _ __  
-# | |   / _ \/ __/ __| | |_ | | | | '_ \ / __| __| |/ _ \| '_ \ 
-# | |__| (_) \__ \__ \ |  _|| |_| | | | | (__| |_| | (_) | | | |
-# |_____\___/|___/___/ |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|
-                                                              
-eta = 1/1000
-
-import torch.optim as optim
-
-loss_fn = nn.L1Loss()
-optimizer = optim.SGD(net.parameters(), lr=eta, momentum = 0.9)
 
 # loss_fn = nn.BCEWithLogitsLoss()
-optimizer = optim.RMSprop(net.parameters(), lr = eta)
 
 # |_   _| __ __ _(_)_ __   | |_| |__   ___  |  \/  | ___   __| | ___| |
 #   | || '__/ _` | | '_ \  | __| '_ \ / _ \ | |\/| |/ _ \ / _` |/ _ \ |
 #   | || | | (_| | | | | | | |_| | | |  __/ | |  | | (_) | (_| |  __/ |
 #   |_||_|  \__,_|_|_| |_|  \__|_| |_|\___| |_|  |_|\___/ \__,_|\___|_|
 
-losses = []
-for t in range(4000):  # loop over the dataset multiple times
-    # Forward Pass; Calculate the Prediction
-    y_pred = net(X)
+def train_model(model, optimizer, loss_fn, X, y):
+    losses = []
+    for t in range(4000):  # loop over the dataset multiple times
+        # Forward Pass; Calculate the Prediction
+        y_pred = model(X)
 
-    # Zero the Gradients
-    optimizer.zero_grad()
+        # Zero the Gradients
+        optimizer.zero_grad()
 
-    # Measure the Loss
-    loss = loss_fn(y, y_pred)
-    if t % 100 == 0:
-        print(loss.item())
-    losses.append(loss.item())
+        # Measure the Loss
+        loss = loss_fn(y, y_pred)
+        if t % 100 == 0:
+            print(loss.item())
+        losses.append(loss.item())
 
-    # Backward Pass; Calculate the Gradients
-    loss.backward()
+        # Backward Pass; Calculate the Gradients
+        loss.backward()
 
-    # update the Weights
-    optimizer.step()
+        # update the Weights
+        optimizer.step()
 
-print('\n----------------------------\n')
-print("The Training Missclassification rate is:\n")
-misclassification_rate(X, y)
-print('\n----------------------------\n')
-print("The Testing Missclassification rate is:\n")
-misclassification_rate(X_test, y_test)
-plt.plot(losses)
-plt.show()
+    print('\n----------------------------\n')
+    print("The Training Missclassification rate is:\n")
+    misclassification_rate(X, y)
+    print('\n----------------------------\n')
+    print("The Testing Missclassification rate is:\n")
+    misclassification_rate(X_test, y_test)
+
+main()
