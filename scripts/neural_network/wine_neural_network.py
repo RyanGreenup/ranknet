@@ -41,25 +41,35 @@ def main():
     X, X_test, y, y_test = load_data()
 
     # Assign the model object
-    net = Network()
+    main.net = Network()
     print('The Neural Network is described as:\n')
-    print(net)
+    print(main.net)
 
     # Define the Loss Function
     loss_fn = nn.L1Loss()
     eta = 1/1000
 
     # Define the Optimizer
-    optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
+    optimizer = torch.optim.RMSprop(main.net.parameters(), lr = eta)
 
-    train_model(net, optimizer, loss_fn, X, y)
+    train_model(main.net, optimizer, loss_fn, X, y)
 
     ## Print the Model Output
     print('The current output of the neural network with random weights are:')
-    out = net(X)
+    out = main.net(X)
     print(out)
 
-    plt.plot(losses)
+    # Measure the misclassification rate
+    print('\n----------------------------\n')
+    print("The Training Missclassification rate is:\n")
+    misclassification_rate(X, y)
+    print('\n----------------------------\n')
+    print("The Testing Missclassification rate is:\n")
+    misclassification_rate(X_test, y_test)
+
+    # Print the losses
+    # TODO should I make train_model a class so that I can use self, that way if I change the function name...
+    plt.plot(train_model.losses)
     plt.show()
 
 
@@ -103,7 +113,7 @@ def load_data(datafile='./DataSets/winequality-red.csv'):
                     
 
 def misclassification_rate(X, y):
-    yhat = net(X)
+    yhat = main.net(X)
     yhat = yhat.detach().numpy().reshape(-1) > 0.5
 
     y=np.array(y)
@@ -158,7 +168,7 @@ class Network(nn.Module):
 #   |_||_|  \__,_|_|_| |_|  \__|_| |_|\___| |_|  |_|\___/ \__,_|\___|_|
 
 def train_model(model, optimizer, loss_fn, X, y):
-    losses = []
+    train_model.losses = []
     for t in range(4000):  # loop over the dataset multiple times
         # Forward Pass; Calculate the Prediction
         y_pred = model(X)
@@ -170,7 +180,7 @@ def train_model(model, optimizer, loss_fn, X, y):
         loss = loss_fn(y, y_pred)
         if t % 100 == 0:
             print(loss.item())
-        losses.append(loss.item())
+        train_model.losses.append(loss.item())
 
         # Backward Pass; Calculate the Gradients
         loss.backward()
@@ -178,11 +188,5 @@ def train_model(model, optimizer, loss_fn, X, y):
         # update the Weights
         optimizer.step()
 
-    print('\n----------------------------\n')
-    print("The Training Missclassification rate is:\n")
-    misclassification_rate(X, y)
-    print('\n----------------------------\n')
-    print("The Testing Missclassification rate is:\n")
-    misclassification_rate(X_test, y_test)
 
 main()
