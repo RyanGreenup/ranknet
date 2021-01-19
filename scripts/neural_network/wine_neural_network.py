@@ -52,7 +52,7 @@ def main():
     # Define the Optimizer
     optimizer = torch.optim.RMSprop(main.net.parameters(), lr = eta)
 
-    train_model(main.net, optimizer, loss_fn, X, y)
+    main.net.train_model(main.net, optimizer, loss_fn, X, y)
 
     ## Print the Model Output
     print('The current output of the neural network with random weights are:')
@@ -70,7 +70,7 @@ def main():
     # Print the losses
     # TODO should I make train_model a class so that I can use self, that way if I change the function name...
     # TODO should the train_model function be a part of the Neural Network class? That might be cleaner?
-    plt.plot(train_model.losses)
+    plt.plot(main.net.losses)
     plt.show()
 
 
@@ -135,6 +135,7 @@ def misclassification_rate(X, y):
 class Network(nn.Module):
     def __init__(self):
         super().__init__()
+        self.losses = []
 
         # Inputs to hidden layer linear transformation
         # Create the input layer and the hidden layer
@@ -160,6 +161,28 @@ class Network(nn.Module):
 
         return x
 
+    def train_model(self, model, optimizer, loss_fn, X, y):
+        self.losses = []
+        # for t in range(4000):  # loop over the dataset multiple times
+        for t in range(5000):  # loop over the dataset multiple times
+            # Forward Pass; Calculate the Prediction
+            y_pred = model(X)
+
+            # Zero the Gradients
+            optimizer.zero_grad()
+
+            # Measure the Loss
+            loss = loss_fn(y, y_pred)
+            if t % 100 == 0:
+                print(loss.item())
+            self.losses.append(loss.item())
+
+            # Backward Pass; Calculate the Gradients
+            loss.backward()
+
+            # update the Weights
+            optimizer.step()
+
 
 # loss_fn = nn.BCEWithLogitsLoss()
 
@@ -168,26 +191,6 @@ class Network(nn.Module):
 #   | || | | (_| | | | | | | |_| | | |  __/ | |  | | (_) | (_| |  __/ |
 #   |_||_|  \__,_|_|_| |_|  \__|_| |_|\___| |_|  |_|\___/ \__,_|\___|_|
 
-def train_model(model, optimizer, loss_fn, X, y):
-    train_model.losses = []
-    for t in range(4000):  # loop over the dataset multiple times
-        # Forward Pass; Calculate the Prediction
-        y_pred = model(X)
-
-        # Zero the Gradients
-        optimizer.zero_grad()
-
-        # Measure the Loss
-        loss = loss_fn(y, y_pred)
-        if t % 100 == 0:
-            print(loss.item())
-        train_model.losses.append(loss.item())
-
-        # Backward Pass; Calculate the Gradients
-        loss.backward()
-
-        # update the Weights
-        optimizer.step()
 
 
 main()
