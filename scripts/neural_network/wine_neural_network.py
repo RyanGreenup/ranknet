@@ -69,6 +69,7 @@ def main():
 
     # Print the losses
     # TODO should I make train_model a class so that I can use self, that way if I change the function name...
+    # TODO should the train_model function be a part of the Neural Network class? That might be cleaner?
     plt.plot(train_model.losses)
     plt.show()
 
