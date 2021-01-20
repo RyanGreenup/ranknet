@@ -65,7 +65,7 @@ def main():
     print(out)
 
     # Measure the misclassification rate
-    m = misclassification_rate(X, X_test, y, y_test)
+    m = misclassification_rate(X, X_test, y, y_test, main.net)
     m.report()
 
     # Print the losses
@@ -153,7 +153,7 @@ class NeuralNetwork(nn.Module):
 
     def train_model(self, model, optimizer, loss_fn, X, y):
         self.losses = []
-        for t in range(int(8e3)):  # loop over the dataset multiple times
+        for t in range(int(8e4)):  # loop over the dataset multiple times
             # Forward Pass; Calculate the Prediction
             y_pred = model(X)
 
@@ -176,18 +176,19 @@ class misclassification_rate:
     """
     This contains the functions to measure and report misclassification rates
     """
-    def __init__(self, X, X_test, y, y_test):
+    def __init__(self, X, X_test, y, y_test, model):
         self.X = X
         self.X_test = X_test
         self.y = y
         self.y_test = y_test
+        self.model = model
 
     def measure(self, X, y):
         """
         Measure the misclassification rate of model given input matrix
         X and desired output classifications y
         """
-        yhat = main.net(X)
+        yhat = self.model(X)
         yhat = yhat.detach().numpy().reshape(-1) > 0.5
         y=np.array(y)
         print(np.average(y != yhat))
