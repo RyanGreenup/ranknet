@@ -43,33 +43,32 @@ def main():
     # Load Data ................................................
     X, X_test, y, y_test = load_data()
 
-    # Assign the Model Object ....................................
-    main.net = NeuralNetwork()
+    # Initialise a Model Object ....................................
+    net = NeuralNetwork()
     print('The Neural Network is described as:\n')
-    print(main.net)
-
+    print(net)
 
     # Choose a Loss Function  ....................................
     loss_fn = torch.nn.L1Loss()
     eta = 1/9000
 
     # Choose an Optimizer
-    optimizer = torch.optim.RMSprop(main.net.parameters(), lr = eta)
+    optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
 
     # Train the Model ............................................
-    main.net.train_model(main.net, optimizer, loss_fn, X, y)
+    net.train_model(net, optimizer, loss_fn, X, y)
 
     ## Print the Model Output
     print('The current output of the neural network with random weights are:')
-    out = main.net(X)
+    out = net(X)
     print(out)
 
     # Measure the misclassification rate
-    m = misclassification_rate(X, X_test, y, y_test, main.net)
+    m = misclassification_rate(X, X_test, y, y_test, net)
     m.report()
 
     # Print the losses
-    plt.plot(main.net.losses)
+    plt.plot(net.losses)
     plt.show()
 
 
