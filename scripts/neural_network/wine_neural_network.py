@@ -65,8 +65,7 @@ def main():
     print(out)
 
     # Measure the misclassification rate
-    m = misclassification_rate(X, y, X_test, y_test)
-    m.measure_train()
+    m = misclassification_rate(X, X_test, y, y_test)
     m.report()
 
     # Print the losses
@@ -154,7 +153,7 @@ class NeuralNetwork(nn.Module):
 
     def train_model(self, model, optimizer, loss_fn, X, y):
         self.losses = []
-        for t in range(int(8e1)):  # loop over the dataset multiple times
+        for t in range(int(8e3)):  # loop over the dataset multiple times
             # Forward Pass; Calculate the Prediction
             y_pred = model(X)
 
@@ -177,31 +176,29 @@ class misclassification_rate:
     """
     This contains the functions to measure and report misclassification rates
     """
-    def __init__(self, X, y, X_test, y_test):
+    def __init__(self, X, X_test, y, y_test):
         self.X = X
-        self.y = y
         self.X_test = X_test
+        self.y = y
         self.y_test = y_test
 
-    def measure_train(self):
-        yhat = main.net(self.X)
+    def measure(self, X, y):
+        """
+        Measure the misclassification rate of model given input matrix
+        X and desired output classifications y
+        """
+        yhat = main.net(X)
         yhat = yhat.detach().numpy().reshape(-1) > 0.5
-        y=np.array(self.y)
-        print(np.average(y != yhat))
-
-    def measure_test(self):
-        yhat = main.net(self.X_test)
-        yhat = yhat.detach().numpy().reshape(-1) > 0.5
-        y=np.array(self.y_test)
+        y=np.array(y)
         print(np.average(y != yhat))
 
     def report(self):
         print('\n----------------------------\n')
         print("The Training Missclassification rate is:\n")
-        self.measure_train()
+        self.measure(self.X, self.y)
         print('\n----------------------------\n')
         print("The Testing Missclassification rate is:\n")
-        self.measure_test()
+        self.measure(self.X_test, self.y_test)
 
 
 main()
