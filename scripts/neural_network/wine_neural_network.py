@@ -2,31 +2,21 @@
 import os, sys
 os.chdir(os.path.dirname(sys.argv[0]))
 # os.chdir("/home/ryan/Studies/2020ResearchTraining/ranknet/scripts/neural_network/")
-# * Import Packages
 
-#    _  _     ___                            _
-#  _| || |_  |_ _|_ __ ___  _ __   ___  _ __| |_
-# |_  ..  _|  | || '_ ` _ \| '_ \ / _ \| '__| __|
-# |_      _|  | || | | | | | |_) | (_) | |  | |_
-#   |_||_|   |___|_| |_| |_| .__/ \___/|_|   \__|
-#                          |_|
-#  ____            _
-# |  _ \ __ _  ___| | ____ _  __ _  ___  ___
-# | |_) / _` |/ __| |/ / _` |/ _` |/ _ \/ __|
-# |  __/ (_| | (__|   < (_| | (_| |  __/\__ \
-# |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
-#                            |___/
+# * Import Packages
+#   ___                            _
+#  |_ _|_ __ ___  _ __   ___  _ __| |_
+#   | || '_ ` _ \| '_ \ / _ \| '__| __|
+#   | || | | | | | |_) | (_) | |  | |_
+#  |___|_| |_| |_| .__/ \___/|_|   \__|
+#                |_|
 # ** Typical stuff
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-
 # ** Torch Stuff
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-#}}}
 
 # * Main
 #  __  __       _
@@ -105,20 +95,20 @@ def load_data(datafile='./DataSets/winequality-red.csv'):
 # |_| \_|\___|\__,_|_|  \__,_|_| |_| \_|\___|\__| \_/\_/ \___/|_|  |_|\_\
 
 # Define the Class for Torch
-class NeuralNetwork(nn.Module):
+class NeuralNetwork(torch.nn.Module):
     def __init__(self):
         super().__init__()
         self.losses = []
 
         # Inputs to hidden layer linear transformation
         # Create the input layer and the hidden layer
-        self.hidden_1 = nn.Linear(11, 5)
-        self.hidden_mid = nn.Linear(5, 5)
-        self.output = nn.Linear(5, 1)
+        self.hidden_1 = torch.nn.Linear(11, 5)
+        self.hidden_mid = torch.nn.Linear(5, 5)
+        self.output = torch.nn.Linear(5, 1)
 
         # Define the activation functions that will be used
-        self.sigmoid = nn.Sigmoid()
-        self.softmax = nn.Softmax(dim=1) # dim=1 calculates softmax across cols
+        self.sigmoid = torch.nn.Sigmoid()
+        self.softmax = torch.nn.Softmax(dim=1) # dim=1 calculates softmax across cols
 
     ## What should the output of the Neural Network be ............
     def forward(self, x):
