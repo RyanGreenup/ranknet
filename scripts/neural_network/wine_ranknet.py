@@ -114,11 +114,17 @@ class NeuralNetwork(torch.nn.Module):
         self.softmax = torch.nn.Softmax(dim=1) # dim=1 calculates softmax across cols
 
     ## What should the output of the Neural Network be ............
-    def forward(self, xi, xj):
-        si = self.network_forward(xi)
-        sj = self.network_forward(xj)
+    def forward(self, X, pairs):
+        outputs = []
+        for pair in pairs:
+            xi = X[pair[0]]
+            xj = X[pair[1]]
+            si = self.network_forward(xi)
+            sj = self.network_forward(xj)
+            output = 1/(1+torch.exp(si-sj))
+            outputs.append()
 
-        return 1/(1+torch.exp(si-sj))
+        return
 
     def network_forward(self, x):
         # Take input
@@ -136,14 +142,15 @@ class NeuralNetwork(torch.nn.Module):
     def train_model(self, optimizer, loss_fn, X, y):
         self.losses = []
         for t in range(int(3e4)):  # loop over the dataset multiple times
-            # Pick a random pair of values
-            pair = random.sample(range(X.shape[0]), 2)
+            # Pick 100 random pair of values
+            pairs = [random.sample(range(X.shape[0]), 2) for i in range(100)]
 
             # Calculate the target
-            S_ij    = 1 if y[pair[0]] > y[pair[1]] else 0
+            S_ij    = [1 if y[pair[0]] > y[pair[1]] else 0 for pair in pairs]
 
             # Forward Pass; Calculate the Prediction
-            P_ij = self.forward(X[pair[0]], X[pair[1]])
+#            P_ij = self.forward(X[pair[0]], X[pair[1]])
+            P_ij = self.forward(X, pairs)
 
 
             # Zero the Gradients
