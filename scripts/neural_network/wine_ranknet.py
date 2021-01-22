@@ -118,7 +118,8 @@ class NeuralNetwork(torch.nn.Module):
         si = self.network_forward(xi)
         sj = self.network_forward(xj)
 
-        return 1/(1+torch.exp(si-sj))
+        s = torch.nn.Sigmoid()
+        return s(si-sj)
 
     def network_forward(self, x):
         # Take input
