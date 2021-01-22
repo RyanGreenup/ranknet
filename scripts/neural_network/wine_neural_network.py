@@ -46,7 +46,7 @@ def main():
     optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
 
     # Train the Model .............................................
-    net.train_model(net, optimizer, loss_fn, X, y)
+    net.train_model(optimizer, loss_fn, X, y)
 
     ## Print the Model Output .......................................
     print('The current output of the neural network with random weights are:')
@@ -54,7 +54,7 @@ def main():
     print(out)
 
     # Measure the misclassification rate....................
-    m = misclassification_rate(X, X_test, y, y_test, net)
+    m = misclassification_rate(X, X_test, y, y_test, net.forward)
     m.report()
 
     # Print the losses.......................................
@@ -124,11 +124,11 @@ class NeuralNetwork(torch.nn.Module):
         return x
 
     ## How to Train the Model .....................................
-    def train_model(self, model, optimizer, loss_fn, X, y):
+    def train_model(self, optimizer, loss_fn, X, y):
         self.losses = []
         for t in range(int(3e4)):  # loop over the dataset multiple times
             # Forward Pass; Calculate the Prediction
-            y_pred = model(X)
+            y_pred = self.forward(X)
 
             # Zero the Gradients
             optimizer.zero_grad()
@@ -144,7 +144,6 @@ class NeuralNetwork(torch.nn.Module):
 
             # update the Weights
             optimizer.step()
-
 
 # |  \/  (_)___  ___| | __ _ ___ ___(_)/ _(_) ___ __ _| |_(_) ___  _ __
 # | |\/| | / __|/ __| |/ _` / __/ __| | |_| |/ __/ _` | __| |/ _ \| '_ \
