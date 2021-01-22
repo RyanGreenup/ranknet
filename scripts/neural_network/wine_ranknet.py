@@ -123,7 +123,7 @@ class NeuralNetwork(torch.nn.Module):
         si = self.network_forward(xi)
         sj = self.network_forward(xj)
 
-        sigmoid.apply(si-sj, self.sigma)
+        return sigmoid.apply(si-sj, self.sigma)
 
 #        return 1/(1+torch.exp(si-sj))
 
