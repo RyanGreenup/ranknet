@@ -3,6 +3,10 @@ import os, sys
 # os.chdir(os.path.dirname(sys.argv[0]))
 # os.chdir("/home/ryan/Studies/2020ResearchTraining/ranknet/scripts/neural_network/")
 
+# TODO Modify Network to use Sigmoid Module so σ can be included
+# TODO Modify the Loss Function to use sigmoid
+# TODO Modify the network to allow the use of vectors
+# TODO Adapt Misclassification for Ranknet
 # * Import Packages
 #   ___                            _
 #  |_ _|_ __ ___  _ __   ___  _ __| |_
@@ -44,7 +48,7 @@ def main():
         return loss
 
     def loss_fn(S_ij, P_ij): # S_ij = pbar
-        loss = torch.mean(-S_ij * torch.log(P_ij) - (1-S_ij)*torch.log(1-P_ij))
+        loss = torch.mean(-S_ij * torch.log(P_ij) - ([1-i for i in S_ij])*torch.log([1-i for i in P_ij]))
         return loss
 
     eta = 1e-6
@@ -56,7 +60,6 @@ def main():
     net.train_model(optimizer, loss_fn, X, y)
 
     # Measure the misclassification rate....................
-    # TODO Adapt this for ranknet
     # m = misclassification_rate(X, X_test, y, y_test, net.forward)
     # m.report()
 
@@ -122,9 +125,9 @@ class NeuralNetwork(torch.nn.Module):
             si = self.network_forward(xi)
             sj = self.network_forward(xj)
             output = 1/(1+torch.exp(si-sj))
-            outputs.append()
+            outputs.append(output)
 
-        return
+        return outputs
 
     def network_forward(self, x):
         # Take input
