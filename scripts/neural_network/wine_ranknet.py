@@ -50,7 +50,9 @@ def main():
     eta = 1e-6
 
     # Choose an Optimizer
-    optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
+    # optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
+    # TODO Consider here, not actually using any optimizer and adjusting manually
+    optimizer = torch.optim.SGD(net.parameters(), lr = eta)
 
     # Train the Model .............................................
     net.train_model(optimizer, loss_fn, X, y)
