@@ -51,11 +51,11 @@ def main():
 
     # Choose an Optimizer
     # optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
-    # TODO Consider here, not actually using any optimizer and adjusting manually
+    # DONE Consider here, not actually using any optimizer and adjusting manually
     optimizer = torch.optim.SGD(net.parameters(), lr = eta)
 
     # Train the Model .............................................
-    net.train_model(optimizer, loss_fn, X, y)
+    net.train_model(eta, loss_fn, X, y)
 
     # Measure the misclassification rate....................
     # TODO Adapt this for ranknet
@@ -136,7 +136,7 @@ class NeuralNetwork(torch.nn.Module):
         return x
 
     ## How to Train the Model .....................................
-    def train_model(self, optimizer, loss_fn, X, y):
+    def train_model(self, lr, loss_fn, X, y):
         self.losses = []
         for t in range(int(3e4)):  # loop over the dataset multiple times
             # Pick a random pair of values
@@ -149,9 +149,6 @@ class NeuralNetwork(torch.nn.Module):
             P_ij = self.forward(X[pair[0]], X[pair[1]])
 
 
-            # Zero the Gradients
-            optimizer.zero_grad()
-
             # Measure the Loss
             loss = loss_fn(S_ij, P_ij)
             if t % 100 == 0:
@@ -162,8 +159,12 @@ class NeuralNetwork(torch.nn.Module):
             # Backward Pass; Calculate the Gradients
             loss.backward()
 
-            # update the Weights
-            optimizer.step()
+
+            # Zero the Gradients
+            self.zero_grad()
+            with torch.no_grad():
+                for parameter in self.parameters():
+                    parameter -= lr * parameter.grad # Must be updated using `-=`, doesn't work otherwise
 
 
 # |  \/  (_)___  ___| | __ _ ___ ___(_)/ _(_) ___ __ _| |_(_) ___  _ __
