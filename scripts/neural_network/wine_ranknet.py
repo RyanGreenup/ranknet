@@ -138,7 +138,8 @@ class NeuralNetwork(torch.nn.Module):
     ## How to Train the Model .....................................
     def train_model(self, lr, loss_fn, X, y):
         self.losses = []
-        for t in range(int(3e4)):  # loop over the dataset multiple times
+        print('{0:10s} \t {1:10s}  {2:10s}'.format("Prediction", "Actual", "Loss"))
+        for t in range(int(3e6)):  # loop over the dataset multiple times
             # Pick a random pair of values
             pair = random.sample(range(X.shape[0]), 2)
 
@@ -148,12 +149,15 @@ class NeuralNetwork(torch.nn.Module):
             # Forward Pass; Calculate the Prediction
             P_ij = self.forward(X[pair[0]], X[pair[1]])
 
-
             # Measure the Loss
             loss = loss_fn(S_ij, P_ij)
             if t % 100 == 0:
-                print(loss.item())
-                print("Prediction, P_ij is:\n", P_ij.item(), "\nTarget Score, S_ij is:\n", S_ij, "\n")
+                print('{0:10f} {1:10f} {2:10f}'.format(P_ij.item(), S_ij, loss.item()))
+                # print("Prediction, P_ij: %10s", P_ij.item())
+                # print("\nTarget Score, S_ij is:\t", S_ij, "\n")
+                # print("The Loss is:\t", loss.item())
+# "Name: %-20s Price: %10d" % (i.name, i.price)
+
             self.losses.append(loss.item())
 
             # Backward Pass; Calculate the Gradients
