@@ -50,14 +50,15 @@ def main():
         loss = torch.mean(-S_ij * torch.log(P_ij) - (1-S_ij)*torch.log(1-P_ij))
         return loss
 
-    # loss_fn = torch.nn.MSELoss()
+    loss_fn = torch.nn.MSELoss()
 
-    eta = 1e-6
+    eta = 1e-2
 
     # Choose an Optimizer
     # optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
     # DONE Consider here, not actually using any optimizer and adjusting manually
     optimizer = torch.optim.SGD(net.parameters(), lr = eta)
+
 
     # Train the Model .............................................
     net.train_model(eta, loss_fn, X, y)
@@ -128,7 +129,7 @@ class NeuralNetwork(torch.nn.Module):
         sj = self.network_forward(xj)
 
         s = torch.nn.Sigmoid()
-        return s(si-sj*self.sigma)
+        return s((si-sj)*self.sigma)
 
     def network_forward(self, x):
         x = x.float()
@@ -144,7 +145,7 @@ class NeuralNetwork(torch.nn.Module):
         return x.double()
 
     ## How to Train the Model .....................................
-    def train_model(self, lr, loss_fn, X, y, batch_size = 500):
+    def train_model(self, lr, loss_fn, X, y, batch_size = 10):
         self.losses = []
         print('{0:10s} \t {1:10s}  {2:10s}'.format("Prediction", "Actual", "Loss"))
         for t in range(int(3e3)):  # loop over the dataset multiple times
@@ -153,6 +154,7 @@ class NeuralNetwork(torch.nn.Module):
             pairs = [pair() for i in range(batch_size)]
             left  = torch.tensor([X.numpy()[pair[0]] for pair in pairs], requires_grad=True)
             right = torch.tensor([X.numpy()[pair[1]] for pair in pairs], requires_grad=True)
+            paired = []
 
             # Calculate the target for each pair
             S_ij = []
@@ -166,9 +168,8 @@ class NeuralNetwork(torch.nn.Module):
             # Measure the Loss
             loss = loss_fn(S_ij, P_ij)
             if t % 100 == 0:
-                # print('{0:10f} {1:10f} {2:10f}'.format(P_ij.item(), S_ij, loss.item()))
+                # print('{0:10f} {1:10f} {2:10f}'.format(P_ij[1].item(), S_ij[1], loss.item()))
                 print(loss.item())
-
             self.losses.append(loss.item())
 
             # Backward Pass; Calculate the Gradients
