@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os, sys
+# TODO calculate loss_fn with respect to batches of length 100-1000
 # os.chdir(os.path.dirname(sys.argv[0]))
 # os.chdir("/home/ryan/Studies/2020ResearchTraining/ranknet/scripts/neural_network/")
 
@@ -47,7 +48,7 @@ def main():
         loss = torch.mean(-S_ij * torch.log(P_ij) - (1-S_ij)*torch.log(1-P_ij))
         return loss
 
-    eta = 1e-6
+    eta = 1e-4
 
     # Choose an Optimizer
     # optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
@@ -111,6 +112,8 @@ class NeuralNetwork(torch.nn.Module):
         self.hidden_mid = torch.nn.Linear(5, 5)
         self.output = torch.nn.Linear(5, 1)
 
+        self.sigma = torch.randn(1, requires_grad=True)
+
         # Define the activation functions that will be used
         self.sigmoid = torch.nn.Sigmoid()
         self.softmax = torch.nn.Softmax(dim=1) # dim=1 calculates softmax across cols
@@ -121,7 +124,7 @@ class NeuralNetwork(torch.nn.Module):
         sj = self.network_forward(xj)
 
         s = torch.nn.Sigmoid()
-        return s(si-sj)
+        return s(si-sj*self.sigma)
 
     def network_forward(self, x):
         # Take input
@@ -139,7 +142,7 @@ class NeuralNetwork(torch.nn.Module):
     def train_model(self, lr, loss_fn, X, y):
         self.losses = []
         print('{0:10s} \t {1:10s}  {2:10s}'.format("Prediction", "Actual", "Loss"))
-        for t in range(int(3e6)):  # loop over the dataset multiple times
+        for t in range(int(3e3)):  # loop over the dataset multiple times
             # Pick a random pair of values
             pair = random.sample(range(X.shape[0]), 2)
 
@@ -169,6 +172,7 @@ class NeuralNetwork(torch.nn.Module):
             with torch.no_grad():
                 for parameter in self.parameters():
                     parameter -= lr * parameter.grad # Must be updated using `-=`, doesn't work otherwise
+                self.sigma    -= lr * self.sigma.grad
 
 
 # |  \/  (_)___  ___| | __ _ ___ ___(_)/ _(_) ___ __ _| |_(_) ___  _ __
