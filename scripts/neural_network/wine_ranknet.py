@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import os, sys
 # TODO calculate loss_fn with respect to batches of length 100-1000
+# TODO Implement an optimizer like RMSProp
+  # This could implement it's own batching, so adjust the batch size to be as large as possible
 # os.chdir(os.path.dirname(sys.argv[0]))
 # os.chdir("/home/ryan/Studies/2020ResearchTraining/ranknet/scripts/neural_network/")
 
@@ -48,7 +50,9 @@ def main():
         loss = torch.mean(-S_ij * torch.log(P_ij) - (1-S_ij)*torch.log(1-P_ij))
         return loss
 
-    eta = 1e-4
+    # loss_fn = torch.nn.MSELoss()
+
+    eta = 1e-6
 
     # Choose an Optimizer
     # optimizer = torch.optim.RMSprop(net.parameters(), lr = eta)
@@ -127,6 +131,7 @@ class NeuralNetwork(torch.nn.Module):
         return s(si-sj*self.sigma)
 
     def network_forward(self, x):
+        x = x.float()
         # Take input
         x = self.hidden_1(x)   # Linear Combination of input-> hidden
         x = self.sigmoid(x)    # Activation Function
@@ -136,26 +141,34 @@ class NeuralNetwork(torch.nn.Module):
         x = self.sigmoid(x)    # Activation Function
         x = torch.flatten(x, start_dim=0, end_dim=-1)
 
-        return x
+        return x.double()
 
     ## How to Train the Model .....................................
-    def train_model(self, lr, loss_fn, X, y):
+    def train_model(self, lr, loss_fn, X, y, batch_size = 500):
         self.losses = []
         print('{0:10s} \t {1:10s}  {2:10s}'.format("Prediction", "Actual", "Loss"))
         for t in range(int(3e3)):  # loop over the dataset multiple times
             # Pick a random pair of values
-            pair = random.sample(range(X.shape[0]), 2)
+            def pair(): return random.sample(range(X.shape[0]), 2)
+            pairs = [pair() for i in range(batch_size)]
+            left  = torch.tensor([X.numpy()[pair[0]] for pair in pairs], requires_grad=True)
+            right = torch.tensor([X.numpy()[pair[1]] for pair in pairs], requires_grad=True)
 
-            # Calculate the target
-            S_ij    = 1 if y[pair[0]] > y[pair[1]] else 0
+            # Calculate the target for each pair
+            S_ij = []
+            for pair in pairs:
+                S_ij.append(1 if y[pair[0]] > y[pair[1]] else 0)
+            S_ij = torch.tensor(S_ij, requires_grad=True, dtype = float)
 
             # Forward Pass; Calculate the Prediction
-            P_ij = self.forward(X[pair[0]], X[pair[1]])
+            P_ij = self.forward(left, right)
 
             # Measure the Loss
             loss = loss_fn(S_ij, P_ij)
             if t % 100 == 0:
-                print('{0:10f} {1:10f} {2:10f}'.format(P_ij.item(), S_ij, loss.item()))
+                # print('{0:10f} {1:10f} {2:10f}'.format(P_ij.item(), S_ij, loss.item()))
+                print(loss.item())
+
             self.losses.append(loss.item())
 
             # Backward Pass; Calculate the Gradients
