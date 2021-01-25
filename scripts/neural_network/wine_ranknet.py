@@ -156,11 +156,6 @@ class NeuralNetwork(torch.nn.Module):
             loss = loss_fn(S_ij, P_ij)
             if t % 100 == 0:
                 print('{0:10f} {1:10f} {2:10f}'.format(P_ij.item(), S_ij, loss.item()))
-                # print("Prediction, P_ij: %10s", P_ij.item())
-                # print("\nTarget Score, S_ij is:\t", S_ij, "\n")
-                # print("The Loss is:\t", loss.item())
-# "Name: %-20s Price: %10d" % (i.name, i.price)
-
             self.losses.append(loss.item())
 
             # Backward Pass; Calculate the Gradients
