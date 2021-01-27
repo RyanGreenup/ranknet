@@ -15,31 +15,25 @@ def main():
     input_size = X_train.shape[1]  # This is 2, x1 and x2 plotted on horizontal and vertical
     net = NeuralNetwork_2layer(input_size, 3, 1)
 
-    net.train(X_train, y_train, 1e-3)
-    print('---')
-    print(net.misclassification(X_train, y_train))
-    print(net.misclassification(X_test, y_test))
+    net.train(X_train, y_train, eta=1e-2)
 
-
-
-    print('success')
-    # print(out)
+    print('---\nMisclassification\n')
+    print("Training.........", round(net.misclassification(X_train, y_train)*100, 2), "%")
+    print("Testing..........", round(net.misclassification(X_test, y_test)*100, 2), "%")
     return 0
 
 class  NeuralNetwork_2layer(torch.nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
-        super().__init__()
-
-        self.n_input  = input_size
-        self.n_hidden = hidden_size
-        self.n_output = output_size
-
+        super().__init__() # inherit the old stuff, I think TODO Clarify this
+        # Weights
         self.wi = torch.nn.Parameter(torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True))
         self.wo = torch.nn.Parameter(torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True))
 
+        # Biases
         self.bi = torch.nn.Parameter(torch.randn(hidden_size, dtype=dtype, requires_grad=True))
         self.bo = torch.nn.Parameter(torch.randn(output_size, dtype=dtype, requires_grad=True))
 
+        # Loss Function and list
         self.loss_fn  = torch.nn.MSELoss()
         self.losses = [] # Losses at each iteration
 
