@@ -50,7 +50,7 @@ def main():
         loss = torch.mean(-S_ij * torch.log(P_ij) - (1-S_ij)*torch.log(1-P_ij))
         return loss
 
-    loss_fn = torch.nn.MSELoss()
+    # loss_fn = torch.nn.MSELoss()
 
     eta = 1e-2
 
@@ -61,7 +61,7 @@ def main():
 
 
     # Train the Model .............................................
-    net.train_model(eta, loss_fn, X, y)
+    net.train_model(optimizer, eta, loss_fn, X, y)
 
     # Measure the misclassification rate....................
     # TODO Adapt this for ranknet
@@ -145,7 +145,7 @@ class NeuralNetwork(torch.nn.Module):
         return x.double()
 
     ## How to Train the Model .....................................
-    def train_model(self, lr, loss_fn, X, y, batch_size = 10):
+    def train_model(self, optimizer, lr, loss_fn, X, y, batch_size = 100):
         self.losses = []
         print('{0:10s} \t {1:10s}  {2:10s}'.format("Prediction", "Actual", "Loss"))
         for t in range(int(3e3)):  # loop over the dataset multiple times
@@ -177,11 +177,14 @@ class NeuralNetwork(torch.nn.Module):
 
 
             # Zero the Gradients
-            self.zero_grad()
-            with torch.no_grad():
-                for parameter in self.parameters():
-                    parameter -= lr * parameter.grad # Must be updated using `-=`, doesn't work otherwise
-                self.sigma    -= lr * self.sigma.grad
+            # self.zero_grad()
+            # with torch.no_grad():
+            #     self.sigma    -= lr * self.sigma.grad
+                # for parameter in self.parameters():
+                #     parameter -= lr * parameter.grad # Must be updated using `-=`, doesn't work otherwise
+
+            optimizer.zero_grad()
+            optimizer.step()
 
 
 # |  \/  (_)___  ___| | __ _ ___ ___(_)/ _(_) ___ __ _| |_(_) ___  _ __
