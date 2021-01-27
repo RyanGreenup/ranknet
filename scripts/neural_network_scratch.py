@@ -20,7 +20,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+print()
 
 #  _                    _   ____        _        
 # | |    ___   __ _  __| | |  _ \  __ _| |_ __ _ 

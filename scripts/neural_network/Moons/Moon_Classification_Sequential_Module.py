@@ -85,6 +85,7 @@ for t in range(10000):
     y_pred = model(X.float())
 
     # Measure the Loss
+    print(y)
     loss = loss_fn(y_pred, y)
     if t % 100 == 0:
         print(t, '\t', loss.item())
