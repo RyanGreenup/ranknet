@@ -13,6 +13,7 @@ import random
 dtype = torch.float
 
 def main():
+    # TODO The plotting hangs, fix that
     X_train, X_test, y_train, y_test = make_data(n = 100000, create_plot=False, noise = 0.3)
     # X_train, X_test, y_train, y_test = make_data(n = 1000, create_plot=True)
     input_size = X_train.shape[1]  # This is 2, x1 and x2 plotted on horizontal and vertical
