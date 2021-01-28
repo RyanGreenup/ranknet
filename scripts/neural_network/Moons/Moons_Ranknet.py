@@ -77,7 +77,7 @@ class  NeuralNetwork_2layer(torch.nn.Module):
 
 def make_data(create_plot=False, n=1000):
     # -- Generate Two Moons Data -----------------------------------
-    X, y = datasets.make_moons(n_samples=n, noise=0.3, random_state=0)
+    X, y = datasets.make_moons(n_samples=n, noise=0.3, random_state=0) # Top left is 0, # Bottom Right is 1
     # Consider reshaping the data
     y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
 
