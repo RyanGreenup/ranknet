@@ -1,3 +1,7 @@
+# Unlike Moons_Classification.py This uses Functions to organise code and
+# uses an optimizer
+# This is the base for the ./Moons_Ranknet.py
+
 #!/usr/bin/env python3
 
 import torch

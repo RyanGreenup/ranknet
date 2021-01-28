@@ -1,3 +1,7 @@
+# This is very similar to  ./Moons_Classification_With_Optimizer.py
+# But this one does not use an optimizer, it just performs gradient
+# descent.
+# Also this one isn't written in functions
 
 #-- Import Packages -------------------------------------------
 import numpy as np
