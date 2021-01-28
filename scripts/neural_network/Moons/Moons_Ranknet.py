@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-DEBUG = True
+DEBUG = False         # Get more verbose printing when trying to debug
 
 import torch
 import numpy as np
@@ -13,7 +13,7 @@ import random
 dtype = torch.float
 
 def main():
-    X_train, X_test, y_train, y_test = make_data(n = 1000, create_plot=False)
+    X_train, X_test, y_train, y_test = make_data(n = 100000, create_plot=False, noise = 0.3)
     # X_train, X_test, y_train, y_test = make_data(n = 1000, create_plot=True)
     input_size = X_train.shape[1]  # This is 2, x1 and x2 plotted on horizontal and vertical
 
@@ -21,8 +21,6 @@ def main():
 
 
     net.train(X_train, y_train, eta=1e-2)
-
-    print('###')
 
     # print('---\nMisclassification\n')
     # print("Training.........", round(net.misclassification(X_train, y_train)*100, 2), "%")
@@ -62,7 +60,7 @@ class  NeuralNetwork_2layer(torch.nn.Module):
         return x
 
     def train(self, x, y, eta):
-        batch_size = 5
+        batch_size = 1000
         opt = torch.optim.RMSprop(self.parameters(), lr = eta)
         for t in range(int(1e3)):
 
@@ -111,11 +109,11 @@ class  NeuralNetwork_2layer(torch.nn.Module):
 
 
 
-def make_data(create_plot=False, n = 1000):
+def make_data(create_plot=False, n = 1000, noise=0.3):
     # -- Generate Two Moons Data -----------------------------------
     # In this case the bottom right (1) is relevant data,
     # top left (0) is not relevant data
-    X, y = datasets.make_moons(n_samples=n, noise=0.003, random_state=0) # Top left is 0, # Bottom Right is 1
+    X, y = datasets.make_moons(n_samples=n, noise=noise, random_state=0) # Top left is 0, # Bottom Right is 1
     # Consider reshaping the data
     y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
 
