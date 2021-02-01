@@ -1,68 +1,69 @@
 #!/usr/bin/env python
 
-# TODO Perhaps this approach actually worked and I was measuring the misclassification rate incorrectly?
-# TODO Perhaps the Loss function is why this approach performed so poorly?
-# TODO Implement testing and training data
-  # TODO Implement a plot of both Testing and Training Data
-# TODO Implement a method to intelligently exit the loop
+# - TODO Perhaps this approach actually worked and I was measuring the
+#   misclassification rate incorrectly?
+# - TODO Perhaps the Loss function is why this approach performed so
+#   poorly?
+# - TODO Implement testing and training data
+# - TODO Implement a plot of both Testing and Training Data
+# - TODO Implement a method to intelligently exit the loop
 
-#-- Import Packages -------------------------------------------
+# -- Import Packages -------------------------------------------
 import numpy as np
 import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
 from sklearn import tree
 import matplotlib.pyplot as plt
+import tools
+import torch
+import torch.nn as nn
 
-#-- Generate Two Moons Data -----------------------------------
-X, y = datasets.make_moons(n_samples = 1000, noise = 0.3, random_state = 0)
-y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
+# -- Generate Two Moons Data -----------------------------------
+X, y = datasets.make_moons(n_samples=1000, noise=0.3, random_state=0)
+y = np.reshape(y, (len(y), 1))  # Make y vertical n x 1 matrix.
 
 # Plot the Generated Data -----------------------------------
-    # Make an empty figure
+# Make an empty figure
 # plt.ion()
 p = plt.figure()
-    # Create the Scatter Plot
-plt.scatter(X[:,0], X[:, 1], c = y)
-    # Labels
+# Create the Scatter Plot
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# Labels
 plt.xlabel("x1")
 plt.ylabel("x2")
 plt.title("Plot of Two Moons Data")
-    # Show the Plot
+# Show the Plot
 plt.show()
 
-#-- Split data into Training and Test Sets --------------------
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.4)
+# -- Split data into Training and Test Sets --------------------
+X_train, X_test, y_train, y_test = train_test_split(X, y,
+                                                    test_size=0.4)
 
-#-Model the Data Using Trees---------------------------------
+# -Model the Data Using Trees---------------------------------
 #  Define a Decision Tree Classifier -------------------------
 d = 4
-clf = sklearn.tree.DecisionTreeClassifier(max_depth = d)
+clf = tree.DecisionTreeClassifier(max_depth=d)
 
-#. Train the Model ..........................................
+#  Train the Model ..........................................
 clf.fit(X_train, y_train)
 
-#. Test the Model
-score = clf.score(X_test, y_test) # mean accuracy (TP+TN)/(P+N)
+#  Test the Model
+score = clf.score(X_test, y_test)  # mean accuracy (TP+TN)/(P+N)
 misclassification_rate_tree = np.average(clf.predict(X) == y)
 
 print("The performance is:\n" + str(score*100) + "%")
 print("The misclassification rate is:\n", misclassification_rate_tree)
 
 # Fit the Neural Network ------------------------------------
-## Import the Packages
-import numpy as np
-import pandas as pd
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-## Create Tensors
+# Import the Packages numpy/np, torch, torch.nn
+# Create Tensors
 device = 'cpu'
 dtype = float
 X = torch.from_numpy(X.astype(np.float32))
 y = torch.from_numpy(y.astype(np.float32))
 
-## Define a model
+# Define a model
 model = nn.Sequential(
     nn.Linear(in_features=2, out_features=3),
     nn.Sigmoid(),
@@ -72,15 +73,15 @@ model = nn.Sequential(
     # nn.Sigmoid(),
 )
 
-## Define a Loss Function
+# Define a Loss Function
 loss_fn = torch.nn.BCEWithLogitsLoss()
-## Define an Optimizer
+# Define an Optimizer
 eta = 1e-1
 eta = 0.005
-optimizer = torch.optim.RMSprop(model.parameters(), lr = eta)
-## Train the Model
+optimizer = torch.optim.RMSprop(model.parameters(), lr=eta)
+#  Train the Model
 losses = []
-for t in range(10000):
+for t in range(100):
     # Forward Pass: Compute predicted y value
     y_pred = model(X.float())
 
@@ -93,23 +94,23 @@ for t in range(10000):
     losses.append(loss.item())
 
     # Backward Pass; Compute the Partial Derivatives
-    ## First Zero the Gradients, otherwise the can't be overwritten
+    #  First Zero the Gradients, otherwise the can't be overwritten
     optimizer.zero_grad()
-    
-    ## Now calculate the gradients
+
+    #  Now calculate the gradients
     loss.backward()
 
     # Adjust the Weights
     optimizer.step()
-    
+
 
 # Measure the Misclassification Rate ------------------------
 yhat = model.forward(X).detach().numpy().reshape((1, -1))
-yhat = [i>0.5 for i in yhat ]
+yhat = [i > 0.5 for i in yhat]
 yhat = np.array(yhat).astype(int)
 y = y.detach().numpy().reshape(1, -1).astype(int)
 
-import tools
+# import tools
 misclassification_rate_nn = tools.misclassification_rate(yhat, y)
 misclassification_rate_tree = tools.misclassification_rate(clf.predict(X), y)
 

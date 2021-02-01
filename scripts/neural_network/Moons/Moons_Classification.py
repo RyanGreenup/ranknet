@@ -3,66 +3,70 @@
 # descent.
 # Also this one isn't written in functions
 
-#-- Import Packages -------------------------------------------
+# * -- Import Packages -------------------------------------------
 import numpy as np
 import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
-from sklearn import tree
 import matplotlib.pyplot as plt
+import torch
 
-#-- Generate Two Moons Data -----------------------------------
-X, y = datasets.make_moons(n_samples = 400, noise = 0.4, random_state = 3141, shuffle=True)
-y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
+# * -- Generate Two Moons Data -----------------------------------
+X, y = datasets.make_moons(n_samples=400,
+                           noise=0.4,
+                           random_state=3141,
+                           shuffle=True)
+y = np.reshape(y, (len(y), 1))  # Make y vertical n x 1 matrix.
 
-# Plot the Generated Data -----------------------------------
-    # Make an empty figure
+# * Plot the Generated Data -----------------------------------
+# ** Make an empty figure
 # plt.ion()
 p = plt.figure()
-    # Create the Scatter Plot
-plt.scatter(X[:,0], X[:, 1], c = y)
-    # Labels
+# ** Create the Scatter Plot
+plt.scatter(X[:, 0], X[:, 1], c=y)
+# ** Labels
 plt.xlabel("x1")
 plt.ylabel("x2")
 plt.title("Plot of Two Moons Data")
-    # Show the Plot
+# ** Show the Plot
 plt.show()
 
-#-- Split data into Training and Test Sets --------------------
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.4)
+# * -- Split data into Training and Test Sets --------------------
+X_train, X_test, y_train, y_test = train_test_split(X, y,
+                                                    test_size=0.4)
 
-#-Model the Data Using Trees---------------------------------
+# ** -Model the Data Using Trees---------------------------------
 #  Define a Decision Tree Classifier -------------------------
 d = 4
-clf = sklearn.tree.DecisionTreeClassifier(max_depth = d)
+clf = sklearn.tree.DecisionTreeClassifier(max_depth=d)
 
-#. Train the Model ..........................................
+# *** Train the Model ..........................................
 clf.fit(X_train, y_train)
 
-#. Test the Model
-score = clf.score(X_test, y_test) # mean accuracy (TP+TN)/(P+N)
-misclassification_rate_tree_train  = np.average(clf.predict(X_train) != y_train.reshape(1, -1)[0])
-misclassification_rate_tree_test  = np.average(clf.predict(X_test) != y_test.reshape(1, -1)[0])
+# *** Test the Model
+score = clf.score(X_test, y_test)  # mean accuracy (TP+TN)/(P+N)
+misclassification_rate_tree_train = np.average(
+    clf.predict(X_train) != y_train.reshape(1, -1)[0]
+)
+misclassification_rate_tree_test = np.average(
+    clf.predict(X_test) != y_test.reshape(1, -1)[0]
+)
 
 print("The performance is:\n" + str(score*100) + "%")
 print("The misclassification rate is:\n", misclassification_rate_tree_test)
 
-# Fit the Neural Network ------------------------------------
-## Import the Packages
-import numpy as np
-import pandas as pd
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-## Create Tensors
+# ** Fit the Neural Network ------------------------------------
+# *** Import the Packages
+# import numpy, torch
 X_train = torch.from_numpy(X_train.astype(np.float32))
 y_train = torch.from_numpy(y_train.astype(np.float32))
 X_test = torch.from_numpy(X_test.astype(np.float32))
 y_test = torch.from_numpy(y_test.astype(np.float32))
-## Define a Model as a class
+# *** Define a Model as a class
 input_size = 2
-hidden_size = 3 # This is arbitrary
-output_size = 1 # should be 1, just like y
+hidden_size = 3  # This is arbitrary
+output_size = 1  # should be 1, just like y
+
 
 class NeuralNetwork():
     def __init__(self, input_size, hidden_size, output_size):
@@ -73,9 +77,9 @@ class NeuralNetwork():
         self.W3 = torch.randn(hidden_size, output_size, requires_grad=True)
 
         # Add Bias Values
-        self.b1 = torch.randn(hidden_size, requires_grad = True)
-        self.b2 = torch.randn(hidden_size, requires_grad = True)
-        self.b3 = torch.randn(output_size, requires_grad = True)
+        self.b1 = torch.randn(hidden_size, requires_grad=True)
+        self.b2 = torch.randn(hidden_size, requires_grad=True)
+        self.b3 = torch.randn(output_size, requires_grad=True)
 
     # Define the Forward Pass
     def forward(self, inputs):
@@ -88,15 +92,18 @@ class NeuralNetwork():
         return output
 
 
-input_size = 2 
-hidden_size = 3 # randomly chosen
-output_size = 1 # we want it to return a number that can be used to calculate the difference from the actual numberclass NeuralNetwork():
+input_size = 2
+hidden_size = 3  # randomly chosen
+output_size = 1  # we want it to return a number that can be used to
+#                  calculate the difference from the actual
+#                  numberclass NeuralNetwork():
 
 epochs = 10000
 learning_rate = 0.005
 model = NeuralNetwork(input_size, hidden_size, output_size)
 inputs = torch.tensor(X_train, dtype=torch.float)
-labels = torch.tensor(y_train, dtype=torch.float)#store all the loss values
+labels = torch.tensor(y_train, dtype=torch.float)
+# store all the loss values
 losses = []
 
 
@@ -105,7 +112,10 @@ for epoch in range(epochs):
     output = model.forward(inputs)
 
     # Binary Cross Entropy Formula
-    loss = -((labels * torch.log(output)) + (1 - labels) * torch.log(1 - output)).sum()
+    loss = -sum(
+        (labels * torch.log(output))
+        + (1 - labels) * torch.log(1 - output)
+    )
 
     # Log the log so it can be plotted after the fact
     losses.append(loss.item())
@@ -130,23 +140,31 @@ for epoch in range(epochs):
     model.b2.grad.zero_()
     model.b3.grad.zero_()
 
-# print("Final loss: ", losses[-1])
+# *** print("Final loss: ", losses[-1])
 plt.plot(losses)
 plt.show()
 
-# Measure the Misclassification Rate ------------------------
+# *** Measure the Misclassification Rate ------------------------
+
+
 def misclassification_rate(yhat, y):
-#    yhat = model.forward(X)
-#    yhat = yhat.detach().numpy().reshape(-1) > 0.5
-#    y=np.array(y)
     return np.average(y != yhat)
+
 
 print('-------------')
 
-misclassification_rate_network_train = np.average((model.forward(X_train) > 0.5) != y_train)
-misclassification_rate_network_test  = np.average((model.forward(X_test)  > 0.5) != y_test)
-# misclassification_rate_tree_train = np.average((clf.predict(X_train.numpy()) > 0.05) != y_train.numpy())
-# misclassification_rate_tree_test  = np.average((clf.predict(X_test.numpy()) > 0.5)  != y_test.numpy())
+misclassification_rate_network_train = np.average(
+    (model.forward(X_train) > 0.5) != y_train
+)
+misclassification_rate_network_test = np.average(
+    (model.forward(X_test) > 0.5) != y_test
+)
+# misclassification_rate_tree_train = np.average(
+#     (clf.predict(X_train.numpy()) > 0.05) != y_train.numpy()
+# )
+# misclassification_rate_tree_test = np.average(
+#     (clf.predict(X_test.numpy()) > 0.5)  != y_test.numpy()
+# )
 
 print(misclassification_rate_network_train)
 
@@ -163,4 +181,4 @@ print('Misclassification Rates\n',
       misclassification_rate_tree_train, '\n',
       'Tree    \t Test \t',
       misclassification_rate_tree_test,  '\n',
-    )
+      )
