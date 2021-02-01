@@ -24,7 +24,7 @@ def main():
 
     net = NeuralNetwork_2layer(input_size, 3, 1)
 
-    net.train(X_train, y_train, eta=1e-2)
+    net.train(X_train, y_train, eta=1e-3)
 
     # print('---\nMisclassification\n')
     # print("Training.........",
@@ -66,17 +66,26 @@ class NeuralNetwork_2layer(torch.nn.Module):
 
         return x
 
+    @staticmethod
+    def rank_encode(xi, xj):
+        if xi > xj:
+            return 1
+        elif xi == xj:
+            return 0
+        else:
+            return -1
+
     def train(self, x, y, eta):
         batch_size = 1000
         opt = torch.optim.RMSprop(self.parameters(), lr=eta)
-        for t in range(int(1e3)):
+        for t in range(int(3*1e3)):
 
             samples = np.array([random.sample(range(x.shape[0]), 2) for i in range(batch_size)])
             xi = x[samples[:, 0], :]
             xj = x[samples[:, 1], :]
             yi = y[samples[:, 0], :]
             yj = y[samples[:, 1], :]
-            y_batch = torch.tensor([int(yi[k] > yj[k]) for k in range(batch_size)], dtype=dtype, requires_grad=False)
+            y_batch = torch.tensor([self.rank_encode(yi[k], yj[k]) for k in range(batch_size)], dtype=dtype, requires_grad=False)
             # Make y vertical n x 1 matrix to match network output
             y_batch = torch.reshape(y_batch, (len(y_batch), 1))
             if DEBUG:
