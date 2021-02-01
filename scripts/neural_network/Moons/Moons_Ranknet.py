@@ -101,7 +101,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
 
             # Measure the loss
             loss = self.loss_fn(y_pred, y_batch)  # input, target is correct order
-            self.losses.append(loss)
+            self.losses.append(loss.item())
             if t%100:
                 print(loss.item())
 
