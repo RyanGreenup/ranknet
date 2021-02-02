@@ -7,6 +7,8 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import random
+import time
+import sys
 
 # * Global Variables
 DEBUG = False         # Get more verbose printing when trying to debug
@@ -32,7 +34,7 @@ def main():
     net = net.to(torch.device(dev))
 
     # TODO why is each batch so slow?
-    net.train(X_train, y_train, eta=1e-3, iterations=1e4)
+    net.train(X_train, y_train, eta=1e-3, iterations=1e4, batch_size = 10000)
 
     # print('---\nMisclassification\n')
     # print("Training.........",
@@ -84,19 +86,24 @@ class NeuralNetwork_2layer(torch.nn.Module):
         else:
             return -1
 
-    def train(self, x, y, eta, iterations):
-        batch_size = 60000
+    def train(self, x, y, eta, iterations, batch_size):
         opt = torch.optim.RMSprop(self.parameters(), lr=eta)
         for t in range(int(iterations)):
+            start = time.time()
 
             samples = np.array([random.sample(range(x.shape[0]), 2) for i in range(batch_size)])
             xi = x[samples[:, 0], :]
             xj = x[samples[:, 1], :]
             yi = y[samples[:, 0], :]
             yj = y[samples[:, 1], :]
+
+            # TODO This is the issue .................................
+            #      Why is this so slow? This scales in linear time
+            #      with respect to the batch size
             y_batch = torch.tensor([self.rank_encode(yi[k], yj[k]) for k in range(batch_size)], dtype=dtype, requires_grad=False, device = dev)
             # Make y vertical n x 1 matrix to match network output
             y_batch = torch.reshape(y_batch, (len(y_batch), 1), )
+            # .........................................................
             if DEBUG:
                 print(yi)
                 print(xi)
@@ -105,8 +112,12 @@ class NeuralNetwork_2layer(torch.nn.Module):
                 print('---')
                 print(y_batch)
 
+            stop = time.time()
+            print(stop - start)
+            sys.exit(0)
             # Make the Prediction; Forward Pass
             y_pred = self.forward(xi, xj)
+
 
             # Measure the loss
             loss = self.loss_fn(y_pred, y_batch)  # input, target is correct order
