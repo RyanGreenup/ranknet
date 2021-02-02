@@ -24,7 +24,7 @@ def main():
 
     net = NeuralNetwork_2layer(input_size, 3, 1)
 
-    net.train(X_train, y_train, eta=1e-3)
+    net.train(X_train, y_train, eta=1e-3, iterations=1e3)
 
     # print('---\nMisclassification\n')
     # print("Training.........",
@@ -75,10 +75,10 @@ class NeuralNetwork_2layer(torch.nn.Module):
         else:
             return -1
 
-    def train(self, x, y, eta):
-        batch_size = 1000
+    def train(self, x, y, eta, iterations):
+        batch_size = 10000
         opt = torch.optim.RMSprop(self.parameters(), lr=eta)
-        for t in range(int(3*1e3)):
+        for t in range(int(iterations)):
 
             samples = np.array([random.sample(range(x.shape[0]), 2) for i in range(batch_size)])
             xi = x[samples[:, 0], :]
@@ -103,7 +103,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
             loss = self.loss_fn(y_pred, y_batch)  # input, target is correct order
             self.losses.append(loss.item())
             if t%100:
-                print(loss.item())
+                print(t*100/iterations, "%")
 
             # Backwards Pass
             # First Zero the Gradients, otherwise they can't be overwritten
