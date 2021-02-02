@@ -115,6 +115,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
             # Adjust the Weights
             opt.step()
 
+        np.array(self.losses).savetxt("lossesOut.txt", a, delimeter=",")
         plt.plot(self.losses)
         plt.show()
 
