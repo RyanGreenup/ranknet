@@ -11,6 +11,12 @@ import random
 # * Global Variables
 DEBUG = False         # Get more verbose printing when trying to debug
 dtype = torch.float
+if torch.cuda.is_available():  
+  print("Detected Cuda Cores, setting Device to Cuda")
+  dev = "cuda:0" 
+else:  
+  print("No cuda cores detected, using CPU")
+  dev = "cpu"  
 
 # * Main
 
@@ -23,8 +29,10 @@ def main():
                                    # horizontal and vertical
 
     net = NeuralNetwork_2layer(input_size, 3, 1)
+    net = net.to(torch.device(dev))
 
-    net.train(X_train, y_train, eta=1e-3, iterations=1e3)
+    # TODO why is each batch so slow?
+    net.train(X_train, y_train, eta=1e-3, iterations=1e4)
 
     # print('---\nMisclassification\n')
     # print("Training.........",
@@ -38,12 +46,12 @@ class NeuralNetwork_2layer(torch.nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super().__init__()  # inherit the old stuff, I think TODO Clarify this
         # Weights
-        self.wi = torch.nn.Parameter(torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True))
-        self.wo = torch.nn.Parameter(torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True))
+        self.wi = torch.nn.Parameter(torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True, device = dev))
+        self.wo = torch.nn.Parameter(torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True, device = dev))
 
         # Biases
-        self.bi = torch.nn.Parameter(torch.randn(hidden_size, dtype=dtype, requires_grad=True))
-        self.bo = torch.nn.Parameter(torch.randn(output_size, dtype=dtype, requires_grad=True))
+        self.bi = torch.nn.Parameter(torch.randn(hidden_size, dtype=dtype, requires_grad=True, device = dev))
+        self.bo = torch.nn.Parameter(torch.randn(output_size, dtype=dtype, requires_grad=True, device = dev))
 
         # Loss Function and list
         self.loss_fn = torch.nn.MSELoss()
@@ -54,7 +62,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
         sj = self.forward_single(xj)
 
         sigma = 1  # TODO this should be a tensor variable with a gradient
-        return torch.sigmoid(sigma*(si-sj))
+        return torch.sigmoid(sigma*(si-sj)).to(dev)
 
     def forward_single(self, x):
         # First Layer
@@ -63,6 +71,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
         # Output Layer
         x = x.mm(self.wo).add(self.bo)
         x = torch.sigmoid(x)
+        x = x.to(dev)
 
         return x
 
@@ -76,7 +85,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
             return -1
 
     def train(self, x, y, eta, iterations):
-        batch_size = 10000
+        batch_size = 60000
         opt = torch.optim.RMSprop(self.parameters(), lr=eta)
         for t in range(int(iterations)):
 
@@ -85,9 +94,9 @@ class NeuralNetwork_2layer(torch.nn.Module):
             xj = x[samples[:, 1], :]
             yi = y[samples[:, 0], :]
             yj = y[samples[:, 1], :]
-            y_batch = torch.tensor([self.rank_encode(yi[k], yj[k]) for k in range(batch_size)], dtype=dtype, requires_grad=False)
+            y_batch = torch.tensor([self.rank_encode(yi[k], yj[k]) for k in range(batch_size)], dtype=dtype, requires_grad=False, device = dev)
             # Make y vertical n x 1 matrix to match network output
-            y_batch = torch.reshape(y_batch, (len(y_batch), 1))
+            y_batch = torch.reshape(y_batch, (len(y_batch), 1), )
             if DEBUG:
                 print(yi)
                 print(xi)
@@ -115,7 +124,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
             # Adjust the Weights
             opt.step()
 
-        np.array(self.losses).savetxt("lossesOut.txt", a, delimeter=",")
+        np.savetxt("lossesOut.txt", np.array(self.losses), delimiter=",")
         plt.plot(self.losses)
         plt.show()
 
@@ -147,7 +156,7 @@ def make_data(create_plot=False, n=1000, noise=0.3):
 
     torch_data = [None]*len(data)
     for i in range(len(data)):
-        torch_data[i] = torch.tensor(data[i], dtype=dtype, requires_grad=False)
+        torch_data[i] = torch.tensor(data[i], dtype=dtype, requires_grad=False, device = dev)
 
     return torch_data
 
