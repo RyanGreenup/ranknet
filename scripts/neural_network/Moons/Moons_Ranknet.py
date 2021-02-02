@@ -100,7 +100,9 @@ class NeuralNetwork_2layer(torch.nn.Module):
             # TODO This is the issue .................................
             #      Why is this so slow? This scales in linear time
             #      with respect to the batch size
-            y_batch = torch.tensor([self.rank_encode(yi[k], yj[k]) for k in range(batch_size)], dtype=dtype, requires_grad=False, device = dev)
+            y_batch_np = ((yi>yj)*2 - 1)*(yi != yj)
+            y_batch = torch.tensor(y_batch_np, dtype=dtype, requires_grad=False)
+
             # Make y vertical n x 1 matrix to match network output
             y_batch = torch.reshape(y_batch, (len(y_batch), 1), )
             # .........................................................
