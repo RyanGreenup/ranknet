@@ -13,12 +13,13 @@ import sys
 # * Global Variables
 DEBUG = False         # Get more verbose printing when trying to debug
 dtype = torch.float
-if torch.cuda.is_available():  
-  print("Detected Cuda Cores, setting Device to Cuda")
-  dev = "cuda:0" 
-else:  
-  print("No cuda cores detected, using CPU")
-  dev = "cpu"  
+# if torch.cuda.is_available():  
+#   print("Detected Cuda Cores, setting Device to Cuda")
+#   dev = "cuda:0" 
+# else:  
+#   print("No cuda cores detected, using CPU")
+#   dev = "cpu"  
+dev = "cpu"
 
 # * Main
 
@@ -33,7 +34,6 @@ def main():
     net = NeuralNetwork_2layer(input_size, 3, 1)
     net = net.to(torch.device(dev))
 
-    # TODO why is each batch so slow?
     net.train(X_train, y_train, eta=1e-3, iterations=1e4, batch_size = 10000)
 
     # print('---\nMisclassification\n')
@@ -89,23 +89,21 @@ class NeuralNetwork_2layer(torch.nn.Module):
     def train(self, x, y, eta, iterations, batch_size):
         opt = torch.optim.RMSprop(self.parameters(), lr=eta)
         for t in range(int(iterations)):
-            start = time.time()
-
             samples = np.array([random.sample(range(x.shape[0]), 2) for i in range(batch_size)])
             xi = x[samples[:, 0], :]
             xj = x[samples[:, 1], :]
             yi = y[samples[:, 0], :]
             yj = y[samples[:, 1], :]
 
-            # TODO This is the issue .................................
-            #      Why is this so slow? This scales in linear time
-            #      with respect to the batch size
+            # Measure whether or not i is greater than j
+            y_batch_boolean = yi>yj
+            # rencode from {0, 1} to {-1, 0, 1}
             y_batch_np = ((yi>yj)*2 - 1)*(yi != yj)
+            # Make it a tensor
             y_batch = torch.tensor(y_batch_np, dtype=dtype, requires_grad=False)
 
             # Make y vertical n x 1 matrix to match network output
             y_batch = torch.reshape(y_batch, (len(y_batch), 1), )
-            # .........................................................
             if DEBUG:
                 print(yi)
                 print(xi)
@@ -114,9 +112,6 @@ class NeuralNetwork_2layer(torch.nn.Module):
                 print('---')
                 print(y_batch)
 
-            stop = time.time()
-            print(stop - start)
-            sys.exit(0)
             # Make the Prediction; Forward Pass
             y_pred = self.forward(xi, xj)
 
