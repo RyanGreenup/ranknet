@@ -9,6 +9,8 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import random
+torch.manual_seed(329832)  # set the seed.
+np.random.seed(39832)
 
 dtype = torch.float
 
@@ -20,7 +22,7 @@ def main():
     net = NeuralNetwork_2layer(input_size, 3, 1)
 
 
-    net.train(X_train, y_train, eta=1e-2, iterations = 0.5*1e3)
+    net.train(X_train, y_train, eta=0.5*1e-2, iterations = 1*1e3)
 
     # print('---\nMisclassification\n')
     # print("Training.........", round(net.misclassification(X_train, y_train)*100, 2), "%")
@@ -60,7 +62,7 @@ class  NeuralNetwork_2layer(torch.nn.Module):
         return x
 
     def train(self, x, y, eta, iterations):
-        batch_size = 10000
+        batch_size = 50000
         opt = torch.optim.RMSprop(self.parameters(), lr = eta)
         for t in range(int(iterations)):
 
@@ -69,8 +71,21 @@ class  NeuralNetwork_2layer(torch.nn.Module):
             xj = x[samples[:,1], :]
             yi = y[samples[:,0], :]
             yj = y[samples[:,1], :]
-            y_batch = torch.tensor([int(yi[k] > yj[k]) for k in range(batch_size)], dtype = dtype, requires_grad=False)
-            y_batch = torch.reshape(y_batch, (len(y_batch), 1)) # Make y vertical n x 1 matrix to match network output
+
+
+            Boolean_Range=0  # Whether to use {0, 1} rather than {-1, 0, 1} as range
+
+            if (Boolean_Range):
+                y_batch = torch.tensor([int(yi[k] > yj[k]) for k in range(batch_size)], dtype = dtype, requires_grad=False)
+                y_batch = torch.reshape(y_batch, (len(y_batch), 1)) # Make y vertical n x 1 matrix to match network output
+            else:
+                # Measure whether or not i is greater than j
+                y_batch_boolean = yi>yj
+                # rencode from {0, 1} to {-1, 0, 1}
+                y_batch_np = ((yi>yj)*2 - 1)*(yi != yj)
+                # Make it a tensor
+                y_batch = torch.tensor(y_batch_np, dtype=dtype, requires_grad=False)
+                y_batch = torch.reshape(y_batch, (len(y_batch), 1)) # Make y vertical n x 1 matrix to match network output
             if DEBUG:
                 print(yi)
                 print(xi)
