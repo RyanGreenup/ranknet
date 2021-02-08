@@ -30,7 +30,7 @@ dev = "cpu"
 
 def main():
     X_train, X_test, y_train, y_test = make_data(
-        n=100000, create_plot=False, noise=0.1)
+        n=100000, create_plot=True, noise=0.1)
     input_size = X_train.shape[1]  # This is 2, x1 and x2 plotted on
     # horizontal and vertical
 
@@ -169,13 +169,9 @@ def make_data(create_plot=False, n=1000, noise=0.3):
     data = train_test_split(X, y, test_size=0.4)
 
     if(create_plot):
-        # Make an empty figure
-        p = plt.figure()
-
         # Create the Scatter Plot
         plt.scatter(X[:, 0], X[:, 1], c=y)
-        plt.legend()
-        p.show()
+        plt.show()
 
     torch_data = [None]*len(data)
     for i in range(len(data)):
