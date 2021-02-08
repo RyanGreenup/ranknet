@@ -37,7 +37,7 @@ def main():
     net = NeuralNetwork_2layer(input_size, 3, 1)
     net = net.to(torch.device(dev))
 
-    net.train(X_train, y_train, eta=0.5*1e-2, iterations=1*1e3)
+    net.train(X_train, y_train, eta=0.5*1e-2, iterations=1*1e2)
 
     return 0
 
@@ -57,8 +57,12 @@ class NeuralNetwork_2layer(torch.nn.Module):
         self.bo = torch.nn.Parameter(torch.randn(
             output_size, dtype=dtype, requires_grad=True))
 
+        # Sigma Value
+        self.sigma = torch.nn.Parameter(torch.randn(
+            1, dtype=dtype, requires_grad=True))
+
         # Loss Function and list
-        self.loss_fn = torch.nn.MSELoss()
+        self.loss_fn = torch.nn.BCELoss()  # NOTE targets should be y \in [0, 1] for this
         self.losses = []  # Losses at each iteration
         self.mcr_list = []  # Misclassification Rate
 
@@ -66,8 +70,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
         si = self.forward_single(xi)
         sj = self.forward_single(xj)
 
-        sigma = 1  # TODO this should be a tensor variable with a gradient
-        return torch.sigmoid(sigma*(si-sj))
+        return torch.sigmoid(self.sigma*(si-sj))
 
     def forward_single(self, x):
         # First Layer
@@ -121,7 +124,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
         for t in range(int(iterations)):
 
             xi, xj, yi, yj, y_batch = self.make_samples(
-                x, y, batch_size=int(20*1e3), Boolean_Range=1)
+                x, y, batch_size=int(10*1e3), Boolean_Range=1)
 
             # Make the Prediction; Forward Pass
             y_pred = self.forward(xi, xj)
