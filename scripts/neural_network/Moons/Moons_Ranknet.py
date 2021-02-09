@@ -30,14 +30,14 @@ dev = "cpu"
 
 def main():
     X_train, X_test, y_train, y_test = make_data(
-        n=100000, create_plot=True, noise=0.1)
+        n=100, create_plot=True, noise=0.1)
     input_size = X_train.shape[1]  # This is 2, x1 and x2 plotted on
     # horizontal and vertical
 
     net = NeuralNetwork_2layer(input_size, 3, 1)
     net = net.to(torch.device(dev))
 
-    net.train(X_train, y_train, eta=0.5*1e-2, iterations=1*1e2)
+    net.train(X_train, y_train, eta=0.5*1e-2, iterations=10*1e3)
 
     return 0
 
@@ -62,7 +62,6 @@ class NeuralNetwork_2layer(torch.nn.Module):
             1, dtype=dtype, requires_grad=True))
 
         # Loss Function and list
-        self.loss_fn = torch.nn.BCELoss()  # NOTE targets should be y \in [0, 1] for this
         self.losses = []  # Losses at each iteration
         self.mcr_list = []  # Misclassification Rate
 
@@ -83,7 +82,10 @@ class NeuralNetwork_2layer(torch.nn.Module):
         return x
 
     @staticmethod
-    def make_samples(x, y, batch_size, Boolean_Range):
+    def BCE_wide(Pij_pred, Pij_actual):
+        return torch.mean(-Pij_actual*torch.log(Pij_pred) - (1-Pij_actual)*torch.log(1-Pij_pred))
+
+    def make_samples(self, x, y, batch_size, Boolean_Range):
         """
         Boolean_Range is Whether to use {0, 1} rather than {-1, 0, 1} as range
         """
@@ -95,11 +97,13 @@ class NeuralNetwork_2layer(torch.nn.Module):
         yj = y[samples[:, 1], :]
 
         if (Boolean_Range):
+            self.loss_fn = torch.nn.BCELoss()  # NOTE targets should be y \in [0, 1] for this
             y_batch = torch.tensor([int(yi[k] > yj[k]) for k in range(
                 batch_size)], dtype=dtype, requires_grad=False)
             # Make y vertical n x 1 matrix to match network output
             y_batch = torch.reshape(y_batch, (len(y_batch), 1))
         else:
+            self.loss_fn = self.BCE_wide  # NOTE targets should be y \in [0, 1] for this
             # Measure whether or not i is greater than j
             y_batch_boolean = yi > yj
             # rencode from {0, 1} to {-1, 0, 1}
@@ -124,7 +128,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
         for t in range(int(iterations)):
 
             xi, xj, yi, yj, y_batch = self.make_samples(
-                x, y, batch_size=int(10*1e3), Boolean_Range=1)
+                x, y, batch_size=int(1*1e3), Boolean_Range=1)
 
             # Make the Prediction; Forward Pass
             y_pred = self.forward(xi, xj)
