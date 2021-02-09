@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# TODO Train the network using only the 1-1 comparisons
+# TODO Implement the factoring trick to improve performance
+
+
+
 # Import Packages
 from sklearn import datasets
 import numpy as np
