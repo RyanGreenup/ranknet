@@ -37,7 +37,7 @@ def main():
     net = NeuralNetwork_2layer(input_size, 3, 1)
     net = net.to(torch.device(dev))
 
-    net.train(X_train, y_train, eta=0.5*1e-2, iterations=10*1e3)
+    net.train(X_train, y_train, eta=0.5*1e-2, iterations=1*1e3)
 
     return 0
 
@@ -128,7 +128,7 @@ class NeuralNetwork_2layer(torch.nn.Module):
         for t in range(int(iterations)):
 
             xi, xj, yi, yj, y_batch = self.make_samples(
-                x, y, batch_size=int(1*1e3), Boolean_Range=1)
+                x, y, batch_size=int(10*1e3), Boolean_Range=1)
 
             # Make the Prediction; Forward Pass
             y_pred = self.forward(xi, xj)
