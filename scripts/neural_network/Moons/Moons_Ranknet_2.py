@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # TODO Train the network using only the 1-1 comparisons
 # TODO Implement the factoring trick to improve performance
+# TODO Implement a way to rank each value, then plot that ranking to the plot.
 
 
 
@@ -14,6 +15,7 @@ import torch
 import sys
 from torch import nn
 from itertools import tee
+import random
 
 torch.manual_seed(1)  # set the seed.
 np.random.seed(1)
@@ -28,6 +30,7 @@ dtype = torch.float
 #   print("No cuda cores detected, using CPU")
 #   dev = "cpu"
 dev = "cpu"
+DEBUG = True
 
 # Main Function
 def main():
@@ -39,6 +42,9 @@ def main():
     # print("Testing Error: ", 100*model.misclassification_rate(X_test, y_test), "%")
     plt.plot(model.losses)
 
+    if DEBUG:
+        report_val(X_train, y_train, model)
+    
     plt.show()
     sys.exit(0)
 
@@ -144,5 +150,27 @@ def make_data(create_plot=False, n=100):
         torch_data[i] = torch.tensor(data[i], dtype=dtype, requires_grad=False)
 
     return torch_data
+
+
+
+
+def report_val(X, y, model):
+    vals = random.sample(range(len(X)-1), 2)
+    xi = X[vals[0],:]
+    yi = y[vals[0]]
+    xj = X[vals[1],:]
+    yj = y[vals[1]]
+
+    y_pred = model.forward(xi, xj)
+    y = ((yi > yj)*2 - 1)*(yi != yj)
+
+    print("so for the two points:")
+    print(xi)
+    print(xj)
+    print("The Actual state of the first one being ranked higher is")
+    print(y)
+    print("The model returns the value")
+    print(y_pred)
+
 
 main()
