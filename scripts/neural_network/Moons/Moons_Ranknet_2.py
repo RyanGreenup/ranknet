@@ -132,8 +132,12 @@ def pairwise(iterable): # NOTE https://docs.python.org/3/library/itertools.html
 
 def make_data(create_plot=False, n=100):
     # -- Generate Two Moons Data -----------------------------------
-    X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0) # Top left is 0, # Bottom Right is 1
-    X, y = datasets.make_blobs(100, 2, 2, random_state=7)
+    # X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0) # Top left is 0, # Bottom Right is 1
+    temp_X, y = datasets.make_blobs(100, 2, 2, random_state=7) # Yellow is relevant
+    # Rotate the plot 90 deg
+    X = np.ndarray(temp_X.shape)
+    X[:,0] = temp_X[:,1]
+    X[:,1] = temp_X[:,0]
     # Consider reshaping the data
     y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
 
