@@ -83,6 +83,7 @@ class three_layer_nn(nn.Module):
     def train(self, x, target, η=1e-4, iterations=1e3):
         bar = Bar('Processing', max=iterations)
         for t in range(int(iterations)):
+            sublosses = []
             for pair in pairwise(range(len(x)-1)):
                 sublosses = []
                 xi =      x[pair[0],]
