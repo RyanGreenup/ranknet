@@ -7,11 +7,13 @@
 # Import Packages
 from sklearn import datasets
 import numpy as np
+from progress.bar import Bar
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import torch
 import sys
 from torch import nn
+from itertools import tee
 
 torch.manual_seed(1)  # set the seed.
 np.random.seed(1)
@@ -29,13 +31,14 @@ dev = "cpu"
 
 # Main Function
 def main():
-    X_train, X_test, y_train, y_test = make_data(n = 30, create_plot=True)
+    X_train, X_test, y_train, y_test = make_data(n = 30, create_plot=False)
     model = three_layer_nn(input_size=X_train.shape[1], hidden_size=2, output_size=1)
-    out1 = model.forward(X_train)
+    out1 = model.forward(X_train[1,:], X_train[2,:])
     model.train(X_train, y_train)
-    print("Training Error: ",  100*model.misclassification_rate(X_train, y_train), "%")
-    print("Testing Error: ", 100*model.misclassification_rate(X_test, y_test), "%")
+    # print("Training Error: ",  100*model.misclassification_rate(X_train, y_train), "%")
+    # print("Testing Error: ", 100*model.misclassification_rate(X_test, y_test), "%")
     plt.plot(model.losses)
+
     plt.show()
     sys.exit(0)
 
@@ -43,52 +46,78 @@ def main():
 class three_layer_nn(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(three_layer_nn, self).__init__()
-        self.wi = torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True)
-        self.wo = torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True)
-
-        self.bi = torch.randn(hidden_size, dtype=dtype, requires_grad=True)
-        self.bo = torch.randn(output_size, dtype=dtype, requires_grad=True)
+        self.wi = torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True, device = dev)
+        self.wo = torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True, device = dev)
+                                                                                      
+        self.bi = torch.randn(hidden_size, dtype=dtype, requires_grad=True, device = dev)
+        self.bo = torch.randn(output_size, dtype=dtype, requires_grad=True, device = dev)
+                                                                                      
+        self.σ = torch.randn(1, dtype=dtype, requires_grad=True, device = dev)
 
         self.losses = []
 
-    def forward(self, x):
-        x = torch.mm(x, self.wi).add(self.bi)
-        x = torch.mm(x, self.wo).add(self.bo)
+    def forward(self, xi, xj):
+        si = self.forward_single(xi)
+        sj = self.forward_single(xj)
+        out = 1/(1+torch.exp(-self.σ*(si-sj))) #0x3c3
+        return out
+    def forward_single(self, x):
+        x = torch.matmul(x, self.wi).add(self.bi)
+        x = torch.matmul(x, self.wo).add(self.bo)
         return x
 
-    def loss_fn(self, x, y):
-        y_pred = self.forward(x)
+    def loss_fn(self, xi, xj, y):
+        y_pred = self.forward(xi, xj)
         return torch.mean(torch.pow((y-y_pred), 2))
 
     def misclassification_rate(self, x, y):
         y_pred = (self.forward(x) > 0.5)
         return np.average(y != y_pred)
 
-    def train(self, x, target, η=1e-4, iterations=2e4):
+    def train(self, x, target, η=1e-4, iterations=1e3):
+        bar = Bar('Processing', max=iterations)
         for t in range(int(iterations)):
-            if (t % 1000 == 0):
-                print(t*100/iterations, "%")
-            # Calculate y, forward pass
-            y_pred = self.forward(x)
+            for pair in pairwise(range(len(x)-1)):
+                sublosses = []
+                xi =      x[pair[0],]
+                yi = target[pair[0]]
+                xj =      x[pair[1],]
+                yj = target[pair[1]]
 
-            # Measure the loss
-            loss = self.loss_fn(x, target)
-            # print(loss.item())
-            self.losses.append(loss.item())
+                # rencode from {0, 1} to {-1, 0, 1}
+                y = ((yi > yj)*2 - 1)*(yi != yj)
 
-            # Calculate the Gradients with Autograd
-            loss.backward()
+                # Calculate y, forward pass
+                y_pred = self.forward(xi, xj)
 
-            with torch.no_grad():
-                # Update the Weights with Gradient Descent 
-                self.wi -= η * self.wi.grad; self.wi.grad = None
-                self.bi -= η * self.bi.grad; self.bi.grad = None
-                self.wo -= η * self.wo.grad; self.wo.grad = None
-                self.bo -= η * self.bo.grad; self.bo.grad = None
+                # Measure the loss
+                loss = self.loss_fn(xi, xj, y)
+                # print(loss.item())
+                sublosses.append(loss.item())
 
-                # ; Zero out the gradients, they've been used
+                # Calculate the Gradients with Autograd
+                loss.backward()
+
+                with torch.no_grad():
+                    # Update the Weights with Gradient Descent 
+                    self.wi -= η * self.wi.grad; self.wi.grad = None
+                    self.bi -= η * self.bi.grad; self.bi.grad = None
+                    self.wo -= η * self.wo.grad; self.wo.grad = None
+                    self.bo -= η * self.bo.grad; self.bo.grad = None
+                    self.σ  -= η * self.σ.grad; self.σ.grad   = None
+
+                    # ; Zero out the gradients, they've been used
+
+            self.losses.append(np.average(sublosses))
+            bar.next()
+        bar.finish()
 
 
+def pairwise(iterable): # NOTE https://docs.python.org/3/library/itertools.html
+    "s -> (s0,s1), (s1,s2), (s2, s3), ..."
+    a, b = tee(iterable)
+    next(b, None)
+    return zip(a, b)
 
 
 
