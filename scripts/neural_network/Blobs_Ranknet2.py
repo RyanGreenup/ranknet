@@ -40,7 +40,9 @@ def main():
     # print("Training Error: ",  100*model.misclassification_rate(X_train, y_train), "%")
     # print("Testing Error: ", 100*model.misclassification_rate(X_test, y_test), "%")
     plt.plot(model.losses)
+    plt.title("Cost / Loss Function for Iteration of Training")
     plt.show()
+    plt.title("blah")
 
     if DEBUG:
         report_val(X_train, y_train, model)
@@ -73,6 +75,7 @@ def make_data(create_plot=False, n=1000):
     if(create_plot):
         # Create the Scatter Plot
         plt.scatter(X[:,0], X[:,1], c = y)
+        plt.title("Sample Data")
         plt.show()
 
     torch_data = [None]*len(data)

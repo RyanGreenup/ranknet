@@ -36,6 +36,7 @@ class three_layer_nn(nn.Module):
 
         if plot:    
             plt.plot(t_list, rates)
+            plt.title('Misclassification Rate Given Thresholds')
             plt.show()
 
 
