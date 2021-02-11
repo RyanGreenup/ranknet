@@ -34,19 +34,25 @@ DEBUG = True
 
 # Main Function
 def main():
-    X_train, X_test, y_train, y_test = make_data(n = 30, create_plot=False)
+    X_train, X_test, y_train, y_test = make_data(n = 200, create_plot=True)
     model = three_layer_nn(input_size=X_train.shape[1], hidden_size=2, output_size=1)
     out1 = model.forward(X_train[1,:], X_train[2,:])
     model.train(X_train, y_train)
     # print("Training Error: ",  100*model.misclassification_rate(X_train, y_train), "%")
     # print("Testing Error: ", 100*model.misclassification_rate(X_test, y_test), "%")
     plt.plot(model.losses)
+    plt.show()
 
     if DEBUG:
         report_val(X_train, y_train, model)
     
-    plt.show()
+    print("The Training Misclassification Rate is: ", model.misclassification_rate(X_train, y_train, model.threshold))
+    print("The Testing Misclassification Rate is: ", model.misclassification_rate(X_test, y_test, model.threshold))
+    
     sys.exit(0)
+
+
+
 
 
 class three_layer_nn(nn.Module):
@@ -60,7 +66,55 @@ class three_layer_nn(nn.Module):
                                                                                       
         self.σ = torch.randn(1, dtype=dtype, requires_grad=True, device = dev)
 
-        self.losses = []
+        self.losses = []  # List to hold loss after each iteration of training
+        self.trainedQ = False  # Has the model been trained yet?
+
+    def threshold_train(self, X, y, plot = False):
+        self.threshold = 0.5                   # Threshold used for Misclassification Rate
+        rate_best = 1                          # Set default misclassification as totally wrong.
+
+        t_list = [i/100 for i in range(100)]  # threshold to try
+        rates = []                            # List of misclassification rates
+        for t in t_list:
+            rate = self.misclassification_rate(X, y, threshold = t)
+            rates.append(rate)
+            if (rate < rate_best):
+                rate_best = rate
+                self.threshold = t
+
+        if plot:    
+            plt.plot(t_list, rates)
+            plt.show()
+
+
+    def misclassification_rate(self, X, target, threshold):
+        if not self.trainedQ:
+            sys.stderr("WARNING: Model has not yet been trained, use the train method")
+        rates = []
+        for pair in pairwise(range(len(X)-1)):
+            xi =      X[pair[0],]
+            yi = target[pair[0]]
+            xj =      X[pair[1],]
+            yj = target[pair[1]]
+
+            # rencode from {0, 1} to {-1, 0, 1}
+            y = ((yi > yj)*2 - 1)*(yi != yj)
+            y = y.item()
+
+            # Calculate y, forward pass
+            y_pred = self.forward(xi, xj).item()
+            if (y_pred < -threshold):
+                y_pred = -1
+            elif (y_pred > threshold):
+                y_pred = 1
+            else: 
+                y_pred = 0
+            m_rate = int(y_pred != y)
+
+
+            rates.append(m_rate)
+        return np.average(rates)
+    
 
     def forward(self, xi, xj):
         si = self.forward_single(xi)
@@ -76,16 +130,12 @@ class three_layer_nn(nn.Module):
         y_pred = self.forward(xi, xj)
         return torch.mean(torch.pow((y-y_pred), 2))
 
-    def misclassification_rate(self, x, y):
-        y_pred = (self.forward(x) > 0.5)
-        return np.average(y != y_pred)
-
     def train(self, x, target, η=1e-4, iterations=1e3):
+        self.trainedQ = True
         bar = Bar('Processing', max=iterations)
         for t in range(int(iterations)):
             sublosses = []
             for pair in pairwise(range(len(x)-1)):
-                sublosses = []
                 xi =      x[pair[0],]
                 yi = target[pair[0]]
                 xj =      x[pair[1],]
@@ -118,6 +168,7 @@ class three_layer_nn(nn.Module):
             self.losses.append(np.average(sublosses))
             bar.next()
         bar.finish()
+        self.threshold_train(x, target, plot = True)
 
 
 def pairwise(iterable): # NOTE https://docs.python.org/3/library/itertools.html
@@ -130,10 +181,10 @@ def pairwise(iterable): # NOTE https://docs.python.org/3/library/itertools.html
 
 
 
-def make_data(create_plot=False, n=100):
+def make_data(create_plot=False, n=1000):
     # -- Generate Two Moons Data -----------------------------------
     # X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0) # Top left is 0, # Bottom Right is 1
-    temp_X, y = datasets.make_blobs(100, 2, 2, random_state=7) # Yellow is relevant
+    temp_X, y = datasets.make_blobs(n, 2, 2, random_state=7) # Yellow is relevant
     # Rotate the plot 90 deg
     X = np.ndarray(temp_X.shape)
     X[:,0] = temp_X[:,1]
