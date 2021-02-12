@@ -81,9 +81,10 @@ class three_layer_nn(nn.Module):
 
     def loss_fn(self, xi, xj, y):
         y_pred = self.forward(xi, xj)
-        return torch.mean(torch.pow((y-y_pred), 2))
+        loss=torch.mean(-y*torch.log(y_pred)-(1-y)*torch.log(1-y_pred))
+        return loss
 
-    def train(self, x, target, η=1e-4, iterations=1e3):
+    def train(self, x, target, η=1e-2, iterations=4e2):
         self.trainedQ = True
         bar = Bar('Processing', max=iterations)
         for t in range(int(iterations)):
@@ -94,15 +95,17 @@ class three_layer_nn(nn.Module):
                 xj =      x[pair[1],]
                 yj = target[pair[1]]
 
-                # rencode from {0, 1} to {-1, 0, 1}
-                y = ((yi > yj)*2 - 1)*(yi != yj)
+                # encode from {0, 1} to {-1, 0, 1}
+                y = yi-yj
+                # Scale between {0,1}
+                y = 1/2*(1+y)
+                
 
                 # Calculate y, forward pass
                 y_pred = self.forward(xi, xj)
 
                 # Measure the loss
                 loss = self.loss_fn(xi, xj, y)
-                # print(loss.item())
                 sublosses.append(loss.item())
 
                 # Calculate the Gradients with Autograd
