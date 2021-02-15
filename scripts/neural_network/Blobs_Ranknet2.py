@@ -35,7 +35,7 @@ DEBUG = True
 
 
 def main():
-    X_train, X_test, y_train, y_test = make_data(n=50, create_plot=True)
+    X_train, X_test, y_train, y_test = make_data(n=100, create_plot=True)
     model = three_layer_nn(
         input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
     out1 = model.forward(X_train[1, :], X_train[2, :])
