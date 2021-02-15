@@ -14,6 +14,7 @@ import sys
 from torch import nn
 import random
 from ranknet.three_layer_nn_class import three_layer_nn
+from ranknet.quicksort_arr import quicksort
 
 
 torch.manual_seed(1)  # set the seed.
@@ -36,7 +37,7 @@ def main():
     X_train, X_test, y_train, y_test = make_data(n = 200, create_plot=True)
     model = three_layer_nn(input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
     out1 = model.forward(X_train[1,:], X_train[2,:])
-    model.train(X_train, y_train)
+    model.train(X_train, y_train, iterations=1e1)
     # print("Training Error: ",  100*model.misclassification_rate(X_train, y_train), "%")
     # print("Testing Error: ", 100*model.misclassification_rate(X_test, y_test), "%")
     plt.plot(model.losses)
@@ -49,10 +50,14 @@ def main():
     
     print("The Training Misclassification Rate is: ", model.misclassification_rate(X_train, y_train, model.threshold))
     print("The Testing Misclassification Rate is: ", model.misclassification_rate(X_test, y_test, model.threshold))
-    
+
     # Plot the ranked data
     # TODO implement quicksort
-    order = X_train[:,1].argsort()
+    n = X_train.shape[0]
+    order = [i for i in range(n)]
+    quicksort(order, 0, n-1, X_train, model)
+    print(order)
+
     ordered_data = X_train[order,:]
     y_ordered = y_train[order]
 
