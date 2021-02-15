@@ -50,6 +50,20 @@ def main():
     print("The Training Misclassification Rate is: ", model.misclassification_rate(X_train, y_train, model.threshold))
     print("The Testing Misclassification Rate is: ", model.misclassification_rate(X_test, y_test, model.threshold))
     
+    # Plot the ranked data
+    # TODO implement quicksort
+    order = X_train[:,1].argsort()
+    ordered_data = X_train[order,:]
+    y_ordered = y_train[order]
+
+
+    p = plt.figure()
+    for i in range(len(ordered_data)):
+        plt.text(ordered_data[i,0], ordered_data[i,1], i)
+    plt.scatter(ordered_data[:,0], ordered_data[:,1], c = y_ordered)
+    plt.title("Testing Data, with ranks")
+    plt.show()
+    
     sys.exit(0)
 
 
