@@ -1,5 +1,5 @@
 # https://www.geeksforgeeks.org/python-program-for-quicksort/
-DEBUG = False
+DEBUG = True
 
 def split(values, left, high): 
 	# Define the leftmost value
@@ -9,7 +9,7 @@ def split(values, left, high):
 
 	for q in range(left, high): 
 		# Only move smaller values left
-		if values[q] <= pivot: 
+		if leq(values[q], pivot): 
 			# +1 next left element
 			l = l+1
 			# Swap the current element onto the left
@@ -31,6 +31,30 @@ def quicksort(values, left, right):
 		# Do this again for the left and right parts
 		quicksort(values, left, pi-1) 
 		quicksort(values, pi+1, right) 
+
+def le(a, b):
+	if (a < b):
+	  return True
+	else:
+	  return False
+
+def leq(a, b):
+	if (a <= b):
+	  return True
+	else:
+	  return False
+
+def gr(a, b):
+	if (a > b):
+	  return True
+	else:
+	  return False
+
+def geq(a, b):
+	if (a >= b):
+	  return True
+	else:
+	  return False
 
 
 if DEBUG:

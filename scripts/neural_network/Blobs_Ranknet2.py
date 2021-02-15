@@ -3,7 +3,6 @@
 # TODO Implement a way to rank each value, then plot that ranking to the plot, with numbers
 
 
-
 # Import Packages
 from sklearn import datasets
 import numpy as np
@@ -33,67 +32,64 @@ dev = "cpu"
 DEBUG = True
 
 # Main Function
+
+
 def main():
-    X_train, X_test, y_train, y_test = make_data(n = 30, create_plot=True)
-    model = three_layer_nn(input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
-    out1 = model.forward(X_train[1,:], X_train[2,:])
-    model.train(X_train, y_train, iterations=1e3)
-    # print("Training Error: ",  100*model.misclassification_rate(X_train, y_train), "%")
-    # print("Testing Error: ", 100*model.misclassification_rate(X_test, y_test), "%")
+    X_train, X_test, y_train, y_test = make_data(n=50, create_plot=True)
+    model = three_layer_nn(
+        input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
+    out1 = model.forward(X_train[1, :], X_train[2, :])
+    model.train(X_train, y_train, iterations=5e2)
+
+    plot_losses(model)
+    plot_ranked_data(X_test, y_test, model)
+
+
+    sys.exit(0)
+
+def plot_losses(model):
     plt.plot(model.losses)
     plt.title("Cost / Loss Function for Iteration of Training")
     plt.show()
-    plt.title("blah")
 
-    if DEBUG:
-        report_val(X_train, y_train, model)
-    
-    print("The Training Misclassification Rate is: ", model.misclassification_rate(X_train, y_train, model.threshold))
-    print("The Testing Misclassification Rate is: ", model.misclassification_rate(X_test, y_test, model.threshold))
-
-    # Plot the ranked data
-    # TODO implement quicksort
-    n = X_train.shape[0]
+def plot_ranked_data(X, y, model):
+    # Create a list of values
+    n = X.shape[0]
     order = [i for i in range(n)]
-    quicksort(order, 0, n-1, X_train, model)
+    # Arrange that list of values based on the model
+    quicksort(values=order, left=0, right=(n-1), data=X, model=model)
     print(order)
 
-    ordered_data = X_train[order,:]
-    y_ordered = y_train[order]
-
+    ordered_data = X[order, :]
+    y_ordered = y[order]
 
     p = plt.figure()
     for i in range(len(ordered_data)):
-        plt.text(ordered_data[i,0], ordered_data[i,1], i)
-    plt.scatter(ordered_data[:,0], ordered_data[:,1], c = y_ordered)
+        plt.text(ordered_data[i, 0], ordered_data[i, 1], i)
+    plt.scatter(ordered_data[:, 0], ordered_data[:, 1], c=y_ordered)
     plt.title("Testing Data, with ranks")
     plt.show()
-    
-    sys.exit(0)
-
-
-
-
 
 
 def make_data(create_plot=False, n=1000):
     # -- Generate Two Moons Data -----------------------------------
-    # X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0) # Top left is 0, # Bottom Right is 1
+    # Top left is 0, # Bottom Right is 1
+    # temp_X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0)
     temp_X, y = datasets.make_blobs(n, 2, 2, random_state=7) # Yellow is relevant
     # Rotate the plot 90 deg
     X = np.ndarray(temp_X.shape)
-    X[:,0] = temp_X[:,1]
-    X[:,1] = temp_X[:,0]
+    X[:, 0] = temp_X[:, 1]
+    X[:, 1] = temp_X[:, 0]
     # Consider reshaping the data
-    y = np.reshape(y, (len(y), 1)) # Make y vertical n x 1 matrix.
+    y = np.reshape(y, (len(y), 1))  # Make y vertical n x 1 matrix.
 
     # -- Split data into Training and Test Sets --------------------
     # X_train, X_test, y_train, y_test
-    data = train_test_split(X, y, test_size = 0.4)
+    data = train_test_split(X, y, test_size=0.4)
 
     if(create_plot):
         # Create the Scatter Plot
-        plt.scatter(X[:,0], X[:,1], c = y)
+        plt.scatter(X[:, 0], X[:, 1], c=y)
         plt.title("Sample Data")
         plt.show()
 
@@ -102,25 +98,5 @@ def make_data(create_plot=False, n=1000):
         torch_data[i] = torch.tensor(data[i], dtype=dtype, requires_grad=False)
 
     return torch_data
-
-
-def report_val(X, y, model):
-    vals = random.sample(range(len(X)-1), 2)
-    xi = X[vals[0],:]
-    yi = y[vals[0]]
-    xj = X[vals[1],:]
-    yj = y[vals[1]]
-
-    y_pred = model.forward(xi, xj)
-    y = ((yi > yj)*2 - 1)*(yi != yj)
-
-    print("so for the two points:")
-    print(xi)
-    print(xj)
-    print("The Actual state of the first one being ranked higher is")
-    print(y)
-    print("The model returns the value")
-    print(y_pred)
-
 
 main()
