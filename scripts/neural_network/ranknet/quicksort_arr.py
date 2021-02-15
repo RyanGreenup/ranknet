@@ -35,8 +35,7 @@ def quicksort(values, left, right, data, model):
 
 
 def leq(a, b, data, model):
-    # score = model.forward(data[a, :], data[b, :])
-    score = data[a, 1] <= data[b, 1]
+    score = model.forward(data[a, :], data[b, :])
     if score <= 0.5:
         return True
     if score > 0.5:

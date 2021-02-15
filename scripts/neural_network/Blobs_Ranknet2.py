@@ -34,10 +34,10 @@ DEBUG = True
 
 # Main Function
 def main():
-    X_train, X_test, y_train, y_test = make_data(n = 200, create_plot=True)
+    X_train, X_test, y_train, y_test = make_data(n = 30, create_plot=True)
     model = three_layer_nn(input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
     out1 = model.forward(X_train[1,:], X_train[2,:])
-    model.train(X_train, y_train, iterations=1e1)
+    model.train(X_train, y_train, iterations=1e3)
     # print("Training Error: ",  100*model.misclassification_rate(X_train, y_train), "%")
     # print("Testing Error: ", 100*model.misclassification_rate(X_test, y_test), "%")
     plt.plot(model.losses)

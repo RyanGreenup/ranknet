@@ -76,7 +76,10 @@ class three_layer_nn(nn.Module):
         return out
     def forward_single(self, x):
         x = torch.matmul(x, self.wi).add(self.bi)
+        x = torch.sigmoid(x)
         x = torch.matmul(x, self.wo).add(self.bo)
+        x = torch.sigmoid(x)
+
         return x
 
     def loss_fn(self, xi, xj, y):
