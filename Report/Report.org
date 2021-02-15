@@ -1,4 +1,4 @@
-#+TITLE: RankNet Investigatoin
+#+TITLE: Implementing of RankNet
 :PREAMBLE:
 #+OPTIONS: broken-links:auto todo:nil H:9 tags:t tex:t
 #+STARTUP: overview
@@ -30,6 +30,63 @@
 #+LATEX_HEADER: \usetikzlibrary{lindenmayersystems}
 :END:
 @@latex: \newpage @@
+
+* Introduction
+  Ranknet is an approach to /Machine-Learned Ranking/ developed by
+  Microsoft as early as 2004
+  cite:christopherburgesRankNetRankingRetrospective2015, although
+  previous work in this area had already been undertaken as early as
+  the 90s (see
+  generally
+  cite:fuhrProbabilisticModelsInformation1992,fuhrOptimumPolynomialRetrieval1989,fuhrProbabilisticModelsInformation1992,geyInferringProbabilityRelevance1994,wongLinearStructureInformation1988)
+  these earlier models didn't perform well compared to more modern machine
+  learning techniques [[cite:manningIntroductionInformationRetrieval2008][\S 15.5]].
+
+  /Machine-Learned
+  Ranking/ is the process of applying machine learning algorithms to
+  ranking problems, it often refered to as /Learning to Rank// cite:liuLearningRankInformation2009.
+* Motivation
+  Much data cannot clearly categorised or quantified even if it there
+  is a capacity to compare different samples, the motivating example
+  is a collection of documents, it might be immediately clear to the reader which
+  documents are more relevant than others, even if the reader would
+  not be able to quantify a "relevance score" for each document.
+
+  By training a model to identify a more relevant document, a ranking
+  can be applied to the data.
+
+  An example of this might be identifying documents in a companies
+  interwiki that are relevant for new employees, by training the model
+  to rank whether one document is more relevant than an other,
+  ultimately an ordered list of documents most relevant for new
+  employees could be created.
+* Implementation
+  To implement the RankNet approach, a neural network will be trained
+  to identify a score.
+
+  Then a sigmoid function to identify a similarity score.
+
+  First apply to an obvious data set.
+
+  Then use a different optimiser
+  Then allow it to use more data
+  then a different data set
+  Then a non-obvious data set, like wine
+  Finally Documents.
+** TODO Blobs
+** TODO Moons
+** TODO Optimisers
+** TODO Batches
+** TODO Wine
+** TODO Rank Wiki Articles
+
+* Conclusion
+
+* Further Research
+
+  - Apply this to documents to get a sorted list.
+  - The "Quicksort" algorithm likely needs a random pivot to be efficient cite:timroughgardenQuicksortOverview2017
+
 * Text and References
 Fractals are complex shapes that often occur from natural processes, in this
 report we hope to investigate the emergence of patterns and complex structures

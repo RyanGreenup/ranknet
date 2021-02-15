@@ -34,6 +34,7 @@
       \strng{authorbibnamehash}{d66c4b884057887b53819bd6feef8736}
       \strng{authornamehash}{d66c4b884057887b53819bd6feef8736}
       \strng{authorfullhash}{d66c4b884057887b53819bd6feef8736}
+      \field{extraname}{1}
       \field{sortinit}{C}
       \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
       \field{labelnamesource}{author}
@@ -44,12 +45,294 @@
       \field{title}{From {{RankNet}} to {{LambdaRank}} to {{LambdaMART}}: {{An Overview}} ({{MSR}}-{{TR}}-2010-82}
       \field{year}{2010}
       \field{dateera}{ce}
+      \verb{file}
+      \verb /tmp/MSR-TR-2010-82.pdf
+      \endverb
       \verb{urlraw}
       \verb https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf
       \endverb
       \verb{url}
       \verb https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf
       \endverb
+    \endentry
+    \entry{christopherburgesRankNetRankingRetrospective2015}{online}{}
+      \name{author}{1}{}{%
+        {{hash=d66c4b884057887b53819bd6feef8736}{%
+           family={{Christopher Burges}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Microsoft Research}%
+      }
+      \strng{namehash}{d66c4b884057887b53819bd6feef8736}
+      \strng{fullhash}{d66c4b884057887b53819bd6feef8736}
+      \strng{bibnamehash}{d66c4b884057887b53819bd6feef8736}
+      \strng{authorbibnamehash}{d66c4b884057887b53819bd6feef8736}
+      \strng{authornamehash}{d66c4b884057887b53819bd6feef8736}
+      \strng{authorfullhash}{d66c4b884057887b53819bd6feef8736}
+      \field{extraname}{2}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{In 2004, Microsoft Research and Microsoft’s Web Search team started a joint effort to improve the relevance of our web search results. There followed a sustained effort that, over the next several years, resulted in our shipping three generations of web search ranking algorithms, culminating in the boosted tree ensembles that Bing uses today. We […]}
+      \field{day}{7}
+      \field{hour}{16}
+      \field{langid}{american}
+      \field{minute}{0}
+      \field{month}{7}
+      \field{second}{5}
+      \field{shorttitle}{{{RankNet}}}
+      \field{timezone}{Z}
+      \field{title}{{{RankNet}}: {{A}} Ranking Retrospective}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/EV2X3Q9J/ranknet-a-ranking-retrospective.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.microsoft.com/en-us/research/blog/ranknet-a-ranking-retrospective/
+      \endverb
+      \verb{url}
+      \verb https://www.microsoft.com/en-us/research/blog/ranknet-a-ranking-retrospective/
+      \endverb
+    \endentry
+    \entry{fuhrOptimumPolynomialRetrieval1989}{article}{}
+      \name{author}{1}{}{%
+        {{hash=fb5609770bbfd5995fd172011393df13}{%
+           family={Fuhr},
+           familyi={F\bibinitperiod},
+           given={Norbert},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{fb5609770bbfd5995fd172011393df13}
+      \strng{fullhash}{fb5609770bbfd5995fd172011393df13}
+      \strng{bibnamehash}{fb5609770bbfd5995fd172011393df13}
+      \strng{authorbibnamehash}{fb5609770bbfd5995fd172011393df13}
+      \strng{authornamehash}{fb5609770bbfd5995fd172011393df13}
+      \strng{authorfullhash}{fb5609770bbfd5995fd172011393df13}
+      \field{extraname}{1}
+      \field{sortinit}{F}
+      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We show that any approach to developing optimum retrieval functions is based on two kinds of assumptions: first, a certain form of representation for documents and requests, and second, additional simplifying assumptions that predefine the type of the retrieval function. Then we describe an approach for the development of optimum polynomial retrieval functions: request-document pairs (fl, dm) are mapped onto description vectors x(fl, dm), and a polynomial function e(x) is developed such that it yields estimates of the probability of relevance P(R | x (fl, dm) with minimum square errors. We give experimental results for the application of this approach to documents with weighted indexing as well as to documents with complex representations. In contrast to other probabilistic models, our approach yields estimates of the actual probabilities, it can handle very complex representations of documents and requests, and it can be easily applied to multivalued relevance scales. On the other hand, this approach is not suited to log-linear probabilistic models and it needs large samples of relevance feedback data for its application.}
+      \field{day}{1}
+      \field{issn}{1046-8188}
+      \field{journaltitle}{ACM Transactions on Information Systems}
+      \field{month}{7}
+      \field{number}{3}
+      \field{shortjournal}{ACM Trans. Inf. Syst.}
+      \field{title}{Optimum Polynomial Retrieval Functions Based on the Probability Ranking Principle}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{volume}{7}
+      \field{year}{1989}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{183\bibrangedash 204}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1145/65943.65944
+      \endverb
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/UMHYUNKC/Fuhr - 1989 - Optimum polynomial retrieval functions based on th.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/65943.65944
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/65943.65944
+      \endverb
+    \endentry
+    \entry{fuhrProbabilisticModelsInformation1992}{article}{}
+      \name{author}{1}{}{%
+        {{hash=fb5609770bbfd5995fd172011393df13}{%
+           family={Fuhr},
+           familyi={F\bibinitperiod},
+           given={Norbert},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{fb5609770bbfd5995fd172011393df13}
+      \strng{fullhash}{fb5609770bbfd5995fd172011393df13}
+      \strng{bibnamehash}{fb5609770bbfd5995fd172011393df13}
+      \strng{authorbibnamehash}{fb5609770bbfd5995fd172011393df13}
+      \strng{authornamehash}{fb5609770bbfd5995fd172011393df13}
+      \strng{authorfullhash}{fb5609770bbfd5995fd172011393df13}
+      \field{extraname}{2}
+      \field{sortinit}{F}
+      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, an introduction and survey over probabilistic information retrieval (IR) is given. First, the basic concepts of this approach are described: the probability-ranking principle shows that optimum retrieval quality can be achieved under certain assumptions; a conceptual model for IR along with the corresponding event space clarify the interpretation of the probabilistic parameters involved. For the estimation of these parameters, three different learning strategies are distinguished, namely query-related, document-related and description-related learning. As a representative for each of these strategies, a specific model is described. A new approach regards IR as uncertain inference; here, imaging is used as a new technique for estimating the probabilistic parameters, and probabilistic inference networks support more complex forms of inference. Finally, the more general problems of parameter estimations, query expansion and the development of models for advanced document representations are discussed.}
+      \field{day}{1}
+      \field{issn}{0010-4620}
+      \field{journaltitle}{The Computer Journal}
+      \field{month}{6}
+      \field{number}{3}
+      \field{shortjournal}{The Computer Journal}
+      \field{title}{Probabilistic {{Models}} in {{Information Retrieval}}}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{volume}{35}
+      \field{year}{1992}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{243\bibrangedash 255}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1093/comjnl/35.3.243
+      \endverb
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/6AJQE5UZ/Fuhr - 1992 - Probabilistic Models in Information Retrieval.pdf;/home/ryan/Zotero/storage/KRUWBVSQ/525633.html
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/comjnl/35.3.243
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/comjnl/35.3.243
+      \endverb
+    \endentry
+    \entry{geyInferringProbabilityRelevance1994}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=21a443bcd8f22f587b38f2ba2119b768}{%
+           family={Gey},
+           familyi={G\bibinitperiod},
+           given={Fredric\bibnamedelima C.},
+           giveni={F\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{21a443bcd8f22f587b38f2ba2119b768}
+      \strng{fullhash}{21a443bcd8f22f587b38f2ba2119b768}
+      \strng{bibnamehash}{21a443bcd8f22f587b38f2ba2119b768}
+      \strng{authorbibnamehash}{21a443bcd8f22f587b38f2ba2119b768}
+      \strng{authornamehash}{21a443bcd8f22f587b38f2ba2119b768}
+      \strng{authorfullhash}{21a443bcd8f22f587b38f2ba2119b768}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 17th Annual International {{ACM SIGIR}} Conference on {{Research}} and Development in Information Retrieval}
+      \field{day}{1}
+      \field{isbn}{978-0-387-19889-7}
+      \field{month}{8}
+      \field{series}{{{SIGIR}} '94}
+      \field{title}{Inferring Probability of Relevance Using the Method of Logistic Regression}
+      \field{year}{1994}
+      \field{dateera}{ce}
+      \field{pages}{222\bibrangedash 231}
+      \range{pages}{10}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/5UWNV6N2/Gey - 1994 - Inferring probability of relevance using the metho.pdf
+      \endverb
+    \endentry
+    \entry{liuLearningRankInformation2009}{article}{}
+      \name{author}{1}{}{%
+        {{hash=716b89cbb7332599ebb33cc58a52f648}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Tie-Yan},
+           giveni={T\bibinithyphendelim Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Now Publishers, Inc.}%
+      }
+      \strng{namehash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{fullhash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{bibnamehash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{authorbibnamehash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{authornamehash}{716b89cbb7332599ebb33cc58a52f648}
+      \strng{authorfullhash}{716b89cbb7332599ebb33cc58a52f648}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Learning to Rank for Information Retrieval}
+      \field{day}{26}
+      \field{issn}{1554-0669, 1554-0677}
+      \field{journaltitle}{Foundations and Trends® in Information Retrieval}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{number}{3}
+      \field{shortjournal}{INR}
+      \field{title}{Learning to {{Rank}} for {{Information Retrieval}}}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{volume}{3}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{225\bibrangedash 331}
+      \range{pages}{107}
+      \verb{doi}
+      \verb 10.1561/1500000016
+      \endverb
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/5JY7M9C2/Liu - 2009 - Learning to Rank for Information Retrieval.pdf;/home/ryan/Zotero/storage/AAC7E3FK/INR-016.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nowpublishers.com/article/Details/INR-016
+      \endverb
+      \verb{url}
+      \verb https://www.nowpublishers.com/article/Details/INR-016
+      \endverb
+    \endentry
+    \entry{manningIntroductionInformationRetrieval2008}{book}{}
+      \name{author}{3}{}{%
+        {{hash=2214edb8305f7ccd7cdc310b3a8ae1b4}{%
+           family={Manning},
+           familyi={M\bibinitperiod},
+           given={Christopher\bibnamedelima D.},
+           giveni={C\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=68f523934985e2f967ab2b15f4ded07c}{%
+           family={Raghavan},
+           familyi={R\bibinitperiod},
+           given={Prabhakar},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9a80de0e5ec6df57363aaf321a5d05be}{%
+           family={Schütze},
+           familyi={S\bibinitperiod},
+           given={Hinrich},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{fullhash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{bibnamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorbibnamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authornamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorfullhash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{annotation}{OCLC: ocn190786122}
+      \field{isbn}{978-0-521-86571-5}
+      \field{pagetotal}{482}
+      \field{title}{Introduction to Information Retrieval}
+      \field{year}{2008}
+      \field{dateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/FDVR8JH7/Manning et al. - 2008 - Introduction to information retrieval.pdf;/home/ryan/Zotero/storage/WAV29C5B/references-and-further-reading-15.html
+      \endverb
+      \keyw{Document clustering,Information retrieval,Semantic Web,Text processing (Computer science)}
     \endentry
     \entry{nicodemiIntroductionAbstractAlgebra2007a}{book}{}
       \name{author}{3}{}{%
@@ -88,11 +371,46 @@
       \field{annotation}{OCLC: 253915717}
       \field{isbn}{978-0-13-101963-8}
       \field{langid}{english}
-      \field{note}{Includes bibliographic references (S. 391-394) and index}
       \field{pagetotal}{436}
       \field{title}{An Introduction to Abstract Algebra with Notes to the Future Teacher}
       \field{year}{2007}
       \field{dateera}{ce}
+    \endentry
+    \entry{timroughgardenQuicksortOverview2017}{video}{}
+      \name{editor}{1}{}{%
+        {{hash=8ede97fb7ce08c5f30b81d29f9eff703}{%
+           family={{Tim Roughgarden}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Stanford Algorithms}%
+      }
+      \strng{namehash}{8ede97fb7ce08c5f30b81d29f9eff703}
+      \strng{fullhash}{8ede97fb7ce08c5f30b81d29f9eff703}
+      \strng{bibnamehash}{8ede97fb7ce08c5f30b81d29f9eff703}
+      \strng{editorbibnamehash}{8ede97fb7ce08c5f30b81d29f9eff703}
+      \strng{editornamehash}{8ede97fb7ce08c5f30b81d29f9eff703}
+      \strng{editorfullhash}{8ede97fb7ce08c5f30b81d29f9eff703}
+      \field{sortinit}{T}
+      \field{sortinithash}{51f9faf24c60c62ca764a77f78cf5666}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{title}
+      \field{day}{28}
+      \field{editortype}{director}
+      \field{month}{1}
+      \field{title}{Quicksort {{Overview}}}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.youtube.com/watch?v=ETo1cpLN7kk&list=PLEAYkSg4uSQ37A6_NrUnTHEKp6EkAxTMa&index=25
+      \endverb
+      \verb{url}
+      \verb https://www.youtube.com/watch?v=ETo1cpLN7kk&list=PLEAYkSg4uSQ37A6_NrUnTHEKp6EkAxTMa&index=25
+      \endverb
     \endentry
     \entry{tuGraphBasedSemiSupervisedNearestNeighbor2016a}{online}{}
       \name{author}{5}{}{%
@@ -137,7 +455,6 @@
       \field{eprintclass}{cs, stat}
       \field{eprinttype}{arxiv}
       \field{month}{6}
-      \field{note}{Comment: 32 pages, 12 figures, 7 tables}
       \field{title}{A {{Graph}}-{{Based Semi}}-{{Supervised}} k {{Nearest}}-{{Neighbor Method}} for {{Nonlinear Manifold Distributed Data Classification}}}
       \field{urlday}{2}
       \field{urlmonth}{12}
@@ -158,6 +475,63 @@
       \verb http://arxiv.org/abs/1606.00985
       \endverb
       \keyw{Computer Science - Machine Learning,Statistics - Machine Learning}
+    \endentry
+    \entry{wongLinearStructureInformation1988}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=428efc011221389ad044dc6a9cd13255}{%
+           family={Wong},
+           familyi={W\bibinitperiod},
+           given={S.\bibnamedelimi K.M.},
+           giveni={S\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=5022b016ed2d5226c593b6666e4ee8d6}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Y.\bibnamedelimi Y.},
+           giveni={Y\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{2922a40a6e99ed2795e85816ffc9aba4}
+      \strng{fullhash}{2922a40a6e99ed2795e85816ffc9aba4}
+      \strng{bibnamehash}{2922a40a6e99ed2795e85816ffc9aba4}
+      \strng{authorbibnamehash}{2922a40a6e99ed2795e85816ffc9aba4}
+      \strng{authornamehash}{2922a40a6e99ed2795e85816ffc9aba4}
+      \strng{authorfullhash}{2922a40a6e99ed2795e85816ffc9aba4}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Based on the concept of user preference, we investigate the linear structure in information retrieval. We also discuss a practical procedure to determine the linear decision function and present an analysis of term weighting. Our experimental results seem to demonstrate that our model provides a useful framework for the design of an adaptive system.}
+      \field{booktitle}{Proceedings of the 11th Annual International {{ACM SIGIR}} Conference on {{Research}} and Development in Information Retrieval}
+      \field{day}{1}
+      \field{isbn}{978-2-7061-0309-4}
+      \field{month}{5}
+      \field{series}{{{SIGIR}} '88}
+      \field{title}{Linear Structure in Information Retrieval}
+      \field{urlday}{14}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{1988}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{219\bibrangedash 232}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1145/62437.62452
+      \endverb
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/HVVVLTTX/Wong and Yao - 1988 - Linear structure in information retrieval.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/62437.62452
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/62437.62452
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

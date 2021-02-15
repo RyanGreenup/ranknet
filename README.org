@@ -32,3 +32,9 @@ RankNet
 :END:
 @@latex: \newpage @@
 
+
+- [[/home/ryan/Studies/2020ResearchTraining/ranknet/scripts/neural_network/Blobs_Ranknet2.py][Functioning Script]]
+- [[file:Report/Report.org][Report]]
+  - [[file:Report/Report.html][Report HTML]]
+  - [[file:Report/Report.pdf][Report PDF]]
+

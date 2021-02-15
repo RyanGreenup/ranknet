@@ -7,7 +7,6 @@
   location = {{New York}},
   isbn = {978-0-444-19451-0},
   keywords = {Graph theory},
-  note = {Includes index},
   pagetotal = {264}
 }
 
@@ -31,7 +30,141 @@
   date = {2010-01-01},
   publisher = {{Microsoft Research Technical Report}},
   url = {https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf},
-  abstract = {From RankNet to LambdaRank toLambdaMART: An OverviewChristopher J.C. BurgesMicrosoft Research Technical Report MSR-TR-2010-82AbstractLambdaMART is the boosted tree version of LambdaRank, which is based onRankNet. RankNet, LambdaRank, and LambdaMART have proven to be very suc-cessful algorithms for solving real world ranking problems: for example an ensem-ble of LambdaMART rankers won Track 1 of the 2010 Yahoo! Learning To RankChallenge. The details of these algorithms are spread across several papers and re-ports, and so here we give a self-contained, detailed and complete description ofthem.}
+  abstract = {From RankNet to LambdaRank toLambdaMART: An OverviewChristopher J.C. BurgesMicrosoft Research Technical Report MSR-TR-2010-82AbstractLambdaMART is the boosted tree version of LambdaRank, which is based onRankNet. RankNet, LambdaRank, and LambdaMART have proven to be very suc-cessful algorithms for solving real world ranking problems: for example an ensem-ble of LambdaMART rankers won Track 1 of the 2010 Yahoo! Learning To RankChallenge. The details of these algorithms are spread across several papers and re-ports, and so here we give a self-contained, detailed and complete description ofthem.},
+  file = {/tmp/MSR-TR-2010-82.pdf}
+}
+
+@online{christopherburgesRankNetRankingRetrospective2015,
+  title = {{{RankNet}}: {{A}} Ranking Retrospective},
+  shorttitle = {{{RankNet}}},
+  author = {{Christopher Burges}},
+  date = {2015-07-07T16:00:05+00:00},
+  url = {https://www.microsoft.com/en-us/research/blog/ranknet-a-ranking-retrospective/},
+  urldate = {2021-02-15},
+  abstract = {In 2004, Microsoft Research and Microsoft’s Web Search team started a joint effort to improve the relevance of our web search results. There followed a sustained effort that, over the next several years, resulted in our shipping three generations of web search ranking algorithms, culminating in the boosted tree ensembles that Bing uses today. We […]},
+  file = {/home/ryan/Zotero/storage/EV2X3Q9J/ranknet-a-ranking-retrospective.html},
+  langid = {american},
+  organization = {{Microsoft Research}}
+}
+
+@inproceedings{cooperProbabilisticRetrievalBased1992,
+  title = {Probabilistic Retrieval Based on Staged Logistic Regression},
+  booktitle = {Proceedings of the 15th Annual International {{ACM SIGIR}} Conference on {{Research}} and Development in Information Retrieval},
+  author = {Cooper, William S. and Gey, Fredric C. and Dabney, Daniel P.},
+  date = {1992-06-01},
+  pages = {198--210},
+  publisher = {{Association for Computing Machinery}},
+  location = {{New York, NY, USA}},
+  doi = {10.1145/133160.133199},
+  url = {https://doi.org/10.1145/133160.133199},
+  urldate = {2021-02-14},
+  abstract = {The goal of a probabilistic retrieval system design is to rank the elements of the search universe in descending order of their estimated probability of usefulness to the user. Previously explored methods for computing such a ranking have involved the use of statistical independence assumptions and multiple regression analysis on a learning sample. In this paper these techniques are recombined in a new way to achieve greater accuracy of probabilistic estimate without undue additional computational complexity. The novel element of the proposed design is that the regression analysis be carried out in two or more levels or stages. Such an approach allows composite or grouped retrieval clues to be analyzed in an orderly manner -- first within groups, and then between. It compensates automatically for systematic biases introduced by the statistical simplifying assumptions, and gives rise to search algorithms of reasonable computational efficiency.},
+  file = {/home/ryan/Zotero/storage/KZBRFBMH/Cooper et al. - 1992 - Probabilistic retrieval based on staged logistic r.pdf},
+  isbn = {978-0-89791-523-6},
+  series = {{{SIGIR}} '92}
+}
+
+@online{dandekarIntuitiveExplanationLearning2016,
+  title = {Intuitive Explanation of {{Learning}} to {{Rank}} (and {{RankNet}}, {{LambdaRank}} and {{LambdaMART}})},
+  author = {Dandekar, Nikhil},
+  date = {2016-01-14T01:56:56},
+  url = {https://medium.com/@nikhilbd/intuitive-explanation-of-learning-to-rank-and-ranknet-lambdarank-and-lambdamart-fe1e17fac418},
+  urldate = {2021-01-06},
+  abstract = {RankNet, LambdaRank and LambdaMART are all what we call Learning to Rank algorithms.},
+  file = {/home/ryan/Zotero/storage/2SKDHX7J/intuitive-explanation-of-learning-to-rank-and-ranknet-lambdarank-and-lambdamart-fe1e17fac418.html},
+  langid = {english},
+  organization = {{Medium}}
+}
+
+@article{fuhrOptimumPolynomialRetrieval1989,
+  title = {Optimum Polynomial Retrieval Functions Based on the Probability Ranking Principle},
+  author = {Fuhr, Norbert},
+  date = {1989-07-01},
+  journaltitle = {ACM Transactions on Information Systems},
+  shortjournal = {ACM Trans. Inf. Syst.},
+  volume = {7},
+  pages = {183--204},
+  issn = {1046-8188},
+  doi = {10.1145/65943.65944},
+  url = {https://doi.org/10.1145/65943.65944},
+  urldate = {2021-02-15},
+  abstract = {We show that any approach to developing optimum retrieval functions is based on two kinds of assumptions: first, a certain form of representation for documents and requests, and second, additional simplifying assumptions that predefine the type of the retrieval function. Then we describe an approach for the development of optimum polynomial retrieval functions: request-document pairs (fl, dm) are mapped onto description vectors x(fl, dm), and a polynomial function e(x) is developed such that it yields estimates of the probability of relevance P(R | x (fl, dm) with minimum square errors. We give experimental results for the application of this approach to documents with weighted indexing as well as to documents with complex representations. In contrast to other probabilistic models, our approach yields estimates of the actual probabilities, it can handle very complex representations of documents and requests, and it can be easily applied to multivalued relevance scales. On the other hand, this approach is not suited to log-linear probabilistic models and it needs large samples of relevance feedback data for its application.},
+  file = {/home/ryan/Zotero/storage/UMHYUNKC/Fuhr - 1989 - Optimum polynomial retrieval functions based on th.pdf},
+  number = {3}
+}
+
+@article{fuhrProbabilisticModelsInformation1992,
+  title = {Probabilistic {{Models}} in {{Information Retrieval}}},
+  author = {Fuhr, Norbert},
+  date = {1992-06-01},
+  journaltitle = {The Computer Journal},
+  shortjournal = {The Computer Journal},
+  volume = {35},
+  pages = {243--255},
+  issn = {0010-4620},
+  doi = {10.1093/comjnl/35.3.243},
+  url = {https://doi.org/10.1093/comjnl/35.3.243},
+  urldate = {2021-02-15},
+  abstract = {In this paper, an introduction and survey over probabilistic information retrieval (IR) is given. First, the basic concepts of this approach are described: the probability-ranking principle shows that optimum retrieval quality can be achieved under certain assumptions; a conceptual model for IR along with the corresponding event space clarify the interpretation of the probabilistic parameters involved. For the estimation of these parameters, three different learning strategies are distinguished, namely query-related, document-related and description-related learning. As a representative for each of these strategies, a specific model is described. A new approach regards IR as uncertain inference; here, imaging is used as a new technique for estimating the probabilistic parameters, and probabilistic inference networks support more complex forms of inference. Finally, the more general problems of parameter estimations, query expansion and the development of models for advanced document representations are discussed.},
+  file = {/home/ryan/Zotero/storage/6AJQE5UZ/Fuhr - 1992 - Probabilistic Models in Information Retrieval.pdf;/home/ryan/Zotero/storage/KRUWBVSQ/525633.html},
+  number = {3}
+}
+
+@inproceedings{geyInferringProbabilityRelevance1994,
+  title = {Inferring Probability of Relevance Using the Method of Logistic Regression},
+  booktitle = {Proceedings of the 17th Annual International {{ACM SIGIR}} Conference on {{Research}} and Development in Information Retrieval},
+  author = {Gey, Fredric C.},
+  date = {1994-08-01},
+  pages = {222--231},
+  publisher = {{Springer-Verlag}},
+  location = {{Berlin, Heidelberg}},
+  file = {/home/ryan/Zotero/storage/5UWNV6N2/Gey - 1994 - Inferring probability of relevance using the metho.pdf},
+  isbn = {978-0-387-19889-7},
+  series = {{{SIGIR}} '94}
+}
+
+@book{kernighanProgrammingLanguage1988,
+  title = {The {{C}} Programming Language},
+  author = {Kernighan, Brian W. and Ritchie, Dennis M.},
+  date = {1988},
+  edition = {2nd ed},
+  publisher = {{Prentice Hall}},
+  location = {{Englewood Cliffs, N.J}},
+  isbn = {978-0-13-110370-2 978-0-13-110362-7},
+  keywords = {C (Computer program language)},
+  pagetotal = {272}
+}
+
+@article{liuLearningRankInformation2009,
+  title = {Learning to {{Rank}} for {{Information Retrieval}}},
+  author = {Liu, Tie-Yan},
+  date = {2009-06-26},
+  journaltitle = {Foundations and Trends® in Information Retrieval},
+  shortjournal = {INR},
+  volume = {3},
+  pages = {225--331},
+  publisher = {{Now Publishers, Inc.}},
+  issn = {1554-0669, 1554-0677},
+  doi = {10.1561/1500000016},
+  url = {https://www.nowpublishers.com/article/Details/INR-016},
+  urldate = {2021-02-15},
+  abstract = {Learning to Rank for Information Retrieval},
+  file = {/home/ryan/Zotero/storage/5JY7M9C2/Liu - 2009 - Learning to Rank for Information Retrieval.pdf;/home/ryan/Zotero/storage/AAC7E3FK/INR-016.html},
+  langid = {english},
+  number = {3}
+}
+
+@book{manningIntroductionInformationRetrieval2008,
+  title = {Introduction to Information Retrieval},
+  author = {Manning, Christopher D. and Raghavan, Prabhakar and Schütze, Hinrich},
+  date = {2008},
+  publisher = {{Cambridge University Press}},
+  location = {{New York}},
+  annotation = {OCLC: ocn190786122},
+  file = {/home/ryan/Zotero/storage/FDVR8JH7/Manning et al. - 2008 - Introduction to information retrieval.pdf;/home/ryan/Zotero/storage/WAV29C5B/references-and-further-reading-15.html},
+  isbn = {978-0-521-86571-5},
+  keywords = {Document clustering,Information retrieval,Semantic Web,Text processing (Computer science)},
+  pagetotal = {482}
 }
 
 @book{nicodemiIntroductionAbstractAlgebra2007a,
@@ -43,8 +176,38 @@
   annotation = {OCLC: 253915717},
   isbn = {978-0-13-101963-8},
   langid = {english},
-  note = {Includes bibliographic references (S. 391-394) and index},
   pagetotal = {436}
+}
+
+@book{pictonNeuralNetworks,
+  title = {Neural Networks},
+  author = {Picton, Philip},
+  publisher = {{Palgrave}},
+  location = {{Basingstoke, Hampshire ; New York}},
+  isbn = {978-0-333-94899-6},
+  keywords = {Neural networks (Computer science)},
+  pagetotal = {195}
+}
+
+@online{PythonProgramQuickSort2014,
+  title = {Python {{Program}} for {{QuickSort}}},
+  date = {2014-01-07T18:57:29+00:00},
+  url = {https://www.geeksforgeeks.org/python-program-for-quicksort/},
+  urldate = {2021-02-15},
+  abstract = {A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.},
+  file = {/home/ryan/Zotero/storage/DMIAJVJK/python-program-for-quicksort.html},
+  langid = {american},
+  organization = {{GeeksforGeeks}}
+}
+
+@video{timroughgardenQuicksortOverview2017,
+  title = {Quicksort  {{Overview}}},
+  editor = {{Tim Roughgarden}},
+  date = {2017-01-28},
+  publisher = {{Stanford Algorithms}},
+  url = {https://www.youtube.com/watch?v=ETo1cpLN7kk&list=PLEAYkSg4uSQ37A6_NrUnTHEKp6EkAxTMa&index=25},
+  urldate = {2021-02-15},
+  editortype = {director}
 }
 
 @online{tuGraphBasedSemiSupervisedNearestNeighbor2016a,
@@ -59,8 +222,32 @@
   eprinttype = {arxiv},
   file = {/home/ryan/Zotero/storage/G9DGWTE3/tuGraphBasedSemiSupervisedNearestNeighbor2016a.pdf;/home/ryan/Zotero/storage/L85BD4UL/1606.html},
   keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
-  note = {Comment: 32 pages, 12 figures, 7 tables},
   primaryClass = {cs, stat}
 }
+
+@online{UniversityLogisticRegression,
+  title = {University:Logistic\_regression},
+  url = {http://192.168.50.190/dokuwiki/doku.php?id=university:logistic_regression&do=export_xhtml},
+  urldate = {2021-01-06},
+  file = {/home/ryan/Zotero/storage/L979NGPC/doku.html}
+}
+
+@inproceedings{wongLinearStructureInformation1988,
+  title = {Linear Structure in Information Retrieval},
+  booktitle = {Proceedings of the 11th Annual International {{ACM SIGIR}} Conference on {{Research}} and Development in Information Retrieval},
+  author = {Wong, S. K.M. and Yao, Y. Y.},
+  date = {1988-05-01},
+  pages = {219--232},
+  publisher = {{Association for Computing Machinery}},
+  location = {{New York, NY, USA}},
+  doi = {10.1145/62437.62452},
+  url = {https://doi.org/10.1145/62437.62452},
+  urldate = {2021-02-14},
+  abstract = {Based on the concept of user preference, we investigate the linear structure in information retrieval. We also discuss a practical procedure to determine the linear decision function and present an analysis of term weighting. Our experimental results seem to demonstrate that our model provides a useful framework for the design of an adaptive system.},
+  file = {/home/ryan/Zotero/storage/HVVVLTTX/Wong and Yao - 1988 - Linear structure in information retrieval.pdf},
+  isbn = {978-2-7061-0309-4},
+  series = {{{SIGIR}} '88}
+}
+
 
 
