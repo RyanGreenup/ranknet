@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 
 # Import Packages
-from sklearn import datasets
 import numpy as np
-from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import torch
 import sys
 from torch import nn
 import random
 from ranknet.test_cuda import test_cuda
+from ranknet.make_data import make_data
 
 # Set Seeds
-torch.manual_seed(1)  
+torch.manual_seed(1)
 np.random.seed(1)
 
 # Set Torch Parameters
@@ -26,4 +25,9 @@ DEBUG = True
 # Main Function
 
 def main():
-    print("Hello World!")
+    X_train, X_test, y_train, y_test = make_data(
+        n=100, create_plot=True, dtype=dtype, dev=dev)
+
+
+if __name__ == "__main__":
+    main()
