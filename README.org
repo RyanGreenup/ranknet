@@ -1,4 +1,4 @@
-RankNet
+RankNet Walkthrough
 :PREAMBLE:
 #+OPTIONS: broken-links:auto todo:nil H:9 tags:t
 #+STARTUP: overview
@@ -32,3 +32,7 @@ RankNet
 :END:
 @@latex: \newpage @@
 
+
+
+This branch contains a walkthrough to accompany a report detailing how
+to implement the Ranknet algorithm.
