@@ -8,7 +8,7 @@ import sys
 import random
 from ranknet.test_cuda import test_cuda
 from ranknet.make_data import make_data
-from ranknet.neural_network import three_layer_classification_network
+from ranknet.neural_network import three_layer_ranknet_network
 
 # Set Seeds
 torch.manual_seed(1)
@@ -30,17 +30,21 @@ def main():
         n=100, create_plot=True, dtype=dtype, dev=dev)
 
     # Create a model object
-    model = three_layer_classification_network(
+    model = three_layer_ranknet_network(
         input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
     
-    model.train(X_train, y_train, η=1e-2, iterations=10000)
+    # Train the Model
+    model.train(X_train, y_train, η=1e-1, iterations=5e2)
+
+    # Visualise the Training Error
+    plot_losses(model)
+
+    # Misclassification won't work for ranked data
+
+def plot_losses(model):
     plt.plot(model.losses)
-    plt.title("Losses at each training iteration")
+    plt.title("Cost / Loss Function for Iteration of Training")
     plt.show()
-
-    print("The testing misclassification rate is:\n")
-    print(model.misclassification_rate(X_test, y_test))
-
 
 if __name__ == "__main__":
     main()
