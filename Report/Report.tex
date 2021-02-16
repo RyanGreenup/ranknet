@@ -1,4 +1,4 @@
-% Created 2021-02-15 Mon 17:21
+% Created 2021-02-16 Tue 13:42
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,11pt,twoside]{article}
 \usepackage[utf8]{inputenc}
@@ -42,27 +42,47 @@
  \newpage 
 
 \section{Introduction}
-\label{sec:orgf2b2d43}
-Ranknet is an approach to \emph{Machine-Learned Ranking} developed by
-Microsoft as early as 2004
+\label{sec:org67581ea}
+Ranknet is an approach to \emph{Machine-Learned Ranking (often refered to
+as "//Learning to Rank}"/ \cite{liuLearningRankInformation2009})/ that
+began development at Microsoft from 2004 onwards
 \cite{christopherburgesRankNetRankingRetrospective2015}, although
 previous work in this area had already been undertaken as early as
-the 90s (see
-generally
+the 90s (see generally
 \cite{fuhrProbabilisticModelsInformation1992,fuhrOptimumPolynomialRetrieval1989,fuhrProbabilisticModelsInformation1992,geyInferringProbabilityRelevance1994,wongLinearStructureInformation1988})
-these earlier models didn't perform well compared to more modern machine
-learning techniques \cite[\S 15.5]{manningIntroductionInformationRetrieval2008}.
+these earlier models didn't perform well compared to more modern
+machine learning techniques
+\cite[\S 15.5]{manningIntroductionInformationRetrieval2008}.
 
-\emph{Machine-Learned
-Ranking} is the process of applying machine learning algorithms to
-ranking problems, it often refered to as \emph{Learning to Rank/} \cite{liuLearningRankInformation2009}.
+This paper hopes to serve as an introduction to the implementation
+of this technique.
+
+The Ranknet approach is typically implemented using Neural Networks,
+an early goal of this research was to evaluate the performance of
+different machine learning algorithms to implement the Ranknet
+method, this research however is still ongoing.
+
+Further Research to look at the implementation of Ranknet for
+documents and comparing different approaches to apply the method to
+on-demand queries is required, although this seems to have been
+implemented by open source Apache Solr project
+\cite{michaelalcornIntroductionMachinelearnedRanking}, which may
+provide guidance for further study. An open question is how the
+performance of Ranknet performs compared to alternative pre-existing
+methods like Recoll \cite{jean-francoisdockesRecollUserManual} and
+docfetcher \cite{docfetcherdevelopmentteamDocFetcherFastDocument}.
+
+
+Ranking/ is the process of applying machine learning algorithms to
+ranking problems, it .
 \section{Motivation}
-\label{sec:org95f965c}
-Much data cannot clearly categorised or quantified even if it there
+\label{sec:org126824b}
+A lot of data cannot be clearly categorised or quantified even if there
 is a capacity to compare different samples, the motivating example
-is a collection of documents, it might be immediately clear to the reader which
-documents are more relevant than others, even if the reader would
-not be able to quantify a "relevance score" for each document.
+is a collection of documents, it might be immediately clear to the
+reader which documents are more relevant than others, even if the
+reader would not be able to quantify a "relevance score" for each
+document.
 
 By training a model to identify a more relevant document, a ranking
 can be applied to the data.
@@ -73,37 +93,80 @@ to rank whether one document is more relevant than an other,
 ultimately an ordered list of documents most relevant for new
 employees could be created.
 \section{Implementation}
-\label{sec:org595db18}
-To implement the RankNet approach, a neural network will be trained
-to identify a score.
+\label{sec:org6bffde5}
+This implementation will first apply the approach to a simple data
+set so as to clearly demonstrate that the approach works, following
+that the model will be extended to support wider and more complex
+data types before finally being implemented on a corpus of documents.
 
-Then a sigmoid function to identify a similarity score.
+\subsection{Neural Network}
+\label{sec:org89df9e1}
+Neural Networks \cite{pictonNeuralNetworks1994}
 
-First apply to an obvious data set.
+The Ranknet method is typically implemented using a Neural Network,
+although other machine learning techniques can also be used
+\cite[\s 1]{christopherburgesRankNetRankingRetrospective2015},
+Neural Networks are essentially a collection of different
+regression models that are fed into one another to create a
+non-linear classifier, a loss function is used to measure the
+performance of the model with respect to the parameters
+(e.g. RMSE \footnote{\textbf{RMSE} \emph{Root Mean Square Error}} or BCE \footnote{\textbf{BCE} \emph{Binary Cross Entropy}}) and the parameters are adjusted so
+as to reduce this error by using the \emph{Gradient Descent Technique}
+(although there are other optimisation algorithms such as RMSProp
+and AdaGrad \cite{mukkamalaVariantsRMSPropAdagrad2017} that can be
+shown to perform better see
+\cite{bushaevUnderstandingRMSpropFaster2018}). The specifics of
+Neural Networks are beyond the scope of this paper (see
+\cite{hmkcodeBackpropagationStepStep} or more generally \cite{pictonNeuralNetworks1994}).
 
-Then use a different optimiser
-Then allow it to use more data
-then a different data set
-Then a non-obvious data set, like wine
-Finally Documents.
+\subsubsection{The Ranknet Method}
+\label{sec:org4a2ceb0}
+
+The Ranknet method is concerned with a value \(p_{ij}\) that
+measures the probability that an observation \(i\) is ranked higher
+than an observation \(j\).
+
+A Neural Network (\(n\)) is trained to return a value
+\(s_k\) from a feature vector \(\mathbf{X}_k\):
+
+ \[n(\mathbf{X}_i) = s_i \quad \exists k\]
+So as to minimise the error of:
+
+
+\[
+  p_{ij} = \frac{1}{1+e^{\sigma \cdot (s_i-s_j)}} \quad \exists \sigma
+  \in \mathbb{R}
+  \]
+
+\subsubsection{Implementation}
+\label{sec:org3a33cbd}
+The first step is to create a simple data set and design a neural
+network that can classify that data set, this can then be extended.
+
+\subsection{How to clone}
+\label{sec:orgb84f545}
+How can the reader clone this onto there machine?
+
+put on the summer repo then provide instructions to clone this
+working example onto there machine to try it out.
 \subsection{Blobs}
-\label{sec:orgb460e93}
+\label{sec:org4081e89}
 \subsection{Moons}
-\label{sec:orgad8c69e}
+\label{sec:org7508d66}
 \subsection{Optimisers}
-\label{sec:org30dc692}
+\label{sec:orgdac49a2}
 \subsection{Batches}
-\label{sec:orgf88f3dd}
+\label{sec:orgdb25fc6}
 \subsection{Wine}
-\label{sec:orgcac6a22}
+\label{sec:org7ea0bde}
 \subsection{Rank Wiki Articles}
-\label{sec:orge125d81}
+\label{sec:orge2d26c2}
 
 \section{Conclusion}
-\label{sec:org4340231}
+\label{sec:org62ac62d}
 
 \section{Further Research}
-\label{sec:orgb507db2}
+\label{sec:orgb3d98b1}
 
 \begin{itemize}
 \item Apply this to documents to get a sorted list.
@@ -111,7 +174,7 @@ Finally Documents.
 \end{itemize}
 
 \section{Text and References}
-\label{sec:orgf5aa00e}
+\label{sec:org84f033f}
 Fractals are complex shapes that often occur from natural processes, in this
 report we hope to investigate the emergence of patterns and complex structures
 from natural phenomena. We begin with an investigation into fractals and the
@@ -121,12 +184,6 @@ processes.
 This is a Reference \cite{tuGraphBasedSemiSupervisedNearestNeighbor2016a} and another \cite{nicodemiIntroductionAbstractAlgebra2007a} and yet another \cite{christopherburgesRankNetLambdaRankLambdaMART2010}.
 
 \section{Fractals}
-\label{sec:org57c61cc}
-Images are shown in figure \ref{fig:orgd35ab15}.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{media/outline-rabbit.png}
-\caption{\label{fig:orgd35ab15}This is a test image showing the outline of a Julia set}
-\end{figure}
+\label{sec:orgef2a409}
+Images are shown in figure .
 \end{document}

@@ -32,25 +32,45 @@
 @@latex: \newpage @@
 
 * Introduction
-  Ranknet is an approach to /Machine-Learned Ranking/ developed by
-  Microsoft as early as 2004
+  Ranknet is an approach to /Machine-Learned Ranking (often refered to
+  as "//Learning to Rank/"/ cite:liuLearningRankInformation2009)/ that
+  began development at Microsoft from 2004 onwards
   cite:christopherburgesRankNetRankingRetrospective2015, although
   previous work in this area had already been undertaken as early as
-  the 90s (see
-  generally
+  the 90s (see generally
   cite:fuhrProbabilisticModelsInformation1992,fuhrOptimumPolynomialRetrieval1989,fuhrProbabilisticModelsInformation1992,geyInferringProbabilityRelevance1994,wongLinearStructureInformation1988)
-  these earlier models didn't perform well compared to more modern machine
-  learning techniques [[cite:manningIntroductionInformationRetrieval2008][\S 15.5]].
+  these earlier models didn't perform well compared to more modern
+  machine learning techniques
+  [[cite:manningIntroductionInformationRetrieval2008][\S 15.5]].
 
-  /Machine-Learned
+  This paper hopes to serve as an introduction to the implementation
+  of this technique.
+
+  The Ranknet approach is typically implemented using Neural Networks,
+  an early goal of this research was to evaluate the performance of
+  different machine learning algorithms to implement the Ranknet
+  method, this research however is still ongoing.
+
+  Further Research to look at the implementation of Ranknet for
+  documents and comparing different approaches to apply the method to
+  on-demand queries is required, although this seems to have been
+  implemented by open source Apache Solr project
+  cite:michaelalcornIntroductionMachinelearnedRanking, which may
+  provide guidance for further study. An open question is how the
+  performance of Ranknet performs compared to alternative pre-existing
+  methods like Recoll cite:jean-francoisdockesRecollUserManual and
+  docfetcher cite:docfetcherdevelopmentteamDocFetcherFastDocument.
+
+  
   Ranking/ is the process of applying machine learning algorithms to
-  ranking problems, it often refered to as /Learning to Rank// cite:liuLearningRankInformation2009.
+  ranking problems, it .
 * Motivation
-  Much data cannot clearly categorised or quantified even if it there
+  A lot of data cannot be clearly categorised or quantified even if there
   is a capacity to compare different samples, the motivating example
-  is a collection of documents, it might be immediately clear to the reader which
-  documents are more relevant than others, even if the reader would
-  not be able to quantify a "relevance score" for each document.
+  is a collection of documents, it might be immediately clear to the
+  reader which documents are more relevant than others, even if the
+  reader would not be able to quantify a "relevance score" for each
+  document.
 
   By training a model to identify a more relevant document, a ranking
   can be applied to the data.
@@ -61,18 +81,57 @@
   ultimately an ordered list of documents most relevant for new
   employees could be created.
 * Implementation
-  To implement the RankNet approach, a neural network will be trained
-  to identify a score.
+  This implementation will first apply the approach to a simple data
+  set so as to clearly demonstrate that the approach works, following
+  that the model will be extended to support wider and more complex
+  data types before finally being implemented on a corpus of documents.
 
-  Then a sigmoid function to identify a similarity score.
+** Neural Network
+   Neural Networks cite:pictonNeuralNetworks1994
 
-  First apply to an obvious data set.
+   The Ranknet method is typically implemented using a Neural Network,
+   although other machine learning techniques can also be used
+   [[cite:christopherburgesRankNetRankingRetrospective2015][\s 1]],
+   Neural Networks are essentially a collection of different
+   regression models that are fed into one another to create a
+   non-linear classifier, a loss function is used to measure the
+   performance of the model with respect to the parameters
+   (e.g. RMSE [fn:1] or BCE [fn:2]) and the parameters are adjusted so
+   as to reduce this error by using the /Gradient Descent Technique/
+   (although there are other optimisation algorithms such as RMSProp
+   and AdaGrad cite:mukkamalaVariantsRMSPropAdagrad2017 that can be
+   shown to perform better see
+   cite:bushaevUnderstandingRMSpropFaster2018). The specifics of
+   Neural Networks are beyond the scope of this paper (see
+   cite:hmkcodeBackpropagationStepStep or more generally cite:pictonNeuralNetworks1994).
 
-  Then use a different optimiser
-  Then allow it to use more data
-  then a different data set
-  Then a non-obvious data set, like wine
-  Finally Documents.
+*** The Ranknet Method
+
+   The Ranknet method is concerned with a value \(p_{ij}\) that
+   measures the probability that an observation \(i\) is ranked higher
+   than an observation \(j\).
+
+   A Neural Network (\(n\)) is trained to return a value
+   \(s_k\) from a feature vector \(\mathbf{X}_k\):
+
+   \[n(\mathbf{X}_i) = s_i \quad \exists k\]
+  So as to minimise the error of:
+
+
+  \[
+  p_{ij} = \frac{1}{1+e^{\sigma \cdot (s_i-s_j)}} \quad \exists \sigma
+  \in \mathbb{R}
+  \]
+  
+*** Implementation
+    The first step is to create a simple data set and design a neural
+    network that can classify that data set, this can then be extended.
+    
+** TODO How to clone 
+   How can the reader clone this onto there machine?
+
+   put on the summer repo then provide instructions to clone this
+   working example onto there machine to try it out.
 ** TODO Blobs
 ** TODO Moons
 ** TODO Optimisers
@@ -99,8 +158,13 @@ This is a Reference cite:tuGraphBasedSemiSupervisedNearestNeighbor2016a and anot
 * Fractals
 Images are shown in figure [[imtest]].
 
-#+NAME: imtest
-#+CAPTION: This is a test image showing the outline of a Julia set
-#+attr_html: :width 400px
-#+attr_latex: :width 0.5\textwidth
-[[file:media/outline-rabbit.png]]
+# #+NAME: imtest
+# #+CAPTION: This is a test image showing the outline of a Julia set
+# #+attr_html: :width 400px
+# #+attr_latex: :width 0.5\textwidth
+[[# file:media/outline-rabbit.png]]
+
+* Footnotes
+[fn:2] *BCE* /Binary Cross Entropy/ 
+
+[fn:1] *RMSE* /Root Mean Square Error/  

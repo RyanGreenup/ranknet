@@ -19,6 +19,51 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{bushaevUnderstandingRMSpropFaster2018}{online}{}
+      \name{author}{1}{}{%
+        {{hash=6b80db3f2bca9150fa7a43922f968bfa}{%
+           family={Bushaev},
+           familyi={B\bibinitperiod},
+           given={Vitaly},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Medium}%
+      }
+      \strng{namehash}{6b80db3f2bca9150fa7a43922f968bfa}
+      \strng{fullhash}{6b80db3f2bca9150fa7a43922f968bfa}
+      \strng{bibnamehash}{6b80db3f2bca9150fa7a43922f968bfa}
+      \strng{authorbibnamehash}{6b80db3f2bca9150fa7a43922f968bfa}
+      \strng{authornamehash}{6b80db3f2bca9150fa7a43922f968bfa}
+      \strng{authorfullhash}{6b80db3f2bca9150fa7a43922f968bfa}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Disclaimer: I presume basic knowledge about neural network optimization algorithms. Particularly, knowledge about SGD and SGD with momentum…}
+      \field{day}{2}
+      \field{hour}{15}
+      \field{langid}{english}
+      \field{minute}{38}
+      \field{month}{9}
+      \field{second}{16}
+      \field{title}{Understanding {{RMSprop}} — Faster Neural Network Learning}
+      \field{urlday}{16}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/HI9Z6HYX/understanding-rmsprop-faster-neural-network-learning-62e116fcf29a.html
+      \endverb
+      \verb{urlraw}
+      \verb https://towardsdatascience.com/understanding-rmsprop-faster-neural-network-learning-62e116fcf29a
+      \endverb
+      \verb{url}
+      \verb https://towardsdatascience.com/understanding-rmsprop-faster-neural-network-learning-62e116fcf29a
+      \endverb
+    \endentry
     \entry{christopherburgesRankNetLambdaRankLambdaMART2010}{misc}{}
       \name{author}{1}{}{%
         {{hash=d66c4b884057887b53819bd6feef8736}{%
@@ -99,6 +144,37 @@
       \endverb
       \verb{url}
       \verb https://www.microsoft.com/en-us/research/blog/ranknet-a-ranking-retrospective/
+      \endverb
+    \endentry
+    \entry{docfetcherdevelopmentteamDocFetcherFastDocument}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0ad26384e1f06c64a374e416acd977d9}{%
+           family={{Docfetcher Development Team}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{0ad26384e1f06c64a374e416acd977d9}
+      \strng{fullhash}{0ad26384e1f06c64a374e416acd977d9}
+      \strng{bibnamehash}{0ad26384e1f06c64a374e416acd977d9}
+      \strng{authorbibnamehash}{0ad26384e1f06c64a374e416acd977d9}
+      \strng{authornamehash}{0ad26384e1f06c64a374e416acd977d9}
+      \strng{authorfullhash}{0ad26384e1f06c64a374e416acd977d9}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{{DocFetcher}} - {{Fast Document Search}}}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/P3VCXBVU/index.html
+      \endverb
+      \verb{urlraw}
+      \verb http://docfetcher.sourceforge.net/en/index.html
+      \endverb
+      \verb{url}
+      \verb http://docfetcher.sourceforge.net/en/index.html
       \endverb
     \endentry
     \entry{fuhrOptimumPolynomialRetrieval1989}{article}{}
@@ -237,6 +313,68 @@
       \verb /home/ryan/Zotero/storage/5UWNV6N2/Gey - 1994 - Inferring probability of relevance using the metho.pdf
       \endverb
     \endentry
+    \entry{hmkcodeBackpropagationStepStep}{online}{}
+      \name{author}{1}{}{%
+        {{hash=82bb9e46081afbed195ef31a99112591}{%
+           family={{HMKCode}},
+           familyi={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{82bb9e46081afbed195ef31a99112591}
+      \strng{fullhash}{82bb9e46081afbed195ef31a99112591}
+      \strng{bibnamehash}{82bb9e46081afbed195ef31a99112591}
+      \strng{authorbibnamehash}{82bb9e46081afbed195ef31a99112591}
+      \strng{authornamehash}{82bb9e46081afbed195ef31a99112591}
+      \strng{authorfullhash}{82bb9e46081afbed195ef31a99112591}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Backpropagation {{Step}} by {{Step}}}
+      \field{urlday}{16}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/CKNLJTZ6/backpropagation-step-by-step.html
+      \endverb
+      \verb{urlraw}
+      \verb https://hmkcode.com/ai/backpropagation-step-by-step/
+      \endverb
+      \verb{url}
+      \verb https://hmkcode.com/ai/backpropagation-step-by-step/
+      \endverb
+    \endentry
+    \entry{jean-francoisdockesRecollUserManual}{online}{}
+      \name{author}{1}{}{%
+        {{hash=278b702f984111b1c9cbe14b966a8b09}{%
+           family={{Jean-Francois Dockes}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{278b702f984111b1c9cbe14b966a8b09}
+      \strng{fullhash}{278b702f984111b1c9cbe14b966a8b09}
+      \strng{bibnamehash}{278b702f984111b1c9cbe14b966a8b09}
+      \strng{authorbibnamehash}{278b702f984111b1c9cbe14b966a8b09}
+      \strng{authornamehash}{278b702f984111b1c9cbe14b966a8b09}
+      \strng{authorfullhash}{278b702f984111b1c9cbe14b966a8b09}
+      \field{sortinit}{J}
+      \field{sortinithash}{c45040a764d616897e7f5b30174d7b92}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Recoll User Manual}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/ALFWE325/usermanual.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.lesbonscomptes.com/recoll/usermanual/usermanual.html
+      \endverb
+      \verb{url}
+      \verb https://www.lesbonscomptes.com/recoll/usermanual/usermanual.html
+      \endverb
+    \endentry
     \entry{liuLearningRankInformation2009}{article}{}
       \name{author}{1}{}{%
         {{hash=716b89cbb7332599ebb33cc58a52f648}{%
@@ -334,6 +472,87 @@
       \endverb
       \keyw{Document clustering,Information retrieval,Semantic Web,Text processing (Computer science)}
     \endentry
+    \entry{michaelalcornIntroductionMachinelearnedRanking}{online}{}
+      \name{author}{1}{}{%
+        {{hash=46af521960d25eda892cf6fba11595fd}{%
+           family={Michael\bibnamedelima Alcorn},
+           familyi={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={21\bibnamedelima Nov\bibnamedelimb 2017\bibnamedelimb Michael\bibnamedelimb A.\bibnamedelimi Alcorn},
+           giveni={2\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim 2\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Opensource.com}%
+      }
+      \strng{namehash}{46af521960d25eda892cf6fba11595fd}
+      \strng{fullhash}{46af521960d25eda892cf6fba11595fd}
+      \strng{bibnamehash}{46af521960d25eda892cf6fba11595fd}
+      \strng{authorbibnamehash}{46af521960d25eda892cf6fba11595fd}
+      \strng{authornamehash}{46af521960d25eda892cf6fba11595fd}
+      \strng{authorfullhash}{46af521960d25eda892cf6fba11595fd}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Learn how to train a machine learning model to rank documents retrieved in the Solr enterprise search platform.}
+      \field{langid}{english}
+      \field{title}{An Introduction to Machine-Learned Ranking in {{Apache Solr}}}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/JXCBYE5I/learning-rank-apache-solr.html
+      \endverb
+      \verb{urlraw}
+      \verb https://opensource.com/article/17/11/learning-rank-apache-solr
+      \endverb
+      \verb{url}
+      \verb https://opensource.com/article/17/11/learning-rank-apache-solr
+      \endverb
+    \endentry
+    \entry{mukkamalaVariantsRMSPropAdagrad2017}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=92154ab7ba990e67ecbcae5350a80f51}{%
+           family={Mukkamala},
+           familyi={M\bibinitperiod},
+           given={Mahesh\bibnamedelima Chandra},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=9e3f4c60354fda4d9127485afba87230}{%
+           family={Hein},
+           familyi={H\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Sydney, NSW, Australia}%
+      }
+      \list{publisher}{1}{%
+        {JMLR.org}%
+      }
+      \strng{namehash}{754c4368b0f7ef68f323075c442bb27a}
+      \strng{fullhash}{754c4368b0f7ef68f323075c442bb27a}
+      \strng{bibnamehash}{754c4368b0f7ef68f323075c442bb27a}
+      \strng{authorbibnamehash}{754c4368b0f7ef68f323075c442bb27a}
+      \strng{authornamehash}{754c4368b0f7ef68f323075c442bb27a}
+      \strng{authorfullhash}{754c4368b0f7ef68f323075c442bb27a}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Adaptive gradient methods have become recently very popular, in particular as they have been shown to be useful in the training of deep neural networks. In this paper we have analyzed RMSProp, originally proposed for the training of deep neural networks, in the context of online convex optimization and show √T-type regret bounds. Moreover, we propose two variants SC-Adagrad and SC-RMSProp for which we show logarithmic regret bounds for strongly convex functions. Finally, we demonstrate in the experiments that these new variants outperform other adaptive gradient techniques or stochastic gradient descent in the optimization of strongly convex functions as well as in training of deep neural networks.}
+      \field{booktitle}{Proceedings of the 34th {{International Conference}} on {{Machine Learning}} - {{Volume}} 70}
+      \field{day}{6}
+      \field{month}{8}
+      \field{series}{{{ICML}}'17}
+      \field{title}{Variants of {{RMSProp}} and {{Adagrad}} with Logarithmic Regret Bounds}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{pages}{2545\bibrangedash 2553}
+      \range{pages}{9}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/BXVVQIFN/Mukkamala and Hein - 2017 - Variants of RMSProp and Adagrad with logarithmic r.pdf
+      \endverb
+    \endentry
     \entry{nicodemiIntroductionAbstractAlgebra2007a}{book}{}
       \name{author}{3}{}{%
         {{hash=c4c18a360dba4df7294730d2aa312b46}{%
@@ -375,6 +594,37 @@
       \field{title}{An Introduction to Abstract Algebra with Notes to the Future Teacher}
       \field{year}{2007}
       \field{dateera}{ce}
+    \endentry
+    \entry{pictonNeuralNetworks1994}{book}{}
+      \name{author}{1}{}{%
+        {{hash=26678ce01a5e032c5d541fa19b788b94}{%
+           family={Picton},
+           familyi={P\bibinitperiod},
+           given={Philip},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Basingstoke, Hampshire ; New York}%
+      }
+      \list{publisher}{1}{%
+        {Palgrave}%
+      }
+      \strng{namehash}{26678ce01a5e032c5d541fa19b788b94}
+      \strng{fullhash}{26678ce01a5e032c5d541fa19b788b94}
+      \strng{bibnamehash}{26678ce01a5e032c5d541fa19b788b94}
+      \strng{authorbibnamehash}{26678ce01a5e032c5d541fa19b788b94}
+      \strng{authornamehash}{26678ce01a5e032c5d541fa19b788b94}
+      \strng{authorfullhash}{26678ce01a5e032c5d541fa19b788b94}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-333-94899-6}
+      \field{pagetotal}{195}
+      \field{title}{Neural Networks}
+      \field{year}{1994}
+      \field{dateera}{ce}
+      \keyw{Neural networks (Computer science)}
     \endentry
     \entry{timroughgardenQuicksortOverview2017}{video}{}
       \name{editor}{1}{}{%
