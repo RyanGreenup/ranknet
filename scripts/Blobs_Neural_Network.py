@@ -32,13 +32,14 @@ def main():
     # Create a model object
     model = three_layer_classification_network(
         input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
+    
+    model.train(X_train, y_train, η=1e-2, iterations=10000)
+    plt.plot(model.losses)
+    plt.title("Losses at each training iteration")
+    plt.show()
 
-
-    # Send some data through the model
-    print("\nThe Network input is:\n---\n")
-    print(X_train[7,:], "\n")
-    print("The Network Output is:\n---\n")
-    print(model.forward(X_train[7,:]).item(), "\n")
+    print("The testing misclassification rate is:\n")
+    print(model.misclassification_rate(X_test, y_test))
 
 
 if __name__ == "__main__":
