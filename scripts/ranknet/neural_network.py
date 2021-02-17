@@ -4,7 +4,9 @@ from torch import nn
 from progress.bar import Bar
 import matplotlib.pyplot as plt
 import sys
+import math as m
 from itertools import tee
+import random
 
 
 class three_layer_ranknet_network(nn.Module):
@@ -87,14 +89,21 @@ class three_layer_ranknet_network(nn.Module):
         loss=torch.mean(-y*torch.log(y_pred)-(1-y)*torch.log(1-y_pred))
         return loss
 
-    def train(self, x, target, η=1e-2, iterations=4e2):
+    def train(self, x, target, η=1e-2, iterations=4e2, batch_size=50):
+        if batch_size > x.shape[0]:
+            batch_size = x.shape[0]-1
+            print("\nWARNING: Batch Size Greater than training data, Batch Size set to nrow(data)\n", file = sys.stderr)
+          
         opt = torch.optim.Adagrad(self.parameters(), lr=η)
         
+
         self.trainedQ = True
-        bar = Bar('Processing', max=iterations)
+        bar = Bar('Processing', max=iterations*m.comb(batch_size, 2))
         for t in range(int(iterations)):
             sublosses = []
-            for pair in pairwise(range(len(x)-1)):
+            vals = list(range(len(x)-1)) 
+            vals = random.sample(vals, batch_size)
+            for pair in pairwise(vals):
                 xi =      x[pair[0],]
                 yi = target[pair[0]]
                 xj =      x[pair[1],]
@@ -123,8 +132,9 @@ class three_layer_ranknet_network(nn.Module):
                 # Adjust the Weights
                 opt.step()
 
+                bar.next()
+
             self.losses.append(np.average(sublosses))
-            bar.next()
         bar.finish()
         self.threshold_train(x, target, plot = False)
 

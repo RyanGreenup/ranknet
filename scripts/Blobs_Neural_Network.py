@@ -28,14 +28,14 @@ DEBUG = True
 def main():
     # Make the Data
     X_train, X_test, y_train, y_test = make_data(
-        n=30, create_plot=True, dtype=dtype, dev=dev)
+        n=int(60/0.4), create_plot=True, dtype=dtype, dev=dev)
 
     # Create a model object
     model = three_layer_ranknet_network(
         input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
-    
+
     # Train the Model
-    model.train(X_train, y_train, η=1e-1, iterations=1e2)
+    model.train(X_train, y_train, η=1e-1, iterations=1e2, batch_size=50)
 
     # Visualise the Training Error
     plot_losses(model)
@@ -43,6 +43,7 @@ def main():
     # Misclassification won't work for ranked data
     # Instead Visualise the ranking
     plot_ranked_data(X_test, y_test, model)
+
 
 def plot_losses(model):
     plt.plot(model.losses)
