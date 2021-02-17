@@ -10,13 +10,13 @@ from itertools import tee
 class three_layer_ranknet_network(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, dtype, dev):
         super(three_layer_ranknet_network, self).__init__()
-        self.wi = torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True, device = dev)
-        self.wo = torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True, device = dev)
+        self.wi =  torch.nn.Parameter(torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True, device = dev))
+        self.wo = torch.nn.Parameter(torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True, device = dev))
                                                                                       
-        self.bi = torch.randn(hidden_size, dtype=dtype, requires_grad=True, device = dev)
-        self.bo = torch.randn(output_size, dtype=dtype, requires_grad=True, device = dev)
+        self.bi = torch.nn.Parameter(torch.randn(hidden_size, dtype=dtype, requires_grad=True, device = dev))
+        self.bo = torch.nn.Parameter(torch.randn(output_size, dtype=dtype, requires_grad=True, device = dev))
                                                                                       
-        self.σ = torch.randn(1, dtype=dtype, requires_grad=True, device = dev)
+        self.σ = torch.nn.Parameter(torch.randn(1, dtype=dtype, requires_grad=True, device = dev))
 
         self.losses = []  # List to hold loss after each iteration of training
         self.trainedQ = False  # Has the model been trained yet?
@@ -88,6 +88,8 @@ class three_layer_ranknet_network(nn.Module):
         return loss
 
     def train(self, x, target, η=1e-2, iterations=4e2):
+        opt = torch.optim.Adagrad(self.parameters(), lr=η)
+        
         self.trainedQ = True
         bar = Bar('Processing', max=iterations)
         for t in range(int(iterations)):
@@ -111,18 +113,15 @@ class three_layer_ranknet_network(nn.Module):
                 loss = self.loss_fn(xi, xj, y)
                 sublosses.append(loss.item())
 
-                # Calculate the Gradients with Autograd
+                # Backwards Pass
+                # First Zero the Gradients, otherwise they can't be overwritten
+                opt.zero_grad()
+
+                # Calculate the Gradients
                 loss.backward()
 
-                with torch.no_grad():
-                    # Update the Weights with Gradient Descent 
-                    self.wi -= η * self.wi.grad; self.wi.grad = None
-                    self.bi -= η * self.bi.grad; self.bi.grad = None
-                    self.wo -= η * self.wo.grad; self.wo.grad = None
-                    self.bo -= η * self.bo.grad; self.bo.grad = None
-                    self.σ  -= η * self.σ.grad; self.σ.grad   = None
-
-                    # ; Zero out the gradients, they've been used
+                # Adjust the Weights
+                opt.step()
 
             self.losses.append(np.average(sublosses))
             bar.next()

@@ -5,10 +5,9 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
 
-
 def make_data(create_plot=False, n=1000, dtype=torch.float, dev="cpu"):
-    X, y = datasets.make_blobs(n, 2, 2, random_state=7) 
-    # temp_X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0) # Moons Data for later
+    X, y = datasets.make_blobs(n, 2, 2, random_state=7)
+    # X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0) # Moons Data for later
 
     # Reshape the data to be consistent
     y = np.reshape(y, (len(y), 1))  # Make y vertical n x 1 matrix.
