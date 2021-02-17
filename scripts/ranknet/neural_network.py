@@ -130,8 +130,10 @@ class three_layer_ranknet_network(nn.Module):
         self.threshold_train(x, target, plot = False)
 
 
-def pairwise(iterable): # NOTE https://docs.python.org/3/library/itertools.html
-    "s -> (s0,s1), (s1,s2), (s2, s3), ..."
-    a, b = tee(iterable)
-    next(b, None)
-    return zip(a, b)
+from itertools import chain
+from itertools import combinations
+def pairwise(iterable):
+    "pairwise([1,2,3, 4]) --> [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]"
+    s = list(iterable)
+    pair_iter = chain.from_iterable(combinations(s, r) for r in [2])
+    return pair_iter
