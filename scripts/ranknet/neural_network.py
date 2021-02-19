@@ -109,7 +109,18 @@ class three_layer_ranknet_network(nn.Module):
             sublosses = []
             vals = list(range(len(x)-1))
             vals = random.sample(vals, batch_size)
-            for pair in pairwise(vals):
+            plt.plot()
+            pairs = [list(pair) for pair in pairwise(vals)]
+            for pair in pairs:
+                if target[pair[0]] == target[pair[1]]:
+                    continue
+                elif target[pair[0]] < target[pair[1]]:
+                    pair[0], pair[1] = pair[1], pair[0]
+                elif target[pair[0]] > target[pair[1]]:
+                    pass
+                else:
+                    print("Trailing Else; This shouldn't have happened")
+
                 xi = x[pair[0], ]
                 yi = target[pair[0]]
                 xj = x[pair[1], ]
@@ -140,6 +151,9 @@ class three_layer_ranknet_network(nn.Module):
                 bar.next()
 
             self.losses.append(np.average(sublosses))
+            plt.plot(self.losses)
+            plt.pause(0.01)
+        plt.show()
         bar.finish()
         self.threshold_train(x, target, plot=False)
 
