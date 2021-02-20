@@ -77,6 +77,8 @@
   methods like Recoll cite:jean-francoisdockesRecollUserManual and
   docfetcher cite:docfetcherdevelopmentteamDocFetcherFastDocument.
 
+  For a non-comprehensive list of actively maintained search engines,
+  see \S [[#search-engines-list][Search Engines]] of the appendix.
   
   Ranking/ is the process of applying machine learning algorithms to
   ranking problems, it .
@@ -189,20 +191,20 @@ Images are shown in figure [[imtest]].
 There are many open source search engines available , a cursory review
 found the following popular projects:
 
-- [[https://github.com/cyclaero/zettair][Zettair]] (C) cite:jansenCyclaeroZettair2020
-- [[https://github.com/apache/lucene-solr][Apache lucene/Solr]] (Java) cite:apachesoftwarefoundationLearningRankApache2017
-  - Implemented [[https://sourceforge.net/p/docfetcher/code/ci/master/tree/][DocFetcher]] cite:docfetcherdevelopmentteamDocFetcherFastDocument
-- [[https://github.com/sphinxsearch/sphinx][Sphinx]] (C++) cite:yurischapovSphinxsearchSphinx2021
-- [[https://github.com/kevinduraj/xapian-search][Xapian]] (C++) cite:ollybettsXapianXapian2021
+- [[https://github.com/cyclaero/zettair][Zettair]] (=C=) cite:jansenCyclaeroZettair2020
+- [[https://github.com/apache/lucene-solr][Apache lucene/Solr]] (=Java=) cite:apachesoftwarefoundationLearningRankApache2017
+  - Implemented by [[https://sourceforge.net/p/docfetcher/code/ci/master/tree/][DocFetcher]] cite:docfetcherdevelopmentteamDocFetcherFastDocument
+- [[https://github.com/sphinxsearch/sphinx][Sphinx]] (=C++=) cite:yurischapovSphinxsearchSphinx2021
+- [[https://github.com/kevinduraj/xapian-search][Xapian]] (=C++=) cite:ollybettsXapianXapian2021
   - Implemented by [[https://www.lesbonscomptes.com/recoll/][Recoll]] cite:jean-francoisdockesRecollUserManual
 
 More Modern Search engines include:
 
-- [[https://github.com/olivernn/lunr.js/][LunrJS]] cite:nightingaleOlivernnLunrJs2021
-- [[https://github.com/blevesearch/bleve][Bleve Search]] (Go) cite:martyschochBleveSearchDocumentation
-- [[https://github.com/go-ego/riot][Riot]] (Go) cite:vzGoegoRiot2021
-- [[https://github.com/tantivy-search/tantivy][Tantivy]] (Rust) cite:clementrenaultMeilisearchMeiliSearch2021
-- [[https://github.com/andylokandy/simsearch-rs][SimSearch]] (Rust) cite:lokAndylokandySimsearchrs2021
+- [[https://github.com/olivernn/lunr.js/][LunrJS]]  (=JS=) cite:nightingaleOlivernnLunrJs2021
+- [[https://github.com/blevesearch/bleve][Bleve Search]] (=Go=) cite:martyschochBleveSearchDocumentation
+- [[https://github.com/go-ego/riot][Riot]] (=Go=) cite:vzGoegoRiot2021
+- [[https://github.com/tantivy-search/tantivy][Tantivy]] (=Rust=) cite:clementrenaultMeilisearchMeiliSearch2021
+- [[https://github.com/andylokandy/simsearch-rs][SimSearch]] (=Rust=) cite:lokAndylokandySimsearchrs2021
 
 * Footnotes
 

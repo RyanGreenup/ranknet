@@ -19,6 +19,42 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{apachesoftwarefoundationLearningRankApache2017}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8b499b5be8914246b406785e1327dbb3}{%
+           family={{Apache Software Foundation}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Solr Reference Guide}%
+      }
+      \strng{namehash}{8b499b5be8914246b406785e1327dbb3}
+      \strng{fullhash}{8b499b5be8914246b406785e1327dbb3}
+      \strng{bibnamehash}{8b499b5be8914246b406785e1327dbb3}
+      \strng{authorbibnamehash}{8b499b5be8914246b406785e1327dbb3}
+      \strng{authornamehash}{8b499b5be8914246b406785e1327dbb3}
+      \strng{authorfullhash}{8b499b5be8914246b406785e1327dbb3}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Learning {{To Rank}} | {{Apache Solr Reference Guide}} 6.6}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/ZS2C5LMR/learning-to-rank.html
+      \endverb
+      \verb{urlraw}
+      \verb https://lucene.apache.org/solr/guide/6_6/learning-to-rank.html
+      \endverb
+      \verb{url}
+      \verb https://lucene.apache.org/solr/guide/6_6/learning-to-rank.html
+      \endverb
+    \endentry
     \entry{bushaevUnderstandingRMSpropFaster2018}{online}{}
       \name{author}{1}{}{%
         {{hash=6b80db3f2bca9150fa7a43922f968bfa}{%
@@ -41,18 +77,11 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Disclaimer: I presume basic knowledge about neural network optimization algorithms. Particularly, knowledge about SGD and SGD with momentum…}
-      \field{day}{2}
-      \field{hour}{15}
       \field{langid}{english}
-      \field{minute}{38}
-      \field{month}{9}
-      \field{second}{16}
       \field{title}{Understanding {{RMSprop}} — Faster Neural Network Learning}
       \field{urlday}{16}
       \field{urlmonth}{2}
       \field{urlyear}{2021}
-      \field{year}{2018}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \verb{file}
       \verb /home/ryan/Zotero/storage/HI9Z6HYX/understanding-rmsprop-faster-neural-network-learning-62e116fcf29a.html
@@ -63,6 +92,7 @@
       \verb{url}
       \verb https://towardsdatascience.com/understanding-rmsprop-faster-neural-network-learning-62e116fcf29a
       \endverb
+      \warn{\item Entry 'bushaevUnderstandingRMSpropFaster2018' (../resources/references.bib): Invalid format '2018-09-02T15:38:16.964Z' of date field 'date' - ignoring}
     \endentry
     \entry{christopherburgesRankNetLambdaRankLambdaMART2010}{misc}{}
       \name{author}{1}{}{%
@@ -145,6 +175,61 @@
       \verb{url}
       \verb https://www.microsoft.com/en-us/research/blog/ranknet-a-ranking-retrospective/
       \endverb
+    \endentry
+    \entry{clementrenaultMeilisearchMeiliSearch2021}{software}{}
+      \name{author}{3}{}{%
+        {{hash=bb2fdfeb8658b8006b89d8f6f199b45a}{%
+           family={{Clement Renault}},
+           familyi={C\bibinitperiod}}}%
+        {{hash=921743c94661e11a3705e08aa1654c97}{%
+           family={{Marin}},
+           familyi={M\bibinitperiod}}}%
+        {{hash=79bfe39bf6a0bbb6597c2bdcf3f66ae7}{%
+           family={{Quentin de Quelen}},
+           familyi={Q\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {MeiliSearch}%
+      }
+      \strng{namehash}{ab2aed321e58fb618f43a88f0397c390}
+      \strng{fullhash}{ab2aed321e58fb618f43a88f0397c390}
+      \strng{bibnamehash}{ab2aed321e58fb618f43a88f0397c390}
+      \strng{authorbibnamehash}{ab2aed321e58fb618f43a88f0397c390}
+      \strng{authornamehash}{ab2aed321e58fb618f43a88f0397c390}
+      \strng{authorfullhash}{ab2aed321e58fb618f43a88f0397c390}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Lightning Fast, Ultra Relevant, and Typo-Tolerant Search Engine}
+      \field{day}{20}
+      \field{hour}{3}
+      \field{minute}{3}
+      \field{month}{2}
+      \field{origday}{23}
+      \field{orighour}{11}
+      \field{origminute}{45}
+      \field{origmonth}{4}
+      \field{origsecond}{28}
+      \field{origtimezone}{Z}
+      \field{origyear}{2018}
+      \field{second}{33}
+      \field{timezone}{Z}
+      \field{title}{Meilisearch/{{MeiliSearch}}}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/meilisearch/MeiliSearch
+      \endverb
+      \verb{url}
+      \verb https://github.com/meilisearch/MeiliSearch
+      \endverb
+      \keyw{database,entreprise-search,highlighting,instant,rust,search-engine,site-search,synonyms,typo-tolerance}
     \endentry
     \entry{docfetcherdevelopmentteamDocFetcherFastDocument}{online}{}
       \name{author}{1}{}{%
@@ -344,6 +429,88 @@
       \verb https://hmkcode.com/ai/backpropagation-step-by-step/
       \endverb
     \endentry
+    \entry{jamesaylettGSoCProjectIdeasLearningtoRankStabilisationXapian2019}{online}{}
+      \name{author}{1}{}{%
+        {{hash=86dfd89d65982d25b3ca1ed23123f8d5}{%
+           family={{James Aylett}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{86dfd89d65982d25b3ca1ed23123f8d5}
+      \strng{fullhash}{86dfd89d65982d25b3ca1ed23123f8d5}
+      \strng{bibnamehash}{86dfd89d65982d25b3ca1ed23123f8d5}
+      \strng{authorbibnamehash}{86dfd89d65982d25b3ca1ed23123f8d5}
+      \strng{authornamehash}{86dfd89d65982d25b3ca1ed23123f8d5}
+      \strng{authorfullhash}{86dfd89d65982d25b3ca1ed23123f8d5}
+      \field{sortinit}{J}
+      \field{sortinithash}{c45040a764d616897e7f5b30174d7b92}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{20}
+      \field{month}{10}
+      \field{title}{{{GSoCProjectIdeas}}/{{LearningtoRankStabilisation}} – {{Xapian}}}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/DVUKVQ72/LearningtoRankStabilisation.html
+      \endverb
+      \verb{urlraw}
+      \verb https://trac.xapian.org/wiki/GSoCProjectIdeas/LearningtoRankStabilisation
+      \endverb
+      \verb{url}
+      \verb https://trac.xapian.org/wiki/GSoCProjectIdeas/LearningtoRankStabilisation
+      \endverb
+    \endentry
+    \entry{jansenCyclaeroZettair2020}{software}{}
+      \name{author}{1}{}{%
+        {{hash=428459a340d271a87d0ff7e69f392619}{%
+           family={Jansen},
+           familyi={J\bibinitperiod},
+           given={Dr\bibnamedelima Rolf},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{428459a340d271a87d0ff7e69f392619}
+      \strng{fullhash}{428459a340d271a87d0ff7e69f392619}
+      \strng{bibnamehash}{428459a340d271a87d0ff7e69f392619}
+      \strng{authorbibnamehash}{428459a340d271a87d0ff7e69f392619}
+      \strng{authornamehash}{428459a340d271a87d0ff7e69f392619}
+      \strng{authorfullhash}{428459a340d271a87d0ff7e69f392619}
+      \field{sortinit}{J}
+      \field{sortinithash}{c45040a764d616897e7f5b30174d7b92}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Zettair is a compact and fast text search engine designed and written by the Search Engine Group at RMIT.}
+      \field{day}{22}
+      \field{hour}{8}
+      \field{minute}{49}
+      \field{month}{12}
+      \field{origday}{12}
+      \field{orighour}{0}
+      \field{origminute}{25}
+      \field{origmonth}{6}
+      \field{origsecond}{47}
+      \field{origtimezone}{Z}
+      \field{origyear}{2018}
+      \field{second}{10}
+      \field{timezone}{Z}
+      \field{title}{Cyclaero/Zettair}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/cyclaero/zettair
+      \endverb
+      \verb{url}
+      \verb https://github.com/cyclaero/zettair
+      \endverb
+    \endentry
     \entry{jean-francoisdockesRecollUserManual}{online}{}
       \name{author}{1}{}{%
         {{hash=278b702f984111b1c9cbe14b966a8b09}{%
@@ -427,6 +594,53 @@
       \verb https://www.nowpublishers.com/article/Details/INR-016
       \endverb
     \endentry
+    \entry{lokAndylokandySimsearchrs2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=6b0a6672e4652ec4178dfd5675fa2f78}{%
+           family={Lok},
+           familyi={L\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b0a6672e4652ec4178dfd5675fa2f78}
+      \strng{fullhash}{6b0a6672e4652ec4178dfd5675fa2f78}
+      \strng{bibnamehash}{6b0a6672e4652ec4178dfd5675fa2f78}
+      \strng{authorbibnamehash}{6b0a6672e4652ec4178dfd5675fa2f78}
+      \strng{authornamehash}{6b0a6672e4652ec4178dfd5675fa2f78}
+      \strng{authorfullhash}{6b0a6672e4652ec4178dfd5675fa2f78}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A simple and lightweight fuzzy search engine that works in memory, searching for similar strings (a pun here).}
+      \field{day}{15}
+      \field{hour}{8}
+      \field{minute}{49}
+      \field{month}{2}
+      \field{origday}{15}
+      \field{orighour}{15}
+      \field{origminute}{44}
+      \field{origmonth}{4}
+      \field{origsecond}{7}
+      \field{origtimezone}{Z}
+      \field{origyear}{2019}
+      \field{second}{14}
+      \field{timezone}{Z}
+      \field{title}{Andylokandy/Simsearch-Rs}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/andylokandy/simsearch-rs
+      \endverb
+      \verb{url}
+      \verb https://github.com/andylokandy/simsearch-rs
+      \endverb
+    \endentry
     \entry{manningIntroductionInformationRetrieval2008}{book}{}
       \name{author}{3}{}{%
         {{hash=2214edb8305f7ccd7cdc310b3a8ae1b4}{%
@@ -471,6 +685,40 @@
       \verb /home/ryan/Zotero/storage/FDVR8JH7/Manning et al. - 2008 - Introduction to information retrieval.pdf;/home/ryan/Zotero/storage/WAV29C5B/references-and-further-reading-15.html
       \endverb
       \keyw{Document clustering,Information retrieval,Semantic Web,Text processing (Computer science)}
+    \endentry
+    \entry{martyschochBleveSearchDocumentation}{online}{}
+      \name{author}{2}{}{%
+        {{hash=98afdcdccf1f6c53896c4442c383d919}{%
+           family={{Marty Schoch}},
+           familyi={M\bibinitperiod}}}%
+        {{hash=75407bffc3e59e82b0131047ca8ec149}{%
+           family={{Abhinav Dangeti}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{4e6cce35e77dbbee4a68818dde04a145}
+      \strng{fullhash}{4e6cce35e77dbbee4a68818dde04a145}
+      \strng{bibnamehash}{4e6cce35e77dbbee4a68818dde04a145}
+      \strng{authorbibnamehash}{4e6cce35e77dbbee4a68818dde04a145}
+      \strng{authornamehash}{4e6cce35e77dbbee4a68818dde04a145}
+      \strng{authorfullhash}{4e6cce35e77dbbee4a68818dde04a145}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Bleve {{Search Documentation}}}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/YM4WLZAI/blevesearch.com.html
+      \endverb
+      \verb{urlraw}
+      \verb http://blevesearch.com/
+      \endverb
+      \verb{url}
+      \verb http://blevesearch.com/
+      \endverb
     \endentry
     \entry{michaelalcornIntroductionMachinelearnedRanking}{online}{}
       \name{author}{1}{}{%
@@ -594,6 +842,105 @@
       \field{title}{An Introduction to Abstract Algebra with Notes to the Future Teacher}
       \field{year}{2007}
       \field{dateera}{ce}
+    \endentry
+    \entry{nightingaleOlivernnLunrJs2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=d173324bf85182e346be41934d872a3a}{%
+           family={Nightingale},
+           familyi={N\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{d173324bf85182e346be41934d872a3a}
+      \strng{fullhash}{d173324bf85182e346be41934d872a3a}
+      \strng{bibnamehash}{d173324bf85182e346be41934d872a3a}
+      \strng{authorbibnamehash}{d173324bf85182e346be41934d872a3a}
+      \strng{authornamehash}{d173324bf85182e346be41934d872a3a}
+      \strng{authorfullhash}{d173324bf85182e346be41934d872a3a}
+      \field{sortinit}{N}
+      \field{sortinithash}{98cf339a479c0454fe09153a08675a15}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A bit like Solr, but much smaller and not as bright}
+      \field{day}{20}
+      \field{hour}{2}
+      \field{minute}{0}
+      \field{month}{2}
+      \field{origday}{23}
+      \field{orighour}{20}
+      \field{origminute}{53}
+      \field{origmonth}{6}
+      \field{origsecond}{57}
+      \field{origtimezone}{Z}
+      \field{origyear}{2011}
+      \field{second}{31}
+      \field{timezone}{Z}
+      \field{title}{Olivernn/Lunr.Js}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/olivernn/lunr.js
+      \endverb
+      \verb{url}
+      \verb https://github.com/olivernn/lunr.js
+      \endverb
+      \keyw{full-text-search,javascript,lunr,search}
+    \endentry
+    \entry{ollybettsXapianXapian2021}{software}{}
+      \name{author}{2}{}{%
+        {{hash=643c827ef8606a5ab1097cfd5e64f000}{%
+           family={{Olly Betts}},
+           familyi={O\bibinitperiod}}}%
+        {{hash=42a4632719d8b408446142dbe2736d25}{%
+           family={{Richard Boulton}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Xapian}%
+      }
+      \strng{namehash}{56986fa64db4f7eb591b6fb57d671fad}
+      \strng{fullhash}{56986fa64db4f7eb591b6fb57d671fad}
+      \strng{bibnamehash}{56986fa64db4f7eb591b6fb57d671fad}
+      \strng{authorbibnamehash}{56986fa64db4f7eb591b6fb57d671fad}
+      \strng{authornamehash}{56986fa64db4f7eb591b6fb57d671fad}
+      \strng{authorfullhash}{56986fa64db4f7eb591b6fb57d671fad}
+      \field{sortinit}{O}
+      \field{sortinithash}{ff8d4eeb5101e3cf3809959b3592d942}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Mirror of the Xapian repository. You're welcome to open pull requests on github (they'll just get merged indirectly).}
+      \field{day}{19}
+      \field{hour}{12}
+      \field{minute}{12}
+      \field{month}{2}
+      \field{origday}{23}
+      \field{orighour}{15}
+      \field{origminute}{51}
+      \field{origmonth}{6}
+      \field{origsecond}{3}
+      \field{origtimezone}{Z}
+      \field{origyear}{2010}
+      \field{second}{0}
+      \field{timezone}{Z}
+      \field{title}{Xapian/Xapian}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/xapian/xapian
+      \endverb
+      \verb{url}
+      \verb https://github.com/xapian/xapian
+      \endverb
     \endentry
     \entry{pictonNeuralNetworks1994}{book}{}
       \name{author}{1}{}{%
@@ -726,6 +1073,99 @@
       \endverb
       \keyw{Computer Science - Machine Learning,Statistics - Machine Learning}
     \endentry
+    \entry{viksinghComparisonOpenSource2009}{online}{}
+      \name{author}{1}{}{%
+        {{hash=be86661aab5875a160fa2bd2ea86c908}{%
+           family={{Vik Singh}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Vik's Blog}%
+      }
+      \strng{namehash}{be86661aab5875a160fa2bd2ea86c908}
+      \strng{fullhash}{be86661aab5875a160fa2bd2ea86c908}
+      \strng{bibnamehash}{be86661aab5875a160fa2bd2ea86c908}
+      \strng{authorbibnamehash}{be86661aab5875a160fa2bd2ea86c908}
+      \strng{authornamehash}{be86661aab5875a160fa2bd2ea86c908}
+      \strng{authorfullhash}{be86661aab5875a160fa2bd2ea86c908}
+      \field{sortinit}{V}
+      \field{sortinithash}{02432525618c08e2b03cac47c19764af}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Updated: sphinx setup wasn’t exactly ‘out of the box’. Sphinx searches the fastest now and its relevancy increased (charts updated below). Motivation Later this month we will be p…}
+      \field{day}{6}
+      \field{hour}{10}
+      \field{langid}{english}
+      \field{minute}{45}
+      \field{month}{7}
+      \field{second}{19}
+      \field{timezone}{Z}
+      \field{title}{A {{Comparison}} of {{Open Source Search Engines}}}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/UVCY5T35/a-comparison-of-open-source-search-engines-and-indexing-twitter.html
+      \endverb
+      \verb{urlraw}
+      \verb https://partyondata.com/2009/07/06/a-comparison-of-open-source-search-engines-and-indexing-twitter/
+      \endverb
+      \verb{url}
+      \verb https://partyondata.com/2009/07/06/a-comparison-of-open-source-search-engines-and-indexing-twitter/
+      \endverb
+    \endentry
+    \entry{vzGoegoRiot2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=54107dd5d77b8a3bcbc0faecd128de7c}{%
+           family={{vz}},
+           familyi={v\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {ego}%
+      }
+      \strng{namehash}{54107dd5d77b8a3bcbc0faecd128de7c}
+      \strng{fullhash}{54107dd5d77b8a3bcbc0faecd128de7c}
+      \strng{bibnamehash}{54107dd5d77b8a3bcbc0faecd128de7c}
+      \strng{authorbibnamehash}{54107dd5d77b8a3bcbc0faecd128de7c}
+      \strng{authornamehash}{54107dd5d77b8a3bcbc0faecd128de7c}
+      \strng{authorfullhash}{54107dd5d77b8a3bcbc0faecd128de7c}
+      \field{sortinit}{v}
+      \field{sortinithash}{02432525618c08e2b03cac47c19764af}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Go Open Source, Distributed, Simple and efficient Search Engine}
+      \field{day}{20}
+      \field{hour}{3}
+      \field{minute}{14}
+      \field{month}{2}
+      \field{origday}{21}
+      \field{orighour}{14}
+      \field{origminute}{17}
+      \field{origmonth}{6}
+      \field{origsecond}{59}
+      \field{origtimezone}{Z}
+      \field{origyear}{2017}
+      \field{second}{33}
+      \field{timezone}{Z}
+      \field{title}{Go-Ego/Riot}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/go-ego/riot
+      \endverb
+      \verb{url}
+      \verb https://github.com/go-ego/riot
+      \endverb
+      \keyw{go,golang,gwk,index,riot,search,search-engine}
+    \endentry
     \entry{wongLinearStructureInformation1988}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=428efc011221389ad044dc6a9cd13255}{%
@@ -781,6 +1221,60 @@
       \endverb
       \verb{url}
       \verb https://doi.org/10.1145/62437.62452
+      \endverb
+    \endentry
+    \entry{yurischapovSphinxsearchSphinx2021}{software}{}
+      \name{author}{3}{}{%
+        {{hash=bb3b9788494bad3b5e9e4fb22ed47ad7}{%
+           family={{Yuri Schapov}},
+           familyi={Y\bibinitperiod}}}%
+        {{hash=cc36bc3516b5ac870ba6c9c3553ce061}{%
+           family={{Andrew Aksyonoff}},
+           familyi={A\bibinitperiod}}}%
+        {{hash=882316e9112eba5baf4a1f8735d63ca5}{%
+           family={{Ilya Kuznetsov}},
+           familyi={I\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Sphinx Technologies Inc}%
+      }
+      \strng{namehash}{5d6ccc4efc337d238eae667a400f3d15}
+      \strng{fullhash}{5d6ccc4efc337d238eae667a400f3d15}
+      \strng{bibnamehash}{5d6ccc4efc337d238eae667a400f3d15}
+      \strng{authorbibnamehash}{5d6ccc4efc337d238eae667a400f3d15}
+      \strng{authornamehash}{5d6ccc4efc337d238eae667a400f3d15}
+      \strng{authorfullhash}{5d6ccc4efc337d238eae667a400f3d15}
+      \field{sortinit}{Y}
+      \field{sortinithash}{6ae2ff5458ff901249c2745238c951b7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Sphinx search server. Contribute to sphinxsearch/sphinx development by creating an account on GitHub.}
+      \field{day}{18}
+      \field{hour}{10}
+      \field{minute}{52}
+      \field{month}{2}
+      \field{origday}{6}
+      \field{orighour}{19}
+      \field{origminute}{15}
+      \field{origmonth}{6}
+      \field{origsecond}{17}
+      \field{origtimezone}{Z}
+      \field{origyear}{2015}
+      \field{second}{52}
+      \field{timezone}{Z}
+      \field{title}{Sphinxsearch/Sphinx}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/sphinxsearch/sphinx
+      \endverb
+      \verb{url}
+      \verb https://github.com/sphinxsearch/sphinx
       \endverb
     \endentry
   \enddatalist
