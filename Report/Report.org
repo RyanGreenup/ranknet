@@ -80,58 +80,50 @@
 
 * Implementation
 
-  The Ranknet approach is typically implemented using Neural Networks,
-  an early goal of this research was to evaluate the performance of
-  different machine learning algorithms to implement the Ranknet
-  method, this research however is still ongoing.
-
-  Further Research to look at the implementation of Ranknet for
-  documents and comparing different approaches to apply the method to
-  on-demand queries is required, although this seems to have been
-  implemented by open source Apache Solr project
-  cite:michaelalcornIntroductionMachinelearnedRanking, which may
-  provide guidance for further study. teamDocFetcherFastDocument.
-
   
+
+    # A lot of data cannot be clearly categorised or quantified even if there
+    # is a capacity to compare different samples, the motivating example
+    # is a collection of documents, it might be immediately clear to the
+    # reader which documents are more relevant than others, even if the
+    # reader would not be able to quantify a "relevance score" for each
+    # document.
+
+    # By training a model to identify a more relevant document, a ranking
+    # can be applied to the data.
+
+    # An example of this might be identifying documents in a companies
+    # interwiki that are relevant for new employees, by training the model
+    # to rank whether one document is more relevant than an other,
+    # ultimately an ordered list of documents most relevant for new
+    # employees could be created.
+
+
+   Neural Networks 
+
   Ranking/ is the process of applying machine learning algorithms to
   ranking problems, it .
 
-  A lot of data cannot be clearly categorised or quantified even if there
-  is a capacity to compare different samples, the motivating example
-  is a collection of documents, it might be immediately clear to the
-  reader which documents are more relevant than others, even if the
-  reader would not be able to quantify a "relevance score" for each
-  document.
-
-  By training a model to identify a more relevant document, a ranking
-  can be applied to the data.
-
-  An example of this might be identifying documents in a companies
-  interwiki that are relevant for new employees, by training the model
-  to rank whether one document is more relevant than an other,
-  ultimately an ordered list of documents most relevant for new
-  employees could be created.
-* Implementation
   This implementation will first apply the approach to a simple data
   set so as to clearly demonstrate that the approach works, following
   that the model will be extended to support wider and more complex
   data types before finally being implemented on a corpus of documents.
 
-** Neural Network
-   Neural Networks cite:pictonNeuralNetworks1994
+** Neural Networks
 
-   The Ranknet method is typically implemented using a Neural Network,
+   The Ranknet method is typically implemented using a Neural Networks
+   [fn:3],
    although other machine learning techniques can also be used
    [[cite:christopherburgesRankNetRankingRetrospective2015][\s 1]],
    Neural Networks are essentially a collection of different
-   regression models that are fed into one another to create a
+   regression models and classifiers that are fed into one another to create a
    non-linear classifier, a loss function is used to measure the
    performance of the model with respect to the parameters
    (e.g. RMSE [fn:1] or BCE [fn:2]) and the parameters are adjusted so
    as to reduce this error by using the /Gradient Descent Technique/
    (although there are other optimisation algorithms such as RMSProp
    and AdaGrad cite:mukkamalaVariantsRMSPropAdagrad2017 that can be
-   shown to perform better see
+   shown to perform better, see
    cite:bushaevUnderstandingRMSpropFaster2018). The specifics of
    Neural Networks are beyond the scope of this paper (see
    cite:hmkcodeBackpropagationStepStep or more generally cite:pictonNeuralNetworks1994).
@@ -154,16 +146,322 @@
   \in \mathbb{R}
   \]
   
-*** Implementation
-    The first step is to create a simple data set and design a neural
-    network that can classify that data set, this can then be extended.
     
-** TODO How to clone 
-   How can the reader clone this onto there machine?
+**** Version Control
+     The implementation in this paper corresponds to the =walkthrough= branch
+     of the =git= repository used in production of this work, id values
+     (e.g. =:08db5b0:=) will be appended to titles to denote specific
+     changes made in that section. See \S [[#version-control-repo]] for
+     more specific guidance.
 
-   put on the summer repo then provide instructions to clone this
-   working example onto there machine to try it out.
-** TODO Blobs
+** TODO Creating Data                                                           :cf9ab26:
+    The first step is to create a simple data set and design a neural
+    network that can classify that data set, the data set generated
+    should have two classes of data (this could be interpreted as
+    relevant and irrelevant documents given the features or principle
+    components of a data set). 
+
+    In order to fit a Neural Network the /PyTorch/ package can be used
+    cite:NEURIPS2019_9015, this will allow the gradients of the neural
+    network to be calculated numerically without needing to solve for
+    the partial derivatives, hence the data will need to be in the
+    form of tensors.
+
+    This can be implemented like so:
+
+    # #+NAME: sample-data-plot
+    # #+CAPTION: Generate Sample of Data for Classification
+    #+begin_src python
+      import torch                    # 
+      import os
+      import matplotlib.pyplot as plt
+      import numpy as np
+      from sklearn import datasets
+      from sklearn.model_selection import train_test_split
+
+
+      def make_data(create_plot=False, n=1000, dtype=torch.float, dev="cpu", export=""):
+	  X, y = datasets.make_blobs(n, 2, 2, random_state=7)
+	  # X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0) # Moons Data for later
+
+	  # Save the data somewhere if necessary
+	  if export != "":
+	      export_data(X, y, export)
+
+	  # Reshape the data to be consistent
+	  y = np.reshape(y, (len(y), 1))  # Make y vertical n x 1 matrix.
+
+	  # -- Split data into Training and Test Sets --------------------
+	  data = train_test_split(X, y, test_size=0.4)
+
+	  if(create_plot):
+	      # Create the Scatter Plot
+	      plt.scatter(X[:, 0], X[:, 1], c=y)
+	      plt.title("Sample Data")
+	      plt.show()
+
+	  # Make sure we're working with tensors not mere numpy arrays
+	  torch_data = [None]*len(data)
+	  for i in range(len(data)):
+	      torch_data[i] = torch.tensor(data[i], dtype=dtype, requires_grad=False)
+
+	  return torch_data
+
+
+      def export_data(X, y, export):
+	  try:
+	      os.remove(export)
+	      print("Warning, given file was over-written")
+	  except:
+	      pass
+
+	  with open(export, "a") as f:
+	      line = "x1, x2, y \n"
+	      f.write(line)
+	      for i in (range(X.shape[0])):
+		  line = str(X[i][0]) + ", " + str(X[i][1]) + ", " + str(y[i]) + "\n"
+		  f.write(line)
+	  print("Data Exported")
+
+      # Set Torch Parameters
+      dtype = torch.float
+      dev = test_cuda()
+
+      # Generate the Data
+      X_train, X_test, y_train, y_test = make_data(
+	  n=int(300/0.4), create_plot=True, dtype=dtype, dev=dev, export = "/tmp/simData.csv")
+    #+end_src
+
+    And will produce a dataset like so:
+
+    #+BEGIN_SRC R :exports both :results output graphics file :file SimulatedData.png :eval never
+      library(tidyverse)
+      data  <- read_csv("/tmp/simData.csv")
+      myplot <-  ggplot(data, aes(x = x1, y = x2, col = factor(y))) +
+	  geom_point(size = 3) +
+	  theme_classic() +
+	  labs(col = "Relevance", x = "PC1", y = "PC2",
+	       title = "Simulated Data")
+
+      myplot
+    #+END_SRC
+
+    #+RESULTS[5d70d2cd555504ec65f5867c4d29faff40c5763c]:
+    [[file:SimulatedData.png]]
+
+** Creating a Neural Network                                                    :7291112:
+   A Neural Network model can be designed as a class, here a 2-layer
+   model using Sigmoid functions has been described, this design was
+   chosen for it's relative simplicity:
+
+   #+begin_src python
+     import torch
+     import numpy as np
+     from torch import nn
+
+
+     class three_layer_classification_network(nn.Module):
+	 def __init__(self, input_size, hidden_size, output_size, dtype=torch.float, dev="cpu"):
+	     super(three_layer_classification_network, self).__init__()
+	     self.wi = torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True)
+	     self.wo = torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True)
+
+	     self.bi = torch.randn(hidden_size, dtype=dtype, requires_grad=True)
+	     self.bo = torch.randn(output_size, dtype=dtype, requires_grad=True)
+
+	     self.losses = []
+
+	 def forward(self, x):
+	     x = torch.matmul(x, self.wi).add(self.bi)
+	     x = torch.sigmoid(x)
+	     x = torch.matmul(x, self.wo).add(self.bo)
+	     x = torch.sigmoid(x)
+	     return x
+
+	 def loss_fn(self, x, y):
+	     y_pred = self.forward(x)
+	     return torch.mean(torch.pow((y-y_pred), 2))
+
+	 def misclassification_rate(self, x, y):
+	     y_pred = (self.forward(x) > 0.5)
+	     return np.average(y != y_pred)
+   #+end_src
+ 
+   A model can then be instantiated, here a =2-3-1=
+   model has been implemented, this choice was arbitrary (note that
+   the model has not yet been trained, the rates are random):
+
+   #+begin_src python :results output
+     #!/usr/bin/env python
+
+     # Import Packages
+     import numpy as np
+     import matplotlib.pyplot as plt
+     import torch
+     import sys
+     import random
+     from ranknet.test_cuda import test_cuda
+     from ranknet.make_data import make_data
+     from ranknet.neural_network import three_layer_classification_network
+
+     # Set Seeds
+     torch.manual_seed(1)
+     np.random.seed(1)
+
+     # Set Torch Parameters
+     dtype = torch.float
+     dev = test_cuda()
+
+     # Set personal flags
+     DEBUG = True
+
+
+     # Main Function
+
+     def main():
+	 # Make the Data
+	 X_train, X_test, y_train, y_test = make_data(
+	     n=100, create_plot=True, dtype=dtype, dev=dev)
+
+	 # Create a model object
+	 model = three_layer_classification_network(
+	     input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
+
+
+	 # Send some data through the model
+	 print("\nThe Network input is:\n---\n")
+	 print(X_train[7,:], "\n")
+	 print("The Network Output is:\n---\n")
+	 print(model.forward(X_train[7,:]).item(), "\n")
+
+
+     if __name__ == "__main__":
+	 main()
+
+   #+end_src
+
+   #+RESULTS:
+   
+   This outputs the following:
+
+   #+begin_src python
+     The Network input is:
+     ---
+
+     tensor([-1.5129,  2.9332]) 
+
+     The Network Output is:
+     ---
+
+     0.22973690927028656 
+   #+end_src
+   
+   
+** Train the Model with Gradient Descent                                        :7d46636:
+   Now that the model has been fit, a method to train the model can be
+   implmented:
+   #+begin_src python
+
+     class three_layer_classification_network(nn.Module):
+	 def __init__(self, input_size, hidden_size, output_size, dtype=torch.float, dev="cpu"):
+	     super(three_layer_classification_network, self).__init__()
+	     self.wi = torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True)
+	     self.wo = torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True)
+
+	     self.bi = torch.randn(hidden_size, dtype=dtype, requires_grad=True)
+	     self.bo = torch.randn(output_size, dtype=dtype, requires_grad=True)
+	     self.σ = torch.randn(output_size, dtype=dtype, requires_grad=True)
+
+	     self.losses = []
+
+	 def train(self, x, target, η=30, iterations=2e4):
+	     bar = Bar('Processing', max=iterations) # progress bar
+	     for t in range(int(iterations)):
+
+		 # Calculate y, forward pass
+		 y_pred = self.forward(x)
+
+		 # Measure the loss
+		 loss = self.loss_fn(x, target)
+
+		 # print(loss.item())
+		 self.losses.append(loss.item())
+
+		 # Calculate the Gradients with Autograd
+		 loss.backward()
+
+		 with torch.no_grad():
+		     # Update the Weights with Gradient Descent 
+		     self.wi -= η * self.wi.grad; self.wi.grad = None
+		     self.bi -= η * self.bi.grad; self.bi.grad = None
+		     self.wo -= η * self.wo.grad; self.wo.grad = None
+		     self.bo -= η * self.bo.grad; self.bo.grad = None
+		     self.σ  -= η * self.σ.grad;  self.σ.grad = None
+		 bar.next()
+	     bar.finish()
+		     # ; Zero out the gradients, they've been used
+
+	 # Rest of the Class Definition Below ...VVV...
+   #+end_src
+
+   So now the model can be trained in order to produce a meaningful
+   classification:
+
+   #+begin_src python
+     def main():
+	 # Make the Data
+	 X_train, X_test, y_train, y_test = make_data(
+	     n=100, create_plot=True, dtype=dtype, dev=dev)
+
+	 # Create a model object
+	 model = three_layer_classification_network(
+	     input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
+    
+	 model.train(X_train, y_train, η=1e-2, iterations=10000)
+	 plt.plot(model.losses)
+	 plt.title("Losses at each training iteration")
+	 plt.show()
+
+	 print("The testing misclassification rate is:\n")
+	 print(model.misclassification_rate(X_test, y_test))
+
+
+     if __name__ == "__main__":
+	 main()
+   #+end_src
+
+   This model classifies the points perfectly, even on the testing
+   data, the loss function at each iteration of training shown below:
+
+   #+attr_html: :width 50px
+   #+attr_latex: :width 0.5\textwidth
+   [[./media/loss_function_initial_nn.png]]
+
+   
+** Implement Ranknet
+   Now that the model can classify the data, the implementation will
+   be modified to:
+
+   ... describe ranknet ...
+
+   this is shown below:
+
+   misclassification rate isn't a meaningful measure though
+
+   
+** Implement sorting
+   So instead of ranking, sort the values, this produces the output.
+
+   but this is the problem, did it work? it's not clear, because even
+   if the model was not trained we get the following (put them side by side).
+
+   So this is definitely one of the hard issues.
+
+   what would be better would be to classify data with a rating
+   (i.e. wine scores), only show the model whether the wine is
+   good/bad and compare the output order with the input order, that
+   would be an effective way to see that it works. This was not yet
+   effectively implemented.
 ** TODO Moons
 ** TODO Optimisers
 ** TODO Batches
@@ -198,6 +496,14 @@
 
 * Further Research
 
+  
+** Practical Improvements
+
+  - Apply this to documents to get a sorted list, like the wine data
+  - The "Quicksort" algorithm likely needs a random pivot to be efficient cite:timroughgardenQuicksortOverview2017
+
+** Evaluate performance improvements
+
   It is still not clear how the
   performance of Ranknet compares to traditional approaches
   implemented by search engines (see \S [[#search-engines-list]]), further
@@ -215,12 +521,13 @@
   cite:jarvelinCumulatedGainbasedEvaluation2002 as demonstrated in
   previous work cite:viksinghComparisonOpenSource2009.
 
+** Evaluate alternative machine learning models
+   :PROPERTIES:
+   :CUSTOM_ID: machine-learning-models
+   :END:
+   i.e. can SVM's or trees be used instead of neural networks?
+
 * Conclusion
-
-* Further Research
-
-  - Apply this to documents to get a sorted list.
-  - The "Quicksort" algorithm likely needs a random pivot to be efficient cite:timroughgardenQuicksortOverview2017
 
 * Text and References
 Fractals are complex shapes that often occur from natural processes, in this
@@ -278,7 +585,49 @@ More Modern Search engines include:
     - [[https://github.com/lotabout/skim][=go-fuzzyfinder=]] cite:ktrKtr0731Gofuzzyfinder2021
     - [[https://github.com/lotabout/skim][Swiper]] cite:krehelAboaboSwiper2021
 
+** Version Control Repository
+   :PROPERTIES:
+   :CUSTOM_ID: version-control-repo
+   :END:
+
+   The =git= repository used in production of this code is currently
+   available on /GitHub/ at [[https://github.com/CRMDS/CRMDS-HDR-Training-2020][github.com/CRMDS/CRMDS-HDR-Training-2020]], in
+   order to get a local copy, execute the following commands (=bash=): 
+
+   #+begin_src bash
+     # Clone the repository
+     git clone https://github.com/CRMDS/CRMDS-HDR-Training-2020
+
+     # Change to the subdirectory
+     cd CRMDS-HDR-Training-2020/ranknet
+
+     # Checkout the Walkthrough branch
+     git checkout walkkthrough
+
+     # list the changes
+     git log
+   #+end_src
+
+   Consider the use of a tool like [[https://magit.vc/][magit]] and [[https://github.com/emacsmirror/git-timemachine][git-timemachine]] (or
+   [[https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens][GitLens]] and [[https://marketplace.visualstudio.com/items?itemName=bee.git-temporal-vscode][git-temporal]] in VsCode) in order to effectively preview
+   the changes at each step, alternatively a pager like [[https://github.com/sharkdp/bat][bat]] can also
+   be used with something like [[https://github.com/junegunn/fzf][fzf]] like so:
+
+   #+begin_src bash
+     git log | grep '^commit' | sed 's/^commit\ //' |\
+	 fzf --preview 'git diff {}^! |\
+	  bat --color always'  
+   #+end_src
+
+
+
 * Footnotes
+
+[fn:3] An early goal of this research was to evaluate the performance
+  of different machine learning algorithms to implement the Ranknet
+  method, as well as contrasting this with simple classification
+  approaches, this research however is still ongoing,  see \S
+  [[#machine-learning-models]]
 
 [fn:2] *BCE* /Binary Cross Entropy/ 
 

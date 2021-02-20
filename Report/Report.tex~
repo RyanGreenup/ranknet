@@ -1,4 +1,4 @@
-% Created 2021-02-15 Mon 17:03
+% Created 2021-02-21 Sun 00:36
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,11pt,twoside]{article}
 \usepackage[utf8]{inputenc}
@@ -31,7 +31,7 @@
  pdftitle={Implementing of RankNet},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 27.1 (Org mode 9.4.4)}, 
+ pdfcreator={Emacs 28.0.50 (Org mode 9.4.4)}, 
  pdflang={English}}
 \begin{document}
 
@@ -42,50 +42,495 @@
  \newpage 
 
 \section{Introduction}
-\label{sec:org08f5ecf}
-Ranknet is an approach to \emph{Machine-Learned Ranking} developed by
-Microsoft as early as 2004
+\label{sec:orgf8e5c51}
+Ranknet is an approach to \emph{Machine-Learned Ranking (often refered to
+as "\emph{/Learning to Rank}}" \cite{liuLearningRankInformation2009}) that
+began development at Microsoft from 2004 onwards
 \cite{christopherburgesRankNetRankingRetrospective2015}, although
 previous work in this area had already been undertaken as early as
-the 90s (see
-generally
+the 90s (see generally
 \cite{fuhrProbabilisticModelsInformation1992,fuhrOptimumPolynomialRetrieval1989,fuhrProbabilisticModelsInformation1992,geyInferringProbabilityRelevance1994,wongLinearStructureInformation1988})
-these earlier models didn't perform well compared to more modern machine
-learning techniques \cite[\S 15.5]{manningIntroductionInformationRetrieval2008}.
+these earlier models didn't perform well compared to more modern
+machine learning techniques
+\cite[\S 15.5]{manningIntroductionInformationRetrieval2008}.
 
-\emph{Machine-Learned
-Ranking} is the process of applying machine learning algorithms to
-ranking problems, it often refered to as \emph{Learning to Rank/} \cite{liuLearningRankInformation2009}.
+Information retrieval is an area that demands effective ranking of
+queries, although straight-forward tools such as \texttt{grep}, relational
+databases (e.g. sqlite, MariaDB, PostgreSql) or NoSQL (e.g. CouchDB,
+MongoDB) can be used to retrieve documents with matching characters
+and words, these methods do not perform well in real word tasks
+across large collections of documents because they do not provide
+any logic to rank results (see generally
+\cite{viksinghComparisonOpenSource2009}).
+
+
 \section{Motivation}
-\label{sec:org0880233}
-\section{Implementation}
-\label{sec:orga0c174d}
-\subsection{Blobs}
-\label{sec:orgabe221b}
-\subsection{Moons}
-\label{sec:org3c8c494}
-\subsection{Optimisers}
-\label{sec:org5dd1cc2}
-\subsection{Batches}
-\label{sec:org6775e35}
-\subsection{Wine}
-\label{sec:org5fa73c1}
-\subsection{Rank Wiki Articles}
-\label{sec:org5dfc13e}
+\label{sec:orgae1f7cd}
 
-\section{Conclusion}
-\label{sec:orgd309de3}
+Search Engines implement more sophisticated techniques to rank
+results, one such example being TF-IDF weighting
+\cite{martyschochBleveSearchDocumentation} , well established
+search engines such as \emph{Apache Lucene}
+\cite{apachesoftwarefoundationLearningRankApache2017} and \emph{Xapian}
+\cite{jamesaylettGSoCProjectIdeasLearningtoRankStabilisationXapian2019},
+however, 
+are implementing Machine-Learned Ranking in order to improve results.
+
+This paper hopes to serve as a general introduction to the implementation
+of the Ranknet technique to facilitate developers of search engines in
+more modern languages (i.e. \texttt{Go} and \texttt{Rust}) in implementing
+it. This is important because these more modern languages are more
+accessible \cite{huntThesisSubmittedPartial}
+and memory safe \cite{perkelWhyScientistsAre2020} than C/C++
+respectfully, without significantly impeding performance; this will
+encourage contributors from more diverse backgrounds and hence
+improve the quality of profession-specific tooling.
+
+
+For a non-comprehensive list of actively maintained search engines,
+see \S \ref{sec:orgc612ab0} of the appendix.
+
+\section{Implementation}
+\label{sec:orgaf81f48}
+
+
+
+Neural Networks 
+
+Ranking/ is the process of applying machine learning algorithms to
+ranking problems, it .
+
+This implementation will first apply the approach to a simple data
+set so as to clearly demonstrate that the approach works, following
+that the model will be extended to support wider and more complex
+data types before finally being implemented on a corpus of documents.
+
+\subsection{Neural Networks}
+\label{sec:org94134ce}
+
+The Ranknet method is typically implemented using a Neural Networks
+\footnote{An early goal of this research was to evaluate the performance
+of different machine learning algorithms to implement the Ranknet
+method, as well as contrasting this with simple classification
+approaches, this research however is still ongoing,  see \S
+\ref{sec:orgd3fefbe}},
+although other machine learning techniques can also be used
+\cite[\s 1]{christopherburgesRankNetRankingRetrospective2015},
+Neural Networks are essentially a collection of different
+regression models and classifiers that are fed into one another to create a
+non-linear classifier, a loss function is used to measure the
+performance of the model with respect to the parameters
+(e.g. RMSE \footnote{\textbf{RMSE} \emph{Root Mean Square Error}} or BCE \footnote{\textbf{BCE} \emph{Binary Cross Entropy}}) and the parameters are adjusted so
+as to reduce this error by using the \emph{Gradient Descent Technique}
+(although there are other optimisation algorithms such as RMSProp
+and AdaGrad \cite{mukkamalaVariantsRMSPropAdagrad2017} that can be
+shown to perform better, see
+\cite{bushaevUnderstandingRMSpropFaster2018}). The specifics of
+Neural Networks are beyond the scope of this paper (see
+\cite{hmkcodeBackpropagationStepStep} or more generally \cite{pictonNeuralNetworks1994}).
+
+\subsubsection{The Ranknet Method}
+\label{sec:org24419a2}
+
+The Ranknet method is concerned with a value \(p_{ij}\) that
+measures the probability that an observation \(i\) is ranked higher
+than an observation \(j\).
+
+A Neural Network (\(n\)) is trained to return a value
+\(s_k\) from a feature vector \(\mathbf{X}_k\):
+
+ \[n(\mathbf{X}_i) = s_i \quad \exists k\]
+So as to minimise the error of:
+
+
+\[
+  p_{ij} = \frac{1}{1+e^{\sigma \cdot (s_i-s_j)}} \quad \exists \sigma
+  \in \mathbb{R}
+  \]
+
+
+\paragraph{Version Control}
+\label{sec:orgb7843d1}
+The implementation in this paper corresponds to the \texttt{walkthrough} branch
+of the \texttt{git} repository used in production of this work, id values
+(e.g. \texttt{:08db5b0:}) will be appended to titles to denote specific
+changes made in that section. See \S \ref{sec:org63befa1} for
+more specific guidance.
+
+\subsection{Creating Data\hfill{}\textsc{cf9ab26}}
+\label{sec:org51f1a46}
+The first step is to create a simple data set and design a neural
+network that can classify that data set, the data set generated
+should have two classes of data (this could be interpreted as
+relevant and irrelevant documents given the features or principle
+components of a data set). 
+
+In order to fit a Neural Network the \emph{PyTorch} package can be used
+\cite{NEURIPS2019_9015}, this will allow the gradients of the neural
+network to be calculated numerically without needing to solve for
+the partial derivatives, hence the data will need to be in the
+form of tensors.
+
+This can be implemented like so:
+
+\begin{minted}[]{python}
+import torch                    # 
+import os
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+
+def make_data(create_plot=False, n=1000, dtype=torch.float, dev="cpu", export=""):
+    X, y = datasets.make_blobs(n, 2, 2, random_state=7)
+    # X, y = datasets.make_moons(n_samples=n, noise=0.1, random_state=0) # Moons Data for later
+
+    # Save the data somewhere if necessary
+    if export != "":
+	export_data(X, y, export)
+
+    # Reshape the data to be consistent
+    y = np.reshape(y, (len(y), 1))  # Make y vertical n x 1 matrix.
+
+    # -- Split data into Training and Test Sets --------------------
+    data = train_test_split(X, y, test_size=0.4)
+
+    if(create_plot):
+	# Create the Scatter Plot
+	plt.scatter(X[:, 0], X[:, 1], c=y)
+	plt.title("Sample Data")
+	plt.show()
+
+    # Make sure we're working with tensors not mere numpy arrays
+    torch_data = [None]*len(data)
+    for i in range(len(data)):
+	torch_data[i] = torch.tensor(data[i], dtype=dtype, requires_grad=False)
+
+    return torch_data
+
+
+def export_data(X, y, export):
+    try:
+	os.remove(export)
+	print("Warning, given file was over-written")
+    except:
+	pass
+
+    with open(export, "a") as f:
+	line = "x1, x2, y \n"
+	f.write(line)
+	for i in (range(X.shape[0])):
+	    line = str(X[i][0]) + ", " + str(X[i][1]) + ", " + str(y[i]) + "\n"
+	    f.write(line)
+    print("Data Exported")
+
+# Set Torch Parameters
+dtype = torch.float
+dev = test_cuda()
+
+# Generate the Data
+X_train, X_test, y_train, y_test = make_data(
+    n=int(300/0.4), create_plot=True, dtype=dtype, dev=dev, export = "/tmp/simData.csv")
+\end{minted}
+
+And will produce a dataset like so:
+
+\begin{minted}[]{r}
+library(tidyverse)
+data  <- read_csv("/tmp/simData.csv")
+myplot <-  ggplot(data, aes(x = x1, y = x2, col = factor(y))) +
+    geom_point(size = 3) +
+    theme_classic() +
+    labs(col = "Relevance", x = "PC1", y = "PC2",
+	 title = "Simulated Data")
+
+myplot
+\end{minted}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{SimulatedData.png}
+\end{center}
+
+\subsection{Creating a Neural Network\hfill{}\textsc{7291112}}
+\label{sec:org88d857b}
+A Neural Network model can be designed as a class, here a 2-layer
+model using Sigmoid functions has been described, this design was
+chosen for it's relative simplicity:
+
+\begin{minted}[]{python}
+import torch
+import numpy as np
+from torch import nn
+
+
+class three_layer_classification_network(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size, dtype=torch.float, dev="cpu"):
+	super(three_layer_classification_network, self).__init__()
+	self.wi = torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True)
+	self.wo = torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True)
+
+	self.bi = torch.randn(hidden_size, dtype=dtype, requires_grad=True)
+	self.bo = torch.randn(output_size, dtype=dtype, requires_grad=True)
+
+	self.losses = []
+
+    def forward(self, x):
+	x = torch.matmul(x, self.wi).add(self.bi)
+	x = torch.sigmoid(x)
+	x = torch.matmul(x, self.wo).add(self.bo)
+	x = torch.sigmoid(x)
+	return x
+
+    def loss_fn(self, x, y):
+	y_pred = self.forward(x)
+	return torch.mean(torch.pow((y-y_pred), 2))
+
+    def misclassification_rate(self, x, y):
+	y_pred = (self.forward(x) > 0.5)
+	return np.average(y != y_pred)
+\end{minted}
+
+A model can then be instantiated, here a \texttt{2-3-1}
+model has been implemented, this choice was arbitrary (note that
+the model has not yet been trained, the rates are random):
+
+\begin{minted}[]{python}
+#!/usr/bin/env python
+
+# Import Packages
+import numpy as np
+import matplotlib.pyplot as plt
+import torch
+import sys
+import random
+from ranknet.test_cuda import test_cuda
+from ranknet.make_data import make_data
+from ranknet.neural_network import three_layer_classification_network
+
+# Set Seeds
+torch.manual_seed(1)
+np.random.seed(1)
+
+# Set Torch Parameters
+dtype = torch.float
+dev = test_cuda()
+
+# Set personal flags
+DEBUG = True
+
+
+# Main Function
+
+def main():
+    # Make the Data
+    X_train, X_test, y_train, y_test = make_data(
+	n=100, create_plot=True, dtype=dtype, dev=dev)
+
+    # Create a model object
+    model = three_layer_classification_network(
+	input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
+
+
+    # Send some data through the model
+    print("\nThe Network input is:\n---\n")
+    print(X_train[7,:], "\n")
+    print("The Network Output is:\n---\n")
+    print(model.forward(X_train[7,:]).item(), "\n")
+
+
+if __name__ == "__main__":
+    main()
+
+\end{minted}
+
+This outputs the following:
+
+\begin{minted}[]{python}
+The Network input is:
+---
+
+tensor([-1.5129,  2.9332]) 
+
+The Network Output is:
+---
+
+0.22973690927028656 
+\end{minted}
+
+
+\subsection{Train the Model with Gradient Descent\hfill{}\textsc{7d46636}}
+\label{sec:org3e0b1d7}
+Now that the model has been fit, a method to train the model can be
+implmented:
+\begin{minted}[]{python}
+
+class three_layer_classification_network(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size, dtype=torch.float, dev="cpu"):
+	super(three_layer_classification_network, self).__init__()
+	self.wi = torch.randn(input_size, hidden_size, dtype=dtype, requires_grad=True)
+	self.wo = torch.randn(hidden_size, output_size, dtype=dtype, requires_grad=True)
+
+	self.bi = torch.randn(hidden_size, dtype=dtype, requires_grad=True)
+	self.bo = torch.randn(output_size, dtype=dtype, requires_grad=True)
+	self.σ = torch.randn(output_size, dtype=dtype, requires_grad=True)
+
+	self.losses = []
+
+    def train(self, x, target, η=30, iterations=2e4):
+	bar = Bar('Processing', max=iterations) # progress bar
+	for t in range(int(iterations)):
+
+	    # Calculate y, forward pass
+	    y_pred = self.forward(x)
+
+	    # Measure the loss
+	    loss = self.loss_fn(x, target)
+
+	    # print(loss.item())
+	    self.losses.append(loss.item())
+
+	    # Calculate the Gradients with Autograd
+	    loss.backward()
+
+	    with torch.no_grad():
+		# Update the Weights with Gradient Descent 
+		self.wi -= η * self.wi.grad; self.wi.grad = None
+		self.bi -= η * self.bi.grad; self.bi.grad = None
+		self.wo -= η * self.wo.grad; self.wo.grad = None
+		self.bo -= η * self.bo.grad; self.bo.grad = None
+		self.σ  -= η * self.σ.grad;  self.σ.grad = None
+	    bar.next()
+	bar.finish()
+		# ; Zero out the gradients, they've been used
+
+    # Rest of the Class Definition Below ...VVV...
+\end{minted}
+
+So now the model can be trained in order to produce a meaningful
+classification:
+
+\begin{minted}[]{python}
+def main():
+    # Make the Data
+    X_train, X_test, y_train, y_test = make_data(
+	n=100, create_plot=True, dtype=dtype, dev=dev)
+
+    # Create a model object
+    model = three_layer_classification_network(
+	input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
+
+    model.train(X_train, y_train, η=1e-2, iterations=10000)
+    plt.plot(model.losses)
+    plt.title("Losses at each training iteration")
+    plt.show()
+
+    print("The testing misclassification rate is:\n")
+    print(model.misclassification_rate(X_test, y_test))
+
+
+if __name__ == "__main__":
+    main()
+\end{minted}
+
+This model classifies the points perfectly, even on the testing
+data, the loss function at each iteration of training shown below:
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{./media/loss_function_initial_nn.png}
+\end{center}
+
+\subsection{Moons}
+\label{sec:org3203be6}
+\subsection{Optimisers}
+\label{sec:orgaef4748}
+\subsection{Batches}
+\label{sec:org8110c0c}
+\subsection{Wine}
+\label{sec:org208ce2f}
+\subsection{Rank Wiki Articles}
+\label{sec:orgbc1b406}
+\section{Difficulties}
+\label{sec:orgf517c8d}
+\begin{itemize}
+\item Don't use torch
+\begin{itemize}
+\item Do it by hand first because it can be hard to see if the correct
+weights are being updated sensibly, making debugging very difficult.
+\item R or Julia would be easier because counting from 0 get's pretty
+confusing when dealing with \{1, 0\}, \{-1, 0, 1\}.
+\end{itemize}
+\item Don't use misclassification rate to measure whether the ranking
+\begin{itemize}
+\item In hindsight this is obvious, but at the time misclassification
+was a tempting metric because of it's interpretability
+\end{itemize}
+was correct
+
+Very difficult to see if the model is working
+
+\item A continuous function will still produce an ordered pattern in
+the ranking of results, even if the model hasn't been trained,
+so visualising isn't helpful either.
+
+\item Implement it on a data set that already has order, obfuscate the
+order and then contrast the results
+\begin{itemize}
+\item or use a measurement
+\end{itemize}
+
+\item Plot the loss function of the training data live, the model is
+slow to train and waiting for it to develop was a massive time
+drain.
+\end{itemize}
+
+
 
 \section{Further Research}
-\label{sec:org2807a22}
+\label{sec:org8b62b00}
+
+
+\subsection{Practical Improvements}
+\label{sec:org7273998}
 
 \begin{itemize}
-\item Apply this to documents to get a sorted list.
+\item Apply this to documents to get a sorted list, like the wine data
 \item The "Quicksort" algorithm likely needs a random pivot to be efficient \cite{timroughgardenQuicksortOverview2017}
 \end{itemize}
 
+\subsection{Evaluate performance improvements}
+\label{sec:orgfd362f2}
+
+It is still not clear how the
+performance of Ranknet compares to traditional approaches
+implemented by search engines (see \S \ref{sec:orgc612ab0}), further
+study would ideally:
+
+\begin{itemize}
+\item Write a program to query a corpus of documents using an existing search engine.
+\begin{itemize}
+\item Or possibly just implement TF-IDF weighting in order to remove variables.
+\end{itemize}
+\item Extend the program to implement machine learned ranking
+\item Measure and contrast the performance of the two models to see
+whether there are any significant improvements.
+\end{itemize}
+
+This could be implemented with TREC datasets
+\cite{usnationalinstituteofstandardsandtechnologyTextREtrievalConference}
+using a cummulated-gain cost function
+\cite{jarvelinCumulatedGainbasedEvaluation2002} as demonstrated in
+previous work \cite{viksinghComparisonOpenSource2009}.
+
+\subsection{Evaluate alternative machine learning models}
+\label{sec:orgd3fefbe}
+i.e. can SVM's or trees be used instead of neural networks?
+
+\section{Conclusion}
+\label{sec:orgc3161e7}
+
 \section{Text and References}
-\label{sec:orgb72dc91}
+\label{sec:orgd127687}
 Fractals are complex shapes that often occur from natural processes, in this
 report we hope to investigate the emergence of patterns and complex structures
 from natural phenomena. We begin with an investigation into fractals and the
@@ -95,12 +540,85 @@ processes.
 This is a Reference \cite{tuGraphBasedSemiSupervisedNearestNeighbor2016a} and another \cite{nicodemiIntroductionAbstractAlgebra2007a} and yet another \cite{christopherburgesRankNetLambdaRankLambdaMART2010}.
 
 \section{Fractals}
-\label{sec:orgb38879d}
-Images are shown in figure \ref{fig:orgcdb1ec2}.
+\label{sec:orgece943d}
+Images are shown in figure .
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{media/outline-rabbit.png}
-\caption{\label{fig:orgcdb1ec2}This is a test image showing the outline of a Julia set}
-\end{figure}
+\section{Appendix}
+\label{sec:org5428d1c}
+
+\subsection{Search Engines}
+\label{sec:orgc612ab0}
+There are many open source search engines available , a cursory review
+found the following popular projects:
+
+\begin{itemize}
+\item \href{https://github.com/cyclaero/zettair}{Zettair} (\texttt{C}) \cite{jansenCyclaeroZettair2020}
+\item \href{https://github.com/apache/lucene-solr}{Apache lucene/Solr} (\texttt{Java}) \cite{apachesoftwarefoundationLearningRankApache2017}
+\begin{itemize}
+\item Implemented by \href{https://sourceforge.net/p/docfetcher/code/ci/master/tree/}{DocFetcher} \cite{docfetcherdevelopmentteamDocFetcherFastDocument}
+\end{itemize}
+\item \href{https://github.com/sphinxsearch/sphinx}{Sphinx} (\texttt{C++}) \cite{yurischapovSphinxsearchSphinx2021}
+\item \href{https://github.com/kevinduraj/xapian-search}{Xapian} (\texttt{C++}) \cite{ollybettsXapianXapian2021}
+\begin{itemize}
+\item Implemented by \href{https://www.lesbonscomptes.com/recoll/}{Recoll} \cite{jean-francoisdockesRecollUserManual}
+\end{itemize}
+\end{itemize}
+
+More Modern Search engines include:
+
+\begin{itemize}
+\item \href{https://github.com/olivernn/lunr.js/}{LunrJS}  (\texttt{JS}) \cite{nightingaleOlivernnLunrJs2021}
+\item \href{https://github.com/blevesearch/bleve}{Bleve Search} (\texttt{Go}) \cite{martyschochBleveSearchDocumentation}
+\item \href{https://github.com/go-ego/riot}{Riot} (\texttt{Go}) \cite{vzGoegoRiot2021}
+\item \href{https://github.com/tantivy-search/tantivy}{Tantivy} (\texttt{Rust}) \cite{clementrenaultMeilisearchMeiliSearch2021}
+\item \href{https://github.com/andylokandy/simsearch-rs}{SimSearch} (\texttt{Rust}) \cite{lokAndylokandySimsearchrs2021}
+\end{itemize}
+
+
+\subsubsection{Fuzzy String Match}
+\label{sec:org5b76f54}
+Somewhat related are programs that rank string similarity, such programs don't tend
+to perform well on documents however (so for example these would
+be effective to filter document titles but would not be useful for
+querying documents):
+
+\begin{itemize}
+\item \href{https://github.com/junegunn/fzf}{\texttt{fzf}} \cite{choiJunegunnFzf2021}
+\item \href{https://github.com/jhawthorn/fzy}{\texttt{fzy}} \cite{hawthornJhawthornFzy2021}
+\item \href{https://github.com/peco/peco}{\texttt{peco}} \cite{lestrratPecoPeco2021}
+\item \href{https://github.com/lotabout/skim}{Skim} \cite{zhangLotaboutSkim2021}
+\item \href{https://github.com/lotabout/skim}{\texttt{go-fuzzyfinder}} \cite{ktrKtr0731Gofuzzyfinder2021}
+\item \href{https://github.com/lotabout/skim}{Swiper} \cite{krehelAboaboSwiper2021}
+\end{itemize}
+
+\subsection{Version Control Repository}
+\label{sec:org63befa1}
+The \texttt{git} repository used in production of this code is currently
+available on \emph{GitHub} at \href{https://github.com/CRMDS/CRMDS-HDR-Training-2020}{github.com/CRMDS/CRMDS-HDR-Training-2020}, in
+order to get a local copy, execute the following commands (\texttt{bash}): 
+
+\begin{minted}[]{bash}
+# Clone the repository
+git clone https://github.com/CRMDS/CRMDS-HDR-Training-2020
+
+# Change to the subdirectory
+cd CRMDS-HDR-Training-2020/ranknet
+
+# Checkout the Walkthrough branch
+git checkout walkkthrough
+
+# list the changes
+git log
+\end{minted}
+
+Consider the use of a tool like \href{https://magit.vc/}{magit} and \href{https://github.com/emacsmirror/git-timemachine}{git-timemachine} (or
+\href{https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens}{GitLens} and \href{https://marketplace.visualstudio.com/items?itemName=bee.git-temporal-vscode}{git-temporal} in VsCode) in order to effectively preview
+the changes at each step, alternatively a pager like \href{https://github.com/sharkdp/bat}{bat} can also
+be used with something like \href{https://github.com/junegunn/fzf}{fzf} like so:
+
+\begin{minted}[]{bash}
+git log | grep '^commit' | sed 's/^commit\ //' |\
+    fzf --preview 'git diff {}^! |\
+     bat --color always'  
+\end{minted}
 \end{document}
