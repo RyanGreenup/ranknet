@@ -44,23 +44,41 @@
   [[cite:manningIntroductionInformationRetrieval2008][\S 15.5]].
 
   Information retrieval is an area that demands effective ranking of
-  queries, although relatively simple tools such as =grep=, relational databases
-  such as Sqlite or NoSQL databases like MongoDB can be used to
-  retrieve documents with matching characters and words, these methods
-  do not perform well in real word tasks across large collections of
-  documents because they do not provide any logic to rank results (see generally cite:viksinghComparisonOpenSource2009).
+  queries, although straight-forward tools such as =grep=, relational
+  databases (e.g. sqlite, MariaDB, PostgreSql) or NoSQL (e.g. CouchDB,
+  MongoDB) can be used to retrieve documents with matching characters
+  and words, these methods do not perform well in real word tasks
+  across large collections of documents because they do not provide
+  any logic to rank results (see generally
+  cite:viksinghComparisonOpenSource2009).
+
+
+* Motivation
 
   Search Engines implement more sophisticated techniques to rank
   results, one such example being TF-IDF weighting
-  cite:martyschochBleveSearchDocumentation.  [fn:3]
+  cite:martyschochBleveSearchDocumentation , well established
+  search engines such as /Apache Lucene/
+  cite:apachesoftwarefoundationLearningRankApache2017 and /Xapian/
+  cite:jamesaylettGSoCProjectIdeasLearningtoRankStabilisationXapian2019,
+  however, 
+  are implementing Machine-Learned Ranking in order to improve results.
 
-  Many search engine
-  Traditional Search-engines such /Apache Lucene/
-  cite:apachesoftwarefoundationLearningRankApache2017 and Xapian
-  cite:jamesaylettGSoCProjectIdeasLearningtoRankStabilisationXapian2019
-  have begun implementing 
-  This paper hopes to serve as an introduction to the implementation
-  of this technique.
+  This paper hopes to serve as a general introduction to the implementation
+  of the Ranknet technique to facilitate developers of search engines in
+  more modern languages (i.e. =Go= and =Rust=) in implementing
+  it. This is important because these more modern languages are more
+  accessible cite:huntThesisSubmittedPartial
+  and memory safe cite:perkelWhyScientistsAre2020 than C/C++
+  respectfully, without significantly impeding performance; this will
+  encourage contributors from more diverse backgrounds and hence
+  improve the quality of profession-specific tooling.
+
+  
+  For a non-comprehensive list of actively maintained search engines,
+  see \S [[#search-engines-list]] of the appendix.
+
+* Implementation
 
   The Ranknet approach is typically implemented using Neural Networks,
   an early goal of this research was to evaluate the performance of
@@ -72,17 +90,12 @@
   on-demand queries is required, although this seems to have been
   implemented by open source Apache Solr project
   cite:michaelalcornIntroductionMachinelearnedRanking, which may
-  provide guidance for further study. An open question is how the
-  performance of Ranknet performs compared to alternative pre-existing
-  methods like Recoll cite:jean-francoisdockesRecollUserManual and
-  docfetcher cite:docfetcherdevelopmentteamDocFetcherFastDocument.
+  provide guidance for further study. teamDocFetcherFastDocument.
 
-  For a non-comprehensive list of actively maintained search engines,
-  see \S [[#search-engines-list][Search Engines]] of the appendix.
   
   Ranking/ is the process of applying machine learning algorithms to
   ranking problems, it .
-* Motivation
+
   A lot of data cannot be clearly categorised or quantified even if there
   is a capacity to compare different samples, the motivating example
   is a collection of documents, it might be immediately clear to the
@@ -156,6 +169,51 @@
 ** TODO Batches
 ** TODO Wine
 ** TODO Rank Wiki Articles
+* TODO Difficulties
+  - Don't use torch
+    - Do it by hand first because it can be hard to see if the correct
+      weights are being updated sensibly, making debugging very difficult.
+    - R or Julia would be easier because counting from 0 get's pretty
+      confusing when dealing with {1, 0}, {-1, 0, 1}.
+  - Don't use misclassification rate to measure whether the ranking
+    - In hindsight this is obvious, but at the time misclassification
+      was a tempting metric because of it's interpretability
+    was correct
+
+    Very difficult to see if the model is working
+
+  - A continuous function will still produce an ordered pattern in
+      the ranking of results, even if the model hasn't been trained,
+      so visualising isn't helpful either.
+
+  - Implement it on a data set that already has order, obfuscate the
+      order and then contrast the results
+    - or use a measurement
+
+  - Plot the loss function of the training data live, the model is
+    slow to train and waiting for it to develop was a massive time
+    drain.
+    
+
+
+* Further Research
+
+  It is still not clear how the
+  performance of Ranknet compares to traditional approaches
+  implemented by search engines (see \S [[#search-engines-list]]), further
+  study would ideally:
+
+  - Write a program to query a corpus of documents using an existing search engine.
+    - Or possibly just implement TF-IDF weighting in order to remove variables.
+  - Extend the program to implement machine learned ranking
+  - Measure and contrast the performance of the two models to see
+    whether there are any significant improvements.
+
+  This could be implemented with TREC datasets
+  cite:usnationalinstituteofstandardsandtechnologyTextREtrievalConference
+  using a cummulated-gain cost function
+  cite:jarvelinCumulatedGainbasedEvaluation2002 as demonstrated in
+  previous work cite:viksinghComparisonOpenSource2009.
 
 * Conclusion
 
@@ -206,9 +264,21 @@ More Modern Search engines include:
 - [[https://github.com/tantivy-search/tantivy][Tantivy]] (=Rust=) cite:clementrenaultMeilisearchMeiliSearch2021
 - [[https://github.com/andylokandy/simsearch-rs][SimSearch]] (=Rust=) cite:lokAndylokandySimsearchrs2021
 
-* Footnotes
+  
+*** Fuzzy String Match
+    Somewhat related are programs that rank string similarity, such programs don't tend
+    to perform well on documents however (so for example these would
+    be effective to filter document titles but would not be useful for
+    querying documents):
 
-[fn:3] 
+    - [[https://github.com/junegunn/fzf][=fzf=]] cite:choiJunegunnFzf2021
+    - [[https://github.com/jhawthorn/fzy][=fzy=]] cite:hawthornJhawthornFzy2021
+    - [[https://github.com/peco/peco][=peco=]] cite:lestrratPecoPeco2021
+    - [[https://github.com/lotabout/skim][Skim]] cite:zhangLotaboutSkim2021
+    - [[https://github.com/lotabout/skim][=go-fuzzyfinder=]] cite:ktrKtr0731Gofuzzyfinder2021
+    - [[https://github.com/lotabout/skim][Swiper]] cite:krehelAboaboSwiper2021
+
+* Footnotes
 
 [fn:2] *BCE* /Binary Cross Entropy/ 
 

@@ -94,6 +94,54 @@
       \endverb
       \warn{\item Entry 'bushaevUnderstandingRMSpropFaster2018' (../resources/references.bib): Invalid format '2018-09-02T15:38:16.964Z' of date field 'date' - ignoring}
     \endentry
+    \entry{choiJunegunnFzf2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=688f1aa9d0b39741539c22c59a067c73}{%
+           family={Choi},
+           familyi={C\bibinitperiod},
+           given={Junegunn},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{688f1aa9d0b39741539c22c59a067c73}
+      \strng{fullhash}{688f1aa9d0b39741539c22c59a067c73}
+      \strng{bibnamehash}{688f1aa9d0b39741539c22c59a067c73}
+      \strng{authorbibnamehash}{688f1aa9d0b39741539c22c59a067c73}
+      \strng{authornamehash}{688f1aa9d0b39741539c22c59a067c73}
+      \strng{authorfullhash}{688f1aa9d0b39741539c22c59a067c73}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{:cherry\_blossom: A command-line fuzzy finder. Contribute to junegunn/fzf development by creating an account on GitHub.}
+      \field{day}{20}
+      \field{hour}{5}
+      \field{minute}{23}
+      \field{month}{2}
+      \field{origday}{23}
+      \field{orighour}{16}
+      \field{origminute}{4}
+      \field{origmonth}{10}
+      \field{origsecond}{23}
+      \field{origtimezone}{Z}
+      \field{origyear}{2013}
+      \field{second}{9}
+      \field{timezone}{Z}
+      \field{title}{Junegunn/Fzf}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/junegunn/fzf
+      \endverb
+      \verb{url}
+      \verb https://github.com/junegunn/fzf
+      \endverb
+      \keyw{bash,cli,fish,fzf,go,neovim,unix,vim,zsh}
+    \endentry
     \entry{christopherburgesRankNetLambdaRankLambdaMART2010}{misc}{}
       \name{author}{1}{}{%
         {{hash=d66c4b884057887b53819bd6feef8736}{%
@@ -398,6 +446,54 @@
       \verb /home/ryan/Zotero/storage/5UWNV6N2/Gey - 1994 - Inferring probability of relevance using the metho.pdf
       \endverb
     \endentry
+    \entry{hawthornJhawthornFzy2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=06b1acb36887c703a9a502555ce0d15a}{%
+           family={Hawthorn},
+           familyi={H\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{06b1acb36887c703a9a502555ce0d15a}
+      \strng{fullhash}{06b1acb36887c703a9a502555ce0d15a}
+      \strng{bibnamehash}{06b1acb36887c703a9a502555ce0d15a}
+      \strng{authorbibnamehash}{06b1acb36887c703a9a502555ce0d15a}
+      \strng{authornamehash}{06b1acb36887c703a9a502555ce0d15a}
+      \strng{authorfullhash}{06b1acb36887c703a9a502555ce0d15a}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{:mag: A simple, fast fuzzy finder for the terminal}
+      \field{day}{20}
+      \field{hour}{0}
+      \field{minute}{40}
+      \field{month}{2}
+      \field{origday}{12}
+      \field{orighour}{4}
+      \field{origminute}{30}
+      \field{origmonth}{7}
+      \field{origsecond}{53}
+      \field{origtimezone}{Z}
+      \field{origyear}{2014}
+      \field{second}{2}
+      \field{timezone}{Z}
+      \field{title}{Jhawthorn/Fzy}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/jhawthorn/fzy
+      \endverb
+      \verb{url}
+      \verb https://github.com/jhawthorn/fzy
+      \endverb
+      \keyw{c,cli,fuzzy,fuzzy-finders,fuzzy-search,fuzzyfinder,fzy,unix,vim}
+    \endentry
     \entry{hmkcodeBackpropagationStepStep}{online}{}
       \name{author}{1}{}{%
         {{hash=82bb9e46081afbed195ef31a99112591}{%
@@ -427,6 +523,32 @@
       \endverb
       \verb{url}
       \verb https://hmkcode.com/ai/backpropagation-step-by-step/
+      \endverb
+    \endentry
+    \entry{huntThesisSubmittedPartial}{article}{}
+      \name{author}{1}{}{%
+        {{hash=697df44aa47ecf5515d8f13afd127094}{%
+           family={Hunt},
+           familyi={H\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{697df44aa47ecf5515d8f13afd127094}
+      \strng{fullhash}{697df44aa47ecf5515d8f13afd127094}
+      \strng{bibnamehash}{697df44aa47ecf5515d8f13afd127094}
+      \strng{authorbibnamehash}{697df44aa47ecf5515d8f13afd127094}
+      \strng{authornamehash}{697df44aa47ecf5515d8f13afd127094}
+      \strng{authorfullhash}{697df44aa47ecf5515d8f13afd127094}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{A Thesis Submitted in Partial Fulfillment of the Requirements for the Degree of {{Master}} of {{Science}} in {{Computer Science}}}
+      \field{pages}{30}
+      \range{pages}{1}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/HGR98SHF/Hunt - A thesis submitted in partial fulﬁllment of the re.pdf
       \endverb
     \endentry
     \entry{jamesaylettGSoCProjectIdeasLearningtoRankStabilisationXapian2019}{online}{}
@@ -511,6 +633,60 @@
       \verb https://github.com/cyclaero/zettair
       \endverb
     \endentry
+    \entry{jarvelinCumulatedGainbasedEvaluation2002}{article}{}
+      \name{author}{2}{}{%
+        {{hash=cc5ad10d6e2bd65521f850e6a5783201}{%
+           family={Järvelin},
+           familyi={J\bibinitperiod},
+           given={Kalervo},
+           giveni={K\bibinitperiod}}}%
+        {{hash=4211fe9dfed31746f5563ba969b7bbbb}{%
+           family={Kekäläinen},
+           familyi={K\bibinitperiod},
+           given={Jaana},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{fullhash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{bibnamehash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{authorbibnamehash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{authornamehash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \strng{authorfullhash}{54e34fc2deb3a92b3d69d923863efa9c}
+      \field{sortinit}{J}
+      \field{sortinithash}{c45040a764d616897e7f5b30174d7b92}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Modern large retrieval environments tend to overwhelm their users by their large output. Since all documents are not of equal relevance to their users, highly relevant documents should be identified and ranked first for presentation. In order to develop IR techniques in this direction, it is necessary to develop evaluation approaches and methods that credit IR methods for their ability to retrieve highly relevant documents. This can be done by extending traditional evaluation methods, that is, recall and precision based on binary relevance judgments, to graded relevance judgments. Alternatively, novel measures based on graded relevance judgments may be developed. This article proposes several novel measures that compute the cumulative gain the user obtains by examining the retrieval result up to a given ranked position. The first one accumulates the relevance scores of retrieved documents along the ranked result list. The second one is similar but applies a discount factor to the relevance scores in order to devaluate late-retrieved documents. The third one computes the relative-to-the-ideal performance of IR techniques, based on the cumulative gain they are able to yield. These novel measures are defined and discussed and their use is demonstrated in a case study using TREC data: sample system run results for 20 queries in TREC-7. As a relevance base we used novel graded relevance judgments on a four-point scale. The test results indicate that the proposed measures credit IR methods for their ability to retrieve highly relevant documents and allow testing of statistical significance of effectiveness differences. The graphs based on the measures also provide insight into the performance IR techniques and allow interpretation, for example, from the user point of view.}
+      \field{day}{1}
+      \field{issn}{1046-8188}
+      \field{journaltitle}{ACM Transactions on Information Systems}
+      \field{month}{10}
+      \field{number}{4}
+      \field{shortjournal}{ACM Trans. Inf. Syst.}
+      \field{title}{Cumulated Gain-Based Evaluation of {{IR}} Techniques}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{volume}{20}
+      \field{year}{2002}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{422\bibrangedash 446}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.1145/582415.582418
+      \endverb
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/TJ5BYDN3/jarvelinCumulatedGainbasedEvaluation2002.pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://doi.org/10.1145/582415.582418
+      \endverb
+      \verb{url}
+      \verb http://doi.org/10.1145/582415.582418
+      \endverb
+      \keyw{cumulated gain,Graded relevance judgments}
+    \endentry
     \entry{jean-francoisdockesRecollUserManual}{online}{}
       \name{author}{1}{}{%
         {{hash=278b702f984111b1c9cbe14b966a8b09}{%
@@ -540,6 +716,148 @@
       \endverb
       \verb{url}
       \verb https://www.lesbonscomptes.com/recoll/usermanual/usermanual.html
+      \endverb
+    \endentry
+    \entry{krehelAboaboSwiper2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=a0584eb8cfa8e3fb98c06fcfab98a0dd}{%
+           family={Krehel},
+           familyi={K\bibinitperiod},
+           given={Oleh},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{a0584eb8cfa8e3fb98c06fcfab98a0dd}
+      \strng{fullhash}{a0584eb8cfa8e3fb98c06fcfab98a0dd}
+      \strng{bibnamehash}{a0584eb8cfa8e3fb98c06fcfab98a0dd}
+      \strng{authorbibnamehash}{a0584eb8cfa8e3fb98c06fcfab98a0dd}
+      \strng{authornamehash}{a0584eb8cfa8e3fb98c06fcfab98a0dd}
+      \strng{authorfullhash}{a0584eb8cfa8e3fb98c06fcfab98a0dd}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Ivy}
+      \field{day}{20}
+      \field{hour}{2}
+      \field{minute}{39}
+      \field{month}{2}
+      \field{origday}{9}
+      \field{orighour}{19}
+      \field{origminute}{29}
+      \field{origmonth}{3}
+      \field{origsecond}{6}
+      \field{origtimezone}{Z}
+      \field{origyear}{2015}
+      \field{second}{43}
+      \field{timezone}{Z}
+      \field{title}{Abo-Abo/Swiper}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/abo-abo/swiper
+      \endverb
+      \verb{url}
+      \verb https://github.com/abo-abo/swiper
+      \endverb
+      \keyw{completion,counsel,emacs,ivy,search,swiper}
+    \endentry
+    \entry{ktrKtr0731Gofuzzyfinder2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=d3f4263a4c026e0f047e1b6a895fb853}{%
+           family={{ktr}},
+           familyi={k\bibinitperiod}}}%
+      }
+      \strng{namehash}{d3f4263a4c026e0f047e1b6a895fb853}
+      \strng{fullhash}{d3f4263a4c026e0f047e1b6a895fb853}
+      \strng{bibnamehash}{d3f4263a4c026e0f047e1b6a895fb853}
+      \strng{authorbibnamehash}{d3f4263a4c026e0f047e1b6a895fb853}
+      \strng{authornamehash}{d3f4263a4c026e0f047e1b6a895fb853}
+      \strng{authorfullhash}{d3f4263a4c026e0f047e1b6a895fb853}
+      \field{sortinit}{k}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{fzf-like fuzzy-finder as a Go library. Contribute to ktr0731/go-fuzzyfinder development by creating an account on GitHub.}
+      \field{day}{16}
+      \field{hour}{13}
+      \field{minute}{41}
+      \field{month}{2}
+      \field{origday}{24}
+      \field{orighour}{8}
+      \field{origminute}{4}
+      \field{origmonth}{1}
+      \field{origsecond}{6}
+      \field{origtimezone}{Z}
+      \field{origyear}{2019}
+      \field{second}{18}
+      \field{timezone}{Z}
+      \field{title}{Ktr0731/Go-Fuzzyfinder}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/ktr0731/go-fuzzyfinder
+      \endverb
+      \verb{url}
+      \verb https://github.com/ktr0731/go-fuzzyfinder
+      \endverb
+      \keyw{fuzzyfinder,golang}
+    \endentry
+    \entry{lestrratPecoPeco2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=5ee29f53cd1173f23f387e511f66777b}{%
+           family={{lestrrat}},
+           familyi={l\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {peco}%
+      }
+      \strng{namehash}{5ee29f53cd1173f23f387e511f66777b}
+      \strng{fullhash}{5ee29f53cd1173f23f387e511f66777b}
+      \strng{bibnamehash}{5ee29f53cd1173f23f387e511f66777b}
+      \strng{authorbibnamehash}{5ee29f53cd1173f23f387e511f66777b}
+      \strng{authornamehash}{5ee29f53cd1173f23f387e511f66777b}
+      \strng{authorfullhash}{5ee29f53cd1173f23f387e511f66777b}
+      \field{sortinit}{l}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Simplistic interactive filtering tool. Contribute to peco/peco development by creating an account on GitHub.}
+      \field{day}{18}
+      \field{hour}{16}
+      \field{minute}{1}
+      \field{month}{2}
+      \field{origday}{6}
+      \field{orighour}{6}
+      \field{origminute}{6}
+      \field{origmonth}{6}
+      \field{origsecond}{32}
+      \field{origtimezone}{Z}
+      \field{origyear}{2014}
+      \field{second}{58}
+      \field{timezone}{Z}
+      \field{title}{Peco/Peco}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/peco/peco
+      \endverb
+      \verb{url}
+      \verb https://github.com/peco/peco
       \endverb
     \endentry
     \entry{liuLearningRankInformation2009}{article}{}
@@ -942,6 +1260,57 @@
       \verb https://github.com/xapian/xapian
       \endverb
     \endentry
+    \entry{perkelWhyScientistsAre2020}{article}{}
+      \name{author}{1}{}{%
+        {{hash=fceabd42825c0d61d41e323f71942d39}{%
+           family={Perkel},
+           familyi={P\bibinitperiod},
+           given={Jeffrey\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{fceabd42825c0d61d41e323f71942d39}
+      \strng{fullhash}{fceabd42825c0d61d41e323f71942d39}
+      \strng{bibnamehash}{fceabd42825c0d61d41e323f71942d39}
+      \strng{authorbibnamehash}{fceabd42825c0d61d41e323f71942d39}
+      \strng{authornamehash}{fceabd42825c0d61d41e323f71942d39}
+      \strng{authorfullhash}{fceabd42825c0d61d41e323f71942d39}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Despite having a steep learning curve, the programming language offers speed and safety.}
+      \field{day}{1}
+      \field{issue}{7836}
+      \field{journaltitle}{Nature}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{number}{7836}
+      \field{title}{Why Scientists Are Turning to {{Rust}}}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{volume}{588}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{185\bibrangedash 186}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1038/d41586-020-03382-2
+      \endverb
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/CVD9GIQK/perkelWhyScientistsAre2020.pdf;/home/ryan/Zotero/storage/65AFQZUD/d41586-020-03382-2.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nature.com/articles/d41586-020-03382-2
+      \endverb
+      \verb{url}
+      \verb https://www.nature.com/articles/d41586-020-03382-2
+      \endverb
+    \endentry
     \entry{pictonNeuralNetworks1994}{book}{}
       \name{author}{1}{}{%
         {{hash=26678ce01a5e032c5d541fa19b788b94}{%
@@ -1072,6 +1441,37 @@
       \verb http://arxiv.org/abs/1606.00985
       \endverb
       \keyw{Computer Science - Machine Learning,Statistics - Machine Learning}
+    \endentry
+    \entry{usnationalinstituteofstandardsandtechnologyTextREtrievalConference}{online}{}
+      \name{author}{1}{}{%
+        {{hash=dbea3f7dfaa329f5383d8197efcad9e5}{%
+           family={{US National Institute of Standards and Technology}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{dbea3f7dfaa329f5383d8197efcad9e5}
+      \strng{fullhash}{dbea3f7dfaa329f5383d8197efcad9e5}
+      \strng{bibnamehash}{dbea3f7dfaa329f5383d8197efcad9e5}
+      \strng{authorbibnamehash}{dbea3f7dfaa329f5383d8197efcad9e5}
+      \strng{authornamehash}{dbea3f7dfaa329f5383d8197efcad9e5}
+      \strng{authorfullhash}{dbea3f7dfaa329f5383d8197efcad9e5}
+      \field{sortinit}{U}
+      \field{sortinithash}{77a6935510e008adcf5b555e7b4f0711}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Text {{REtrieval Conference}} ({{TREC}}) {{Home Page}}}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/T6DJ9QZR/trec.nist.gov.html
+      \endverb
+      \verb{urlraw}
+      \verb https://trec.nist.gov/
+      \endverb
+      \verb{url}
+      \verb https://trec.nist.gov/
+      \endverb
     \endentry
     \entry{viksinghComparisonOpenSource2009}{online}{}
       \name{author}{1}{}{%
@@ -1276,6 +1676,54 @@
       \verb{url}
       \verb https://github.com/sphinxsearch/sphinx
       \endverb
+    \endentry
+    \entry{zhangLotaboutSkim2021}{software}{}
+      \name{author}{1}{}{%
+        {{hash=798c8bf03ff35285448648ce2fa5d0cb}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jinzhou},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{798c8bf03ff35285448648ce2fa5d0cb}
+      \strng{fullhash}{798c8bf03ff35285448648ce2fa5d0cb}
+      \strng{bibnamehash}{798c8bf03ff35285448648ce2fa5d0cb}
+      \strng{authorbibnamehash}{798c8bf03ff35285448648ce2fa5d0cb}
+      \strng{authornamehash}{798c8bf03ff35285448648ce2fa5d0cb}
+      \strng{authorfullhash}{798c8bf03ff35285448648ce2fa5d0cb}
+      \field{sortinit}{Z}
+      \field{sortinithash}{8f7b480688e809b50b6f6577b16f3db5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Fuzzy Finder in rust! Contribute to lotabout/skim development by creating an account on GitHub.}
+      \field{day}{19}
+      \field{hour}{21}
+      \field{minute}{17}
+      \field{month}{2}
+      \field{origday}{29}
+      \field{orighour}{6}
+      \field{origminute}{24}
+      \field{origmonth}{5}
+      \field{origsecond}{46}
+      \field{origtimezone}{Z}
+      \field{origyear}{2016}
+      \field{second}{8}
+      \field{timezone}{Z}
+      \field{title}{Lotabout/Skim}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/lotabout/skim
+      \endverb
+      \verb{url}
+      \verb https://github.com/lotabout/skim
+      \endverb
+      \keyw{fuzzyfinder,rust,skim}
     \endentry
   \enddatalist
 \endrefsection
