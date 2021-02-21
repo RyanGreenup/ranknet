@@ -4,7 +4,7 @@
 #+STARTUP: overview
 #+AUTHOR: Ryan Greenup
 #+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
-# #+TODO: TODO IN-PROGRESS WAITING DONE
+#+TODO: TODO IN-PROGRESS WAITING DONE
 #+CATEGORY: TAD
 :END:
 :HTML:
