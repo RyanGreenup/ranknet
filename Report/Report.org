@@ -555,15 +555,26 @@
 
    #+end_src
    
-    #+BEGIN_SRC R :exports results :results output graphics file :file SimulatedData.png :eval never
+    #+BEGIN_SRC R :exports results :results output graphics file :file ranknet_loss.png :eval never
       library(tidyverse)
-      data  <- read_csv("/tmp/simData.csv")
-      (myplot <-  ggplot(data, aes(x = x1, y = x2, col = factor(y))) +
-                        geom_point(size = 3) +
-                        theme_classic() +
-                        labs(col = "Relevance", x = "PC1", y = "PC2",
-                             title = "Simulated Data"))
+
+      data <- read.csv(file = "/tmp/losses.csv", header = FALSE, sep = ",")[1]
+      data$iteration <- 1:nrow(data)
+      names(data) <- c("losses", "iteration")
+
+      ggplot(data, aes(x = iteration, y = losses)) +
+	  geom_line(size = 1, color = "indianred") +
+	  theme_classic() +
+	  labs(x = "Training Iteration", y = "Loss measured using BCE",
+	  title = "Training Loss at each iteration for Ranknet")
     #+END_SRC
+
+    #+NAME: ranknet-loss
+    #+CAPTION: BCE training loss at each iteration for the Ranknet method.
+    #+attr_html: :width 400px
+    #+attr_latex: :width 0.4\textwidth
+    #+RESULTS[4dc8a85a43a77b706337ded0072cc441bbdbf9a1]:
+    [[file:ranknet_loss.png]]
 
 ** Implement sorting
    So instead of ranking, sort the values, this produces the output.
