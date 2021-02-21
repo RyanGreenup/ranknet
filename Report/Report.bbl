@@ -23,6 +23,50 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{amodioEamodioVscodegitlens2016}{software}{}
+      \name{author}{1}{}{%
+        {{hash=6b86010a9956c9c060b4368189d16972}{%
+           family={Amodio},
+           familyi={A\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b86010a9956c9c060b4368189d16972}
+      \strng{fullhash}{6b86010a9956c9c060b4368189d16972}
+      \strng{bibnamehash}{6b86010a9956c9c060b4368189d16972}
+      \strng{authorbibnamehash}{6b86010a9956c9c060b4368189d16972}
+      \strng{authornamehash}{6b86010a9956c9c060b4368189d16972}
+      \strng{authorfullhash}{6b86010a9956c9c060b4368189d16972}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Supercharge the Git capabilities built into Visual Studio Code — Visualize code authorship at a glance via Git blame annotations and code lens, seamlessly navigate and explore Git repositories, gai...}
+      \field{day}{6}
+      \field{month}{11}
+      \field{origday}{8}
+      \field{orighour}{14}
+      \field{origminute}{50}
+      \field{origmonth}{8}
+      \field{origsecond}{30}
+      \field{origtimezone}{Z}
+      \field{origyear}{2016}
+      \field{title}{Eamodio/Vscode-Gitlens}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/eamodio/vscode-gitlens
+      \endverb
+      \verb{url}
+      \verb https://github.com/eamodio/vscode-gitlens
+      \endverb
+      \keyw{git,vscode,vscode-extension}
+    \endentry
     \entry{apachesoftwarefoundationLearningRankApache2017}{online}{}
       \name{author}{1}{}{%
         {{hash=8b499b5be8914246b406785e1327dbb3}{%
@@ -57,6 +101,41 @@
       \endverb
       \verb{url}
       \verb https://lucene.apache.org/solr/guide/6_6/learning-to-rank.html
+      \endverb
+    \endentry
+    \entry{beewilkersonGittemporalGittemporalMono2018}{online}{}
+      \name{author}{1}{}{%
+        {{hash=43c907a9b19b3df964664069bc923f4c}{%
+           family={{Bee Wilkerson}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{43c907a9b19b3df964664069bc923f4c}
+      \strng{fullhash}{43c907a9b19b3df964664069bc923f4c}
+      \strng{bibnamehash}{43c907a9b19b3df964664069bc923f4c}
+      \strng{authorbibnamehash}{43c907a9b19b3df964664069bc923f4c}
+      \strng{authornamehash}{43c907a9b19b3df964664069bc923f4c}
+      \strng{authorfullhash}{43c907a9b19b3df964664069bc923f4c}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{12}
+      \field{month}{9}
+      \field{title}{Git-Temporal/Git-Temporal: {{The}} Mono Repo for Components, Data Layer, and Interfaces of Git-Temporal.}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/S2LCSLXG/git-temporal.html
+      \endverb
+      \verb{urlraw}
+      \verb https://github.com/git-temporal/git-temporal
+      \endverb
+      \verb{url}
+      \verb https://github.com/git-temporal/git-temporal
       \endverb
     \endentry
     \entry{bushaevUnderstandingRMSpropFaster2018}{online}{}
@@ -314,6 +393,37 @@
       \verb http://docfetcher.sourceforge.net/en/index.html
       \endverb
     \endentry
+    \entry{dominikOrgModeReference2018}{book}{}
+      \name{author}{1}{}{%
+        {{hash=795225af1a453faf8f69582330d3cbfc}{%
+           family={Dominik},
+           familyi={D\bibinitperiod},
+           given={Carsten},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Place of publication not identified}%
+      }
+      \list{publisher}{1}{%
+        {12TH MEDIA SERVICES}%
+      }
+      \strng{namehash}{795225af1a453faf8f69582330d3cbfc}
+      \strng{fullhash}{795225af1a453faf8f69582330d3cbfc}
+      \strng{bibnamehash}{795225af1a453faf8f69582330d3cbfc}
+      \strng{authorbibnamehash}{795225af1a453faf8f69582330d3cbfc}
+      \strng{authornamehash}{795225af1a453faf8f69582330d3cbfc}
+      \strng{authorfullhash}{795225af1a453faf8f69582330d3cbfc}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{annotation}{OCLC: 1023776403}
+      \field{isbn}{978-1-68092-165-6}
+      \field{langid}{english}
+      \field{title}{Org {{Mode Reference Manual}}}
+      \field{year}{2018}
+      \field{dateera}{ce}
+    \endentry
     \entry{fuhrOptimumPolynomialRetrieval1989}{article}{}
       \name{author}{1}{}{%
         {{hash=fb5609770bbfd5995fd172011393df13}{%
@@ -449,6 +559,42 @@
       \verb{file}
       \verb /home/ryan/Zotero/storage/5UWNV6N2/Gey - 1994 - Inferring probability of relevance using the metho.pdf
       \endverb
+    \endentry
+    \entry{hattoriAutopep8ToolThat}{software}{}
+      \name{author}{1}{}{%
+        {{hash=3a2b7154fc653578346ffaa7a78d9aa3}{%
+           family={Hattori},
+           familyi={H\bibinitperiod},
+           given={Hideo},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{3a2b7154fc653578346ffaa7a78d9aa3}
+      \strng{fullhash}{3a2b7154fc653578346ffaa7a78d9aa3}
+      \strng{bibnamehash}{3a2b7154fc653578346ffaa7a78d9aa3}
+      \strng{authorbibnamehash}{3a2b7154fc653578346ffaa7a78d9aa3}
+      \strng{authornamehash}{3a2b7154fc653578346ffaa7a78d9aa3}
+      \strng{authorfullhash}{3a2b7154fc653578346ffaa7a78d9aa3}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{shorttitle}{Autopep8}
+      \field{title}{Autopep8: {{A}} Tool That Automatically Formats {{Python}} Code to Conform to the {{PEP}} 8 Style Guide}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{version}{1.5.5}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/BNU8DARK/autopep8.html
+      \endverb
+      \verb{urlraw}
+      \verb https://github.com/hhatto/autopep8
+      \endverb
+      \verb{url}
+      \verb https://github.com/hhatto/autopep8
+      \endverb
+      \keyw{automation;,format;,pep8;,pycodestyle,Software Development - Libraries - Python Modules,Software Development - Quality Assurance}
     \endentry
     \entry{hawthornJhawthornFzy2021}{software}{}
       \name{author}{1}{}{%
@@ -963,6 +1109,39 @@
       \verb https://github.com/andylokandy/simsearch-rs
       \endverb
     \endentry
+    \entry{MagitMagit2008}{software}{}
+      \list{organization}{1}{%
+        {Magit}%
+      }
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labeltitlesource}{title}
+      \field{abstract}{It's Magit! A Git porcelain inside Emacs. Contribute to magit/magit development by creating an account on GitHub.}
+      \field{day}{19}
+      \field{month}{10}
+      \field{origday}{7}
+      \field{orighour}{19}
+      \field{origminute}{7}
+      \field{origmonth}{5}
+      \field{origsecond}{4}
+      \field{origtimezone}{Z}
+      \field{origyear}{2010}
+      \field{title}{Magit/Magit}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2008}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/magit/magit
+      \endverb
+      \verb{url}
+      \verb https://github.com/magit/magit
+      \endverb
+      \keyw{emacs,git,magit}
+    \endentry
     \entry{manningIntroductionInformationRetrieval2008}{book}{}
       \name{author}{3}{}{%
         {{hash=2214edb8305f7ccd7cdc310b3a8ae1b4}{%
@@ -1083,6 +1262,46 @@
       \range{pages}{9}
       \verb{file}
       \verb /home/ryan/Zotero/storage/BXVVQIFN/Mukkamala and Hein - 2017 - Variants of RMSProp and Adagrad with logarithmic r.pdf
+      \endverb
+    \endentry
+    \entry{nickcoghlanPEPStyleGuide2001}{online}{}
+      \name{author}{1}{}{%
+        {{hash=b3050a7e705c6a99d55d7911f7e6f166}{%
+           family={{Nick Coghlan}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Python.org}%
+      }
+      \strng{namehash}{b3050a7e705c6a99d55d7911f7e6f166}
+      \strng{fullhash}{b3050a7e705c6a99d55d7911f7e6f166}
+      \strng{bibnamehash}{b3050a7e705c6a99d55d7911f7e6f166}
+      \strng{authorbibnamehash}{b3050a7e705c6a99d55d7911f7e6f166}
+      \strng{authornamehash}{b3050a7e705c6a99d55d7911f7e6f166}
+      \strng{authorfullhash}{b3050a7e705c6a99d55d7911f7e6f166}
+      \field{sortinit}{N}
+      \field{sortinithash}{98cf339a479c0454fe09153a08675a15}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The official home of the Python Programming Language}
+      \field{day}{1}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{title}{{{PEP}} 8 -- {{Style Guide}} for {{Python Code}}}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2001}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/B9USDATE/pep-0008.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.python.org/dev/peps/pep-0008/
+      \endverb
+      \verb{url}
+      \verb https://www.python.org/dev/peps/pep-0008/
       \endverb
     \endentry
     \entry{nicodemiIntroductionAbstractAlgebra2007a}{book}{}
@@ -1448,6 +1667,97 @@
       \verb https://www.nature.com/articles/d41586-020-03382-2
       \endverb
     \endentry
+    \entry{peterSharkdpBat2018}{software}{}
+      \name{author}{1}{}{%
+        {{hash=8a83439621b17728ad3d8aae092a8ab9}{%
+           family={Peter},
+           familyi={P\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{8a83439621b17728ad3d8aae092a8ab9}
+      \strng{fullhash}{8a83439621b17728ad3d8aae092a8ab9}
+      \strng{bibnamehash}{8a83439621b17728ad3d8aae092a8ab9}
+      \strng{authorbibnamehash}{8a83439621b17728ad3d8aae092a8ab9}
+      \strng{authornamehash}{8a83439621b17728ad3d8aae092a8ab9}
+      \strng{authorfullhash}{8a83439621b17728ad3d8aae092a8ab9}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A cat(1) clone with wings. Contribute to sharkdp/bat development by creating an account on GitHub.}
+      \field{day}{21}
+      \field{month}{4}
+      \field{origday}{21}
+      \field{orighour}{10}
+      \field{origminute}{52}
+      \field{origmonth}{4}
+      \field{origsecond}{23}
+      \field{origtimezone}{Z}
+      \field{origyear}{2018}
+      \field{title}{Sharkdp/Bat}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/sharkdp/bat
+      \endverb
+      \verb{url}
+      \verb https://github.com/sharkdp/bat
+      \endverb
+      \keyw{cli,command-line,git,hacktoberfest,rust,syntax-highlighting,terminal,tool}
+    \endentry
+    \entry{peterstiernstromEmacsmirrorGittimemachine2014}{software}{}
+      \name{author}{2}{}{%
+        {{hash=aca4b8a3561e14ea2773a2f0736bea07}{%
+           family={{Peter Stiernström}},
+           familyi={P\bibinitperiod}}}%
+        {{hash=d71bd9a820710b5b50af6a081c4218fd}{%
+           family={{Basti}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Emacsmirror}%
+      }
+      \strng{namehash}{161b234d60d12f566a4df159d2284525}
+      \strng{fullhash}{161b234d60d12f566a4df159d2284525}
+      \strng{bibnamehash}{161b234d60d12f566a4df159d2284525}
+      \strng{authorbibnamehash}{161b234d60d12f566a4df159d2284525}
+      \strng{authornamehash}{161b234d60d12f566a4df159d2284525}
+      \strng{authorfullhash}{161b234d60d12f566a4df159d2284525}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Walk through git revisions of a file. Contribute to emacsmirror/git-timemachine development by creating an account on GitHub.}
+      \field{day}{29}
+      \field{month}{6}
+      \field{origday}{5}
+      \field{orighour}{23}
+      \field{origminute}{47}
+      \field{origmonth}{6}
+      \field{origsecond}{5}
+      \field{origtimezone}{Z}
+      \field{origyear}{2018}
+      \field{title}{Emacsmirror/Git-Timemachine}
+      \field{urlday}{20}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/emacsmirror/git-timemachine
+      \endverb
+      \verb{url}
+      \verb https://github.com/emacsmirror/git-timemachine
+      \endverb
+    \endentry
     \entry{pictonNeuralNetworks1994}{book}{}
       \name{author}{1}{}{%
         {{hash=26678ce01a5e032c5d541fa19b788b94}{%
@@ -1478,6 +1788,72 @@
       \field{year}{1994}
       \field{dateera}{ce}
       \keyw{Neural networks (Computer science)}
+    \endentry
+    \entry{rcoreteamLanguageEnvironmentStatistical2021}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=dcdebb6b35bff7c0568bf8c50ef8626d}{%
+           family={{R Core Team}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Vienna, Austria}%
+      }
+      \list{organization}{1}{%
+        {R Foundation for Statistical Computing}%
+      }
+      \strng{namehash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{fullhash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{bibnamehash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{authorbibnamehash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{authornamehash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \strng{authorfullhash}{dcdebb6b35bff7c0568bf8c50ef8626d}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{R: {{A}} Language and Environment for Statistical Computing}
+      \field{type}{manual}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://www.R-project.org/
+      \endverb
+      \verb{url}
+      \verb https://www.R-project.org/
+      \endverb
+    \endentry
+    \entry{stallmanGNUEmacsManual2002}{book}{}
+      \name{author}{1}{}{%
+        {{hash=1dfe179dc9301b7f9e2ce5c352009d00}{%
+           family={Stallman},
+           familyi={S\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Boston, Mass}%
+      }
+      \list{publisher}{1}{%
+        {Free Software Foundation}%
+      }
+      \strng{namehash}{1dfe179dc9301b7f9e2ce5c352009d00}
+      \strng{fullhash}{1dfe179dc9301b7f9e2ce5c352009d00}
+      \strng{bibnamehash}{1dfe179dc9301b7f9e2ce5c352009d00}
+      \strng{authorbibnamehash}{1dfe179dc9301b7f9e2ce5c352009d00}
+      \strng{authornamehash}{1dfe179dc9301b7f9e2ce5c352009d00}
+      \strng{authorfullhash}{1dfe179dc9301b7f9e2ce5c352009d00}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{annotation}{OCLC: 837009497}
+      \field{edition}{15.ed., updated for Emacs version 21.2}
+      \field{isbn}{978-1-882114-85-6}
+      \field{langid}{english}
+      \field{pagetotal}{602}
+      \field{title}{{{GNU Emacs}} Manual}
+      \field{year}{2002}
+      \field{dateera}{ce}
     \endentry
     \entry{timroughgardenQuicksortOverview2017}{video}{}
       \name{editor}{1}{}{%
@@ -1702,6 +2078,183 @@
       \verb https://github.com/go-ego/riot
       \endverb
       \keyw{go,golang,gwk,index,riot,search,search-engine}
+    \endentry
+    \entry{wickhamGgplot2ElegantGraphics2016a}{book}{}
+      \name{author}{1}{}{%
+        {{hash=1d0f6977ce2d043e298a59a1cd75b7ef}{%
+           family={Wickham},
+           familyi={W\bibinitperiod},
+           given={Hadley},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag New York}%
+      }
+      \strng{namehash}{1d0f6977ce2d043e298a59a1cd75b7ef}
+      \strng{fullhash}{1d0f6977ce2d043e298a59a1cd75b7ef}
+      \strng{bibnamehash}{1d0f6977ce2d043e298a59a1cd75b7ef}
+      \strng{authorbibnamehash}{1d0f6977ce2d043e298a59a1cd75b7ef}
+      \strng{authornamehash}{1d0f6977ce2d043e298a59a1cd75b7ef}
+      \strng{authorfullhash}{1d0f6977ce2d043e298a59a1cd75b7ef}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-319-24277-4}
+      \field{title}{Ggplot2: {{Elegant}} Graphics for Data Analysis}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://ggplot2.tidyverse.org
+      \endverb
+      \verb{url}
+      \verb https://ggplot2.tidyverse.org
+      \endverb
+    \endentry
+    \entry{wickhamWelcomeTidyverse2019}{article}{}
+      \name{author}{24}{}{%
+        {{hash=1d0f6977ce2d043e298a59a1cd75b7ef}{%
+           family={Wickham},
+           familyi={W\bibinitperiod},
+           given={Hadley},
+           giveni={H\bibinitperiod}}}%
+        {{hash=0c11220b22f907dc3709ff23c6b023e5}{%
+           family={Averick},
+           familyi={A\bibinitperiod},
+           given={Mara},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0f88b724c9f070dbceda00a5027d25bb}{%
+           family={Bryan},
+           familyi={B\bibinitperiod},
+           given={Jennifer},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3ad4f9244dbfff3b38eeeec6d91fbd7d}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Winston},
+           giveni={W\bibinitperiod}}}%
+        {{hash=28ee445d433874efb86495f4c4e9d559}{%
+           family={McGowan},
+           familyi={M\bibinitperiod},
+           given={Lucy\bibnamedelima D'Agostino},
+           giveni={L\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=3bd2c624a8715b2aeffcecaa24f3d017}{%
+           family={François},
+           familyi={F\bibinitperiod},
+           given={Romain},
+           giveni={R\bibinitperiod}}}%
+        {{hash=de759ef99fad34b8426e26035eb4a20b}{%
+           family={Grolemund},
+           familyi={G\bibinitperiod},
+           given={Garrett},
+           giveni={G\bibinitperiod}}}%
+        {{hash=83154656fbd4fc02a9e468c493204cf9}{%
+           family={Hayes},
+           familyi={H\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4caae9be043b32573c94b11203a4a2fe}{%
+           family={Henry},
+           familyi={H\bibinitperiod},
+           given={Lionel},
+           giveni={L\bibinitperiod}}}%
+        {{hash=5d26572f4d1de0fce70db1a8cfb6b0d1}{%
+           family={Hester},
+           familyi={H\bibinitperiod},
+           given={Jim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3305789acf03200ed22f154007d4fab9}{%
+           family={Kuhn},
+           familyi={K\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod}}}%
+        {{hash=baa847ed0a47fe330db451600329cf32}{%
+           family={Pedersen},
+           familyi={P\bibinitperiod},
+           given={Thomas\bibnamedelima Lin},
+           giveni={T\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=ac004a72f317bb04dcf539660a0feee0}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Evan},
+           giveni={E\bibinitperiod}}}%
+        {{hash=5769225f722449dff0c3f62aa09d2f6e}{%
+           family={Bache},
+           familyi={B\bibinitperiod},
+           given={Stephan\bibnamedelima Milton},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=1435ca4f08e53208e1c34297357afa80}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Kirill},
+           giveni={K\bibinitperiod}}}%
+        {{hash=0f4f7df4d18c1270721b575fc1288184}{%
+           family={Ooms},
+           familyi={O\bibinitperiod},
+           given={Jeroen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=42a6c387e6c733bd0db8180d2bbacd30}{%
+           family={Robinson},
+           familyi={R\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d318a128b5a51b4b776ac61c1f4f7e99}{%
+           family={Seidel},
+           familyi={S\bibinitperiod},
+           given={Dana\bibnamedelima Paige},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=ac149bcd683a561a218e8dc1c1529489}{%
+           family={Spinu},
+           familyi={S\bibinitperiod},
+           given={Vitalie},
+           giveni={V\bibinitperiod}}}%
+        {{hash=cc134fc26d52494111fa09f0a1546069}{%
+           family={Takahashi},
+           familyi={T\bibinitperiod},
+           given={Kohske},
+           giveni={K\bibinitperiod}}}%
+        {{hash=858f3a61393526cfc73cb860925a277a}{%
+           family={Vaughan},
+           familyi={V\bibinitperiod},
+           given={Davis},
+           giveni={D\bibinitperiod}}}%
+        {{hash=acc6b5a79d7cad33c02e41491584028f}{%
+           family={Wilke},
+           familyi={W\bibinitperiod},
+           given={Claus},
+           giveni={C\bibinitperiod}}}%
+        {{hash=ff79890fd7a7f58816ee7360c25d812e}{%
+           family={Woo},
+           familyi={W\bibinitperiod},
+           given={Kara},
+           giveni={K\bibinitperiod}}}%
+        {{hash=f2f301536c9cd620e39deb5fad8712ff}{%
+           family={Yutani},
+           familyi={Y\bibinitperiod},
+           given={Hiroaki},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{fullhash}{60da0af5902bcdfab541641a492d8d42}
+      \strng{bibnamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{authorbibnamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{authornamehash}{e0731a35ef88164c57848ecb7ca5f8ca}
+      \strng{authorfullhash}{60da0af5902bcdfab541641a492d8d42}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Open Source Software}
+      \field{number}{43}
+      \field{title}{Welcome to the {{tidyverse}}}
+      \field{volume}{4}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{pages}{1686}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.21105/joss.01686
+      \endverb
     \endentry
     \entry{wongLinearStructureInformation1988}{inproceedings}{}
       \name{author}{2}{}{%
