@@ -1,4 +1,4 @@
-% Created 2021-02-21 Sun 12:08
+% Created 2021-02-21 Sun 14:22
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,11pt,twoside]{article}
 \usepackage[utf8]{inputenc}
@@ -41,7 +41,7 @@
  \newpage 
 
 \section{Introduction}
-\label{sec:org255a0d4}
+\label{sec:orgb760860}
 Ranknet is an approach to \emph{Machine-Learned Ranking (often refered to
 as "\emph{/Learning to Rank}}" \cite{liuLearningRankInformation2009}) that
 began development at Microsoft from 2004 onwards
@@ -64,7 +64,7 @@ any logic to rank results (see generally
 
 
 \section{Motivation}
-\label{sec:org25f0336}
+\label{sec:org8a50106}
 
 Search Engines implement more sophisticated techniques to rank
 results, one such example being TF-IDF weighting
@@ -87,10 +87,10 @@ improve the quality of profession-specific tooling.
 
 
 For a non-comprehensive list of actively maintained search engines,
-see \S \ref{sec:orgc11cd2c} of the appendix.
+see \S \ref{sec:orgc06fea8} of the appendix.
 
 \section{Implementation}
-\label{sec:org3bdda0a}
+\label{sec:org8f331ad}
 
 
 
@@ -105,14 +105,14 @@ that the model will be extended to support wider and more complex
 data types before finally being implemented on a corpus of documents.
 
 \subsection{Neural Networks}
-\label{sec:orgc35ac5b}
+\label{sec:orgcda53c8}
 
 The Ranknet method is typically implemented using a Neural Networks
 \footnote{An early goal of this research was to evaluate the performance
 of different machine learning algorithms to implement the Ranknet
 method, as well as contrasting this with simple classification
 approaches, this research however is still ongoing,  see \S
-\ref{sec:orgbdb1f82}},
+\ref{sec:org451563a}},
 although other machine learning techniques can also be used
 \cite[p. 1]{christopherburgesRankNetRankingRetrospective2015},
 Neural Networks are essentially a collection of different
@@ -129,7 +129,7 @@ Neural Networks are beyond the scope of this paper (see
 \cite{hmkcodeBackpropagationStepStep} or more generally \cite{pictonNeuralNetworks1994}).
 
 \subsubsection{The Ranknet Method}
-\label{sec:orgadcbafa}
+\label{sec:orgf472a28}
 
 The Ranknet method is concerned with a value \(p_{ij}\) that
 measures the probability that an observation \(i\) is ranked higher
@@ -153,30 +153,37 @@ So as to minimise the error of:
 
 
 \paragraph{Version Control}
-\label{sec:org03268b3}
+\label{sec:orgdd8e553}
 The implementation in this paper corresponds to the \texttt{walkthrough} branch
 of the \texttt{git} repository used in production of this work, id values
 (e.g. \texttt{:08db5b0:}) will be appended to titles to denote specific
-changes made in that section. See \S \ref{sec:org5e5da9a} for
+changes made in that section. See \S \ref{sec:org7b85786} for
 more specific guidance.
 
 \paragraph{Code listings}
-\label{sec:orgb45ecc8}
+\label{sec:org6dee45e}
 The code listings provided will use a standard set of import
-statements (see \S \ref{sec:org333c655} ) and so they will be
+statements (see \S \ref{sec:org0978e0e} ) and so they will be
 omitted from the listings, for more comprehensive guidance on
 implementing this code refer to the \href{https://crmds.github.io/CRMDS-HDR-Training-2020/}{documentation page}\footnote{\href{https://crmds.github.io/CRMDS-HDR-Training-2020/}{crmds.github.io/CRMDS-HDR-Training-2020/}} that
 accompanies the \texttt{git} repo.
 
 \subsection{Creating Data\hfill{}\textsc{cf9ab26}}
-\label{sec:org331787d}
+\label{sec:orgf349919}
 The first step is to create a simple data set and design a neural
 network that can classify that data set, the data set generated
 should have two classes of data (this could be interpreted as
 relevant and irrelevant documents given the features or principle
 components of a data set), this can be implemented using sci kit
-learn as shown below and visualized\footnote{See \S \ref{sec:org2f95801} for the specific method definition used to
-export the data to a \texttt{csv.}} in figure \ref{fig:org4eff592}.
+learn as shown below and visualized\footnote{See \S \ref{sec:orgca99887} for the specific method definition used to
+export the data to a \texttt{csv.}} in figure \ref{fig:orgfd45949}.\footnote{Visualisations for this Report were implemented using
+\texttt{org-babel} \cite{dominikOrgModeReference2018} inside \emph{Emacs}
+\cite{stallmanGNUEmacsManual2002} to call \textbf{\emph{R}}
+\cite{rcoreteamLanguageEnvironmentStatistical2021} with \emph{GGPlot2}
+\cite{wickhamGgplot2ElegantGraphics2016a} (and \emph{Tidyverse}
+\cite{wickhamWelcomeTidyverse2019} generally), the source code for this
+is avaliable in the report manuscript available in the \texttt{git} repository
+available at \href{https://github.com/RyanGreenup/ranknet/blob/main/Report/Report.org}{github.com/RyanGreenup/ranknet/blob/main/Report/Report.org}\label{org6226172}}
 
 
 In order to fit a Neural Network the \emph{PyTorch} package can be used
@@ -226,11 +233,11 @@ X_train, X_test, y_train, y_test = make_data(
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.4\textwidth]{SimulatedData.png}
-\caption{\label{fig:org4eff592}Generated data, output classes denote document relevance and the axis features or principle components}
+\caption{\label{fig:orgfd45949}Generated data, output classes denote document relevance and the axis features or principle components}
 \end{figure}
 
 \subsection{Creating a Neural Network\hfill{}\textsc{7291112}}
-\label{sec:org35f4b12}
+\label{sec:org58c70b5}
 A Neural Network model can be designed as a class, here a 2-layer
 model using Sigmoid functions has been described, this design was
 chosen for it's relative simplicity:
@@ -320,11 +327,11 @@ The Network Output is:
 \end{verbatim}
 
 \subsection{Train the Model with Gradient Descent\hfill{}\textsc{7d46636}}
-\label{sec:org8eb1cba}
+\label{sec:orga1cf581}
 Now that the model has been fit, a method to train the model can be
 implmented \footnote{This class definition is incomplete and serves only to show the
 method definition corresponding to the original class shown in \S
-\ref{sec:org35f4b12}}:
+\ref{sec:org58c70b5}}:
 \begin{minted}[]{python}
 class three_layer_classification_network(nn.Module):
     # __init__ method goes here, see above
@@ -364,7 +371,7 @@ class three_layer_classification_network(nn.Module):
 With this definition the model can hence be trained in order to
 produce meaningful classifications, as shown below, this model classifies the
 points perfectly, even on the testing data, the training error 
-over time is shown in figure \ref{fig:org10c5b87}.
+over time is shown in figure \ref{fig:org07407db}.
 
 \begin{minted}[]{python}
 # Make the Data
@@ -391,11 +398,11 @@ print(model.misclassification_rate(X_test, y_test))
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.3\textwidth]{./media/loss_function_initial_nn.png}
-\caption{\label{fig:org10c5b87}Training error, given by \(l\left( x \right) = \sum^{n}_{i= 1} \left[ \left( x_i - f\left( x_i \right)  \right)^2  \right]\), at each iteration of training}
+\caption{\label{fig:org07407db}Training error, given by \(l\left( x \right) = \sum^{n}_{i= 1} \left[ \left( x_i - f\left( x_i \right)  \right)^2  \right]\), at each iteration of training}
 \end{figure}
 
 \subsection{Implement Ranknet\hfill{}\textsc{f25f376:05df04f}}
-\label{sec:org3a41cce}
+\label{sec:orgb7c9edc}
 Now that the model can classify the data, the implementation will
 be modified to:
 
@@ -483,7 +490,7 @@ class three_layer_ranknet_network(nn.Module):
 The training method must be adapted to interact with these changes
 like so:\footnote{Note the definition of the \texttt{pairwise} function, this was
 incorrectly implemented initially (\texttt{f25f376}) and rectified shortly
-after (\texttt{05df04f}). see \ref{sec:orgf0fc045}}
+after (\texttt{05df04f}). see \ref{sec:org96be77a}}
 
 \begin{minted}[]{python}
 class three_layer_ranknet_network(nn.Module):
@@ -533,15 +540,171 @@ class three_layer_ranknet_network(nn.Module):
 	self.threshold_train(x, target, plot=False)
 \end{minted}
 
-This can then be implemented as before with the loss function shown
-in figure , one of the greatest difficulties in
-implementing this, however, is that it is not simple to determine
-whether or not the model has classified the data well.\footnote{A naive misclassification method was implemented (\texttt{f25f376}),
-but it was not very insightful and so was omitted from this report.} 
-misclassification rate isn't a meaningful measure though
+This can then be implemented as before, the loss function is
+provided at figure \ref{fig:org100f8bc}. 
 
-\subsection{Implement sorting}
-\label{sec:org8f0f2ac}
+\begin{minted}[]{python}
+# Make the Data
+X_train, X_test, y_train, y_test = make_data(
+    n=30, create_plot=True, dtype=dtype, dev=dev)
+
+# Create a model object
+model = three_layer_ranknet_network(
+    input_size=X_train.shape[1], hidden_size=2, output_size=1, dtype=dtype, dev=dev)
+
+# Train the Model
+model.train(X_train, y_train, η=1e-1, iterations=1e2)
+
+# Save the losses
+np.savetxt(fname="/tmp/losses.csv", X=model.losses, delimiter=',')
+
+\end{minted}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.4\textwidth]{ranknet_loss.png}
+\caption{\label{fig:org100f8bc}BCE training loss at each iteration for the Ranknet method.}
+\end{figure}
+
+\subsection{Implement sorting\hfill{}\textsc{99b390a:7d46636}}
+\label{sec:orgf61d2ac}
+One of the difficulties in implementing this, however, is that it
+is not simple to determine whether or not the model has classified
+the data well,\footnote{A naive misclassification method was implemented (\texttt{f25f376}),
+but it was not very insightful and so was omitted from this report.} In order to address this the model can be
+implemented to sort the data by ranked values and then
+visualised. To implement this a derivative of the \emph{quicksort}
+algorithm was chosen as a sorting function
+\cite{hoareAlgorithm64Quicksort1961}, this was implemented by
+adapting code already available in the literature
+\cite[\S 4.10]{kernighanProgrammingLanguage1988} and online
+\cite{PythonProgramQuickSort2014}:  
+
+\begin{minted}[]{python}
+def split(values, left, right, data, model):
+    # Define the leftmost value
+    l = (left-1)
+    # Set the right value as the pivot
+    pivot = values[right]  # TODO The pivot should be random
+
+    for q in range(left, right):
+	# Only move smaller values left
+	if leq(values[q], pivot, data, model):
+	    # +1 next left element
+	    l = l+1
+	    # Swap the current element onto the left
+	    values[l], values[q] = values[q], values[l]
+
+    # Swap the pivot value into the left position from the right
+    values[l+1], values[right] = values[right], values[l+1]
+    return (l+1)
+
+
+def qsort(values, left, right, data, model):
+    if len(values) == 1:
+	return values
+    if right > left:
+	# pi is the index of where the pivot was moved to
+	# It's position is now correct
+	pi = split(values, left, right, data, model)
+
+	# Do this again for the left and right parts
+	qsort(values, left, pi-1, data, model)
+	qsort(values, pi+1, right, data, model)
+
+import random
+
+def leq(a, b, data, model):
+    score = model.forward(data[a, :], data[b, :])
+    if score <= 0.5:
+	return True
+    if score > 0.5:
+	return False
+
+	if (a < b):
+	    return True
+	else:
+	    return False
+
+
+if DEBUG:
+    for i in range(3):
+	import random
+	values = random.sample(range(9), 7)
+	n = len(values)
+	print(values)
+	qsort(values, 0, n-1, data, model)
+	print("==>", values)
+
+\end{minted}
+
+The data can then be plotted, as in figure and exported like so:\footnote{In this case the plot has been generated by \emph{GGPlot2} \textsuperscript{\ref{org6226172}}}
+
+\begin{minted}[]{python}
+# Main Function
+def main():
+    # Make the Data
+    X_train, X_test, y_train, y_test = make_data(n=100,
+						 create_plot=True,
+						 dtype=dtype,
+						 dev=dev)
+
+    # Create a model object
+    model = three_layer_ranknet_network(input_size=X_train.shape[1],
+					hidden_size=2,
+					output_size=1,
+					dtype=dtype,
+					dev=dev)
+
+    # Train the Model
+    model.train(X_train, y_train, η=1e-1, iterations=1e2)
+
+    # Visualise the Training Error
+    plot_losses(model)
+
+    # Misclassification won't work for ranked data
+    # Instead Visualise the ranking
+    plot_ranked_data(X_test, y_test, model)
+
+
+def plot_losses(model):
+    plt.plot(model.losses)
+    plt.title("Cost / Loss Function for Iteration of Training")
+    plt.show()
+
+
+def plot_ranked_data(X, y, model):
+    # Create a list of values
+    n = X.shape[0]
+    order = [i for i in range(n)]
+    # Arrange that list of values based on the model
+    quicksort(values=order, left=0, right=(n - 1), data=X, model=model)
+    print(order)
+
+    ordered_data = X[order, :]
+    y_ordered = y[order]
+
+    np.savetxt("/tmp/ordered_data.csv", X=ordered_data.numpy(), delimiter=',')
+
+    p = plt.figure()
+    for i in range(len(ordered_data)):
+	plt.text(ordered_data[i, 0], ordered_data[i, 1], i)
+    plt.scatter(ordered_data[:, 0], ordered_data[:, 1], c=y_ordered)
+    plt.title("Testing Data, with ranks")
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()
+\end{minted}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.3\textwidth]{media/ordered_blobs.png}
+\caption{\label{fig:org028b4af}Using Machine Learned Ranking to order the points from most to least relevant}
+\end{figure}
+
 So instead of ranking, sort the values, this produces the output.
 
 but this is the problem, did it work? it's not clear, because even
@@ -555,17 +718,17 @@ good/bad and compare the output order with the input order, that
 would be an effective way to see that it works. This was not yet
 effectively implemented.
 \subsection{Moons}
-\label{sec:orgf8600a6}
+\label{sec:orgeb1cf69}
 \subsection{Optimisers}
-\label{sec:org3b09691}
+\label{sec:org40ba167}
 \subsection{Batches}
-\label{sec:org898cf6d}
+\label{sec:org44640b3}
 \subsection{Wine}
-\label{sec:orgeffec1b}
+\label{sec:org5bec415}
 \subsection{Rank Wiki Articles}
-\label{sec:org8f18fae}
+\label{sec:org936a10b}
 \section{Difficulties}
-\label{sec:org3049553}
+\label{sec:orgff0d9e6}
 \begin{itemize}
 \item Don't use torch
 \begin{itemize}
@@ -601,11 +764,11 @@ drain.
 
 
 \section{Further Research}
-\label{sec:org79b2e7a}
+\label{sec:orgfe780ee}
 
 
 \subsection{Practical Improvements}
-\label{sec:org4009b67}
+\label{sec:org3dcccec}
 
 \begin{itemize}
 \item Apply this to documents to get a sorted list, like the wine data
@@ -613,11 +776,11 @@ drain.
 \end{itemize}
 
 \subsection{Evaluate performance improvements}
-\label{sec:org42e781b}
+\label{sec:org8e3a89d}
 
 It is still not clear how the
 performance of Ranknet compares to traditional approaches
-implemented by search engines (see \S \ref{sec:orgc11cd2c}), further
+implemented by search engines (see \S \ref{sec:orgc06fea8}), further
 study would ideally:
 
 \begin{itemize}
@@ -637,14 +800,14 @@ using a cummulated-gain cost function
 previous work \cite{viksinghComparisonOpenSource2009}.
 
 \subsection{Evaluate alternative machine learning models}
-\label{sec:orgbdb1f82}
+\label{sec:org451563a}
 i.e. can SVM's or trees be used instead of neural networks?
 
 \section{Conclusion}
-\label{sec:org9cd5d6b}
+\label{sec:org52623f2}
 
 \section{Text and References}
-\label{sec:orgd253870}
+\label{sec:org5ed4186}
 Fractals are complex shapes that often occur from natural processes, in this
 report we hope to investigate the emergence of patterns and complex structures
 from natural phenomena. We begin with an investigation into fractals and the
@@ -654,14 +817,14 @@ processes.
 This is a Reference \cite{tuGraphBasedSemiSupervisedNearestNeighbor2016a} and another \cite{nicodemiIntroductionAbstractAlgebra2007a} and yet another \cite{christopherburgesRankNetLambdaRankLambdaMART2010}.
 
 \section{Fractals}
-\label{sec:org7d54ce3}
+\label{sec:org16ebd5f}
 Images are shown in figure .
 
 \section{Appendix}
-\label{sec:org5308db7}
+\label{sec:orgcdffa45}
 
 \subsection{Search Engines}
-\label{sec:orgc11cd2c}
+\label{sec:orgc06fea8}
 There are many open source search engines available , a cursory review
 found the following popular projects:
 
@@ -690,7 +853,7 @@ More Modern Search engines include:
 
 
 \subsubsection{Fuzzy String Match}
-\label{sec:org400ebda}
+\label{sec:orgaf94acf}
 Somewhat related are programs that rank string similarity, such programs don't tend
 to perform well on documents however (so for example these would
 be effective to filter document titles but would not be useful for
@@ -706,7 +869,7 @@ querying documents):
 \end{itemize}
 
 \subsection{Import Statements}
-\label{sec:org333c655}
+\label{sec:org0978e0e}
 The following import statements were included, where used, \footnote{Including \texttt{import} statements where they are not used is fine,
 other than complaints from a \emph{linter} following \emph{PEP}
 \cite{nickcoghlanPEPStyleGuide2001} (e.g. \href{https://pypi.org/project/autopep8/}{autopep}
@@ -738,7 +901,7 @@ from ranknet.quicksort import quicksort
 \end{minted}
 
 \subsection{Export Data Method}
-\label{sec:org2f95801}
+\label{sec:orgca99887}
 The data was exported by printing the values to a text file like
 so:
 
@@ -762,7 +925,7 @@ def export_data(X, y, export):
 \end{minted}
 
 \subsection{Version Control Repository}
-\label{sec:org5e5da9a}
+\label{sec:org7b85786}
 The \texttt{git} repository used in production of this code is currently
 available on \emph{GitHub} at \href{https://github.com/CRMDS/CRMDS-HDR-Training-2020}{github.com/CRMDS/CRMDS-HDR-Training-2020}, in
 order to get a local copy, execute the following commands (\texttt{bash}): 
@@ -796,7 +959,7 @@ git log | grep '^commit' | sed 's/^commit\ //' |\
 \end{minted}
 
 \subsubsection{Version Control Log for Walkthrough}
-\label{sec:orgf0fc045}
+\label{sec:org96be77a}
 \begin{center}
 \begin{tabular}{ll}
 \textbf{\emph{Commit ID}} & \textbf{\emph{Message}}\\

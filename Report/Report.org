@@ -226,22 +226,25 @@
     #+end_src
 
 
-    #+BEGIN_SRC R :exports results :results output graphics file :file SimulatedData.png :eval never
+    #+BEGIN_SRC R :exports results :results output graphics file :file ./media/SimulatedData.png 
       library(tidyverse)
-      data  <- read_csv("/tmp/simData.csv")
-      (myplot <-  ggplot(data, aes(x = x1, y = x2, col = factor(y))) +
-                        geom_point(size = 3) +
-                        theme_classic() +
-                        labs(col = "Relevance", x = "PC1", y = "PC2",
-                             title = "Simulated Data"))
+
+      data  <- read_csv("/tmp/file.csv")
+      myplot <-  ggplot(data, aes(x = x1, y = x2, col = factor(y))) +
+			geom_point(size = 3) +
+			theme_classic() +
+			labs(col = "Relevance", x = "PC1", y = "PC2",
+			     title = "Simulated Data")
+
+      ggsave(myplot, filename = "./media/SimulatedData.png",  bg = "transparent")
     #+END_SRC
 
     #+NAME: sim-data
     #+CAPTION: Generated data, output classes denote document relevance and the axis features or principle components
     #+attr_html: :width 400px
     #+attr_latex: :width 0.4\textwidth 
-    #+RESULTS[5d70d2cd555504ec65f5867c4d29faff40c5763c]:
-    [[file:SimulatedData.png]]
+    #+RESULTS[31b82663f9f121e6d24165834f8eeba4b8f4fc8a]:
+    [[file:./media/SimulatedData.png]]
 
 ** Creating a Neural Network                                                    :7291112:
    :PROPERTIES:
@@ -533,10 +536,8 @@
 	     self.threshold_train(x, target, plot=False)
    #+end_src
 
-   This can then be implemented as before with the loss function shown
-   in figure [[ranknet-loss]], one of the greatest difficulties in
-   implementing this, however, is that it is not simple to determine
-   whether or not the model has classified the data well:[fn:12] 
+   This can then be implemented as before, the loss function is
+   provided at figure [[ranknet-loss]]. 
 
    #+begin_src python
      # Make the Data
@@ -555,28 +556,190 @@
 
    #+end_src
    
-    #+BEGIN_SRC R :exports results :results output graphics file :file ranknet_loss.png :eval never
+    #+BEGIN_SRC R :exports results :results output graphics file :file ./media/ranknet_loss.png 
       library(tidyverse)
 
       data <- read.csv(file = "/tmp/losses.csv", header = FALSE, sep = ",")[1]
       data$iteration <- 1:nrow(data)
       names(data) <- c("losses", "iteration")
 
-      ggplot(data, aes(x = iteration, y = losses)) +
+      losses_plot <- ggplot(data, aes(x = iteration, y = losses)) +
 	  geom_line(size = 1, color = "indianred") +
 	  theme_classic() +
 	  labs(x = "Training Iteration", y = "Loss measured using BCE",
 	  title = "Training Loss at each iteration for Ranknet")
+
+      ggsave(losses_plot, filename = "./media/ranknet_loss.png",  bg = "transparent")
     #+END_SRC
 
     #+NAME: ranknet-loss
     #+CAPTION: BCE training loss at each iteration for the Ranknet method.
     #+attr_html: :width 400px
     #+attr_latex: :width 0.4\textwidth
-    #+RESULTS[4dc8a85a43a77b706337ded0072cc441bbdbf9a1]:
-    [[file:ranknet_loss.png]]
+    #+RESULTS[c869c9ccd6760c95180c63874b696369ed59b481]:
+    [[file:./media/ranknet_loss.png]]
 
-** Implement sorting
+** Implement sorting                                                            :99b390a:7d46636:
+   One of the difficulties in implementing this, however, is that it
+   is not simple to determine whether or not the model has classified
+   the data well,[fn:12] In order to address this the model can be
+   implemented to sort the data by ranked values and then
+   visualised. To implement this a derivative of the /quicksort/
+   algorithm was chosen as a sorting function
+   cite:hoareAlgorithm64Quicksort1961, this was implemented by
+   adapting code already available in the literature
+   [[cite:kernighanProgrammingLanguage1988][\S 4.10]] and online
+   cite:PythonProgramQuickSort2014:  
+
+   #+begin_src python
+     def split(values, left, right, data, model):
+	 # Define the leftmost value
+	 l = (left-1)
+	 # Set the right value as the pivot
+	 pivot = values[right]  # TODO The pivot should be random
+
+	 for q in range(left, right):
+	     # Only move smaller values left
+	     if leq(values[q], pivot, data, model):
+		 # +1 next left element
+		 l = l+1
+		 # Swap the current element onto the left
+		 values[l], values[q] = values[q], values[l]
+
+	 # Swap the pivot value into the left position from the right
+	 values[l+1], values[right] = values[right], values[l+1]
+	 return (l+1)
+
+
+     def qsort(values, left, right, data, model):
+	 if len(values) == 1:
+	     return values
+	 if right > left:
+	     # pi is the index of where the pivot was moved to
+	     # It's position is now correct
+	     pi = split(values, left, right, data, model)
+
+	     # Do this again for the left and right parts
+	     qsort(values, left, pi-1, data, model)
+	     qsort(values, pi+1, right, data, model)
+
+     import random
+
+     def leq(a, b, data, model):
+	 score = model.forward(data[a, :], data[b, :])
+	 if score <= 0.5:
+	     return True
+	 if score > 0.5:
+	     return False
+
+	     if (a < b):
+		 return True
+	     else:
+		 return False
+
+
+     if DEBUG:
+	 for i in range(3):
+	     import random
+	     values = random.sample(range(9), 7)
+	     n = len(values)
+	     print(values)
+	     qsort(values, 0, n-1, data, model)
+	     print("==>", values)
+
+   #+end_src
+
+   The data can then be plotted, as in figure [[ordered-blobs,]] and exported like so:[fn:14]
+
+   #+begin_src python
+     # Main Function
+     def main():
+	 # Make the Data
+	 X_train, X_test, y_train, y_test = make_data(n=100,
+						      create_plot=True,
+						      dtype=dtype,
+						      dev=dev)
+
+	 # Create a model object
+	 model = three_layer_ranknet_network(input_size=X_train.shape[1],
+					     hidden_size=2,
+					     output_size=1,
+					     dtype=dtype,
+					     dev=dev)
+
+	 # Train the Model
+	 model.train(X_train, y_train, η=1e-1, iterations=1e2)
+
+	 # Visualise the Training Error
+	 plot_losses(model)
+
+	 # Misclassification won't work for ranked data
+	 # Instead Visualise the ranking
+	 plot_ranked_data(X_test, y_test, model)
+
+
+     def plot_losses(model):
+	 plt.plot(model.losses)
+	 plt.title("Cost / Loss Function for Iteration of Training")
+	 plt.show()
+
+
+     def plot_ranked_data(X, y, model):
+	 # Create a list of values
+	 n = X.shape[0]
+	 order = [i for i in range(n)]
+	 # Arrange that list of values based on the model
+	 quicksort(values=order, left=0, right=(n - 1), data=X, model=model)
+	 print(order)
+
+	 ordered_data = X[order, :]
+	 y_ordered = y[order]
+
+	 np.savetxt("/tmp/ordered_data.csv", X=ordered_data.numpy(), delimiter=',')
+
+	 p = plt.figure()
+	 for i in range(len(ordered_data)):
+	     plt.text(ordered_data[i, 0], ordered_data[i, 1], i)
+	 plt.scatter(ordered_data[:, 0], ordered_data[:, 1], c=y_ordered)
+	 plt.title("Testing Data, with ranks")
+	 plt.show()
+
+
+     if __name__ == "__main__":
+	 main()
+   #+end_src
+
+   
+    #+BEGIN_SRC R :exports results :results output graphics file :file media/ordered_blobs.png 
+	library(tidyverse)
+
+	data <- read.csv(file = "/tmp/ordered_data.csv", header = FALSE, sep = ",")
+	data$order <- 1:nrow(data)
+	names(data) <- c("PC1", "PC2", "rank")
+	data
+
+	ordered_plot <- ggplot(data, aes(x = PC1, y = PC2)) +
+	    geom_label(aes(label = rank), nudge_x = 0.0, nudge_y = 0.0, size = 5) +
+	    geom_point(aes(col = rank), size = 15, alpha = 0.4) +
+	    theme_classic() +
+	    labs(x = "Training Iteration", y = "Loss measured using BCE",
+	    title = "Training Loss at each iteration for Ranknet") + 
+	    guides(col = FALSE, alpha = FALSE, size = FALSE) +
+	    ## scale_colour_gradient(low = "#132B43", high = "#56B1F7", na.value = "grey50")
+	    ## scale_color_brewer(palette="RdBu") 
+	    scale_color_gradient2(mid="white", high="red", space ="Lab" )
+
+      ggsave(ordered_plot, filename = "./media/ordered_blobs.png",  bg = "transparent")
+
+    #+END_SRC
+
+    #+NAME: ordered-blobs
+    #+CAPTION: Using Machine Learned Ranking to order the points from most to least relevant
+    #+attr_html: :width 400px
+    #+attr_latex: :width 0.3\textwidth
+    #+RESULTS[af6eaf094592543a31778e4c6791ecc005f66993]:
+    [[file:media/ordered_blobs.png]]
+
    So instead of ranking, sort the values, this produces the output.
 
    but this is the problem, did it work? it's not clear, because even
@@ -912,6 +1075,7 @@ such corresponding inputs have also been listed:
 
 
 * Footnotes
+[fn:14] In this case the plot has been generated by /GGPlot2/ [fn:13] 
 
 [fn:13] Visualisations for this Report were implemented using
 =org-babel= cite:dominikOrgModeReference2018 inside /Emacs/

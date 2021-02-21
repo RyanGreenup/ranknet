@@ -675,6 +675,54 @@
       \verb https://hmkcode.com/ai/backpropagation-step-by-step/
       \endverb
     \endentry
+    \entry{hoareAlgorithm64Quicksort1961}{article}{}
+      \name{author}{1}{}{%
+        {{hash=d6facc8397f631d3ef01dd70be993640}{%
+           family={Hoare},
+           familyi={H\bibinitperiod},
+           given={C.\bibnamedelimi A.\bibnamedelimi R.},
+           giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{d6facc8397f631d3ef01dd70be993640}
+      \strng{fullhash}{d6facc8397f631d3ef01dd70be993640}
+      \strng{bibnamehash}{d6facc8397f631d3ef01dd70be993640}
+      \strng{authorbibnamehash}{d6facc8397f631d3ef01dd70be993640}
+      \strng{authornamehash}{d6facc8397f631d3ef01dd70be993640}
+      \strng{authorfullhash}{d6facc8397f631d3ef01dd70be993640}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{1}
+      \field{issn}{0001-0782}
+      \field{journaltitle}{Communications of the ACM}
+      \field{month}{7}
+      \field{number}{7}
+      \field{shortjournal}{Commun. ACM}
+      \field{shorttitle}{Algorithm 64}
+      \field{title}{Algorithm 64: {{Quicksort}}}
+      \field{urlday}{21}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{volume}{4}
+      \field{year}{1961}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{321}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1145/366622.366644
+      \endverb
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/ITGCEXUT/hoareAlgorithm64Quicksort1961.pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://doi.org/10.1145/366622.366644
+      \endverb
+      \verb{url}
+      \verb http://doi.org/10.1145/366622.366644
+      \endverb
+    \endentry
     \entry{huntThesisSubmittedPartial}{article}{}
       \name{author}{1}{}{%
         {{hash=697df44aa47ecf5515d8f13afd127094}{%
@@ -867,6 +915,43 @@
       \verb{url}
       \verb https://www.lesbonscomptes.com/recoll/usermanual/usermanual.html
       \endverb
+    \endentry
+    \entry{kernighanProgrammingLanguage1988}{book}{}
+      \name{author}{2}{}{%
+        {{hash=cef3a18f3097ba31cc4cf18c95bfdfbc}{%
+           family={Kernighan},
+           familyi={K\bibinitperiod},
+           given={Brian\bibnamedelima W.},
+           giveni={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=12fa210c982feca0e65287dfda751aca}{%
+           family={Ritchie},
+           familyi={R\bibinitperiod},
+           given={Dennis\bibnamedelima M.},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Englewood Cliffs, N.J}%
+      }
+      \list{publisher}{1}{%
+        {Prentice Hall}%
+      }
+      \strng{namehash}{3d646d17379d31803e7e0fbf4ee93b5c}
+      \strng{fullhash}{3d646d17379d31803e7e0fbf4ee93b5c}
+      \strng{bibnamehash}{3d646d17379d31803e7e0fbf4ee93b5c}
+      \strng{authorbibnamehash}{3d646d17379d31803e7e0fbf4ee93b5c}
+      \strng{authornamehash}{3d646d17379d31803e7e0fbf4ee93b5c}
+      \strng{authorfullhash}{3d646d17379d31803e7e0fbf4ee93b5c}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2nd ed}
+      \field{isbn}{978-0-13-110370-2 978-0-13-110362-7}
+      \field{pagetotal}{272}
+      \field{title}{The {{C}} Programming Language}
+      \field{year}{1988}
+      \field{dateera}{ce}
+      \keyw{C (Computer program language)}
     \endentry
     \entry{krehelAboaboSwiper2021}{software}{}
       \name{author}{1}{}{%
@@ -1788,6 +1873,38 @@
       \field{year}{1994}
       \field{dateera}{ce}
       \keyw{Neural networks (Computer science)}
+    \endentry
+    \entry{PythonProgramQuickSort2014}{online}{}
+      \list{organization}{1}{%
+        {GeeksforGeeks}%
+      }
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.}
+      \field{day}{7}
+      \field{hour}{18}
+      \field{langid}{american}
+      \field{minute}{57}
+      \field{month}{1}
+      \field{second}{29}
+      \field{timezone}{Z}
+      \field{title}{Python {{Program}} for {{QuickSort}}}
+      \field{urlday}{15}
+      \field{urlmonth}{2}
+      \field{urlyear}{2021}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /home/ryan/Zotero/storage/DMIAJVJK/python-program-for-quicksort.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.geeksforgeeks.org/python-program-for-quicksort/
+      \endverb
+      \verb{url}
+      \verb https://www.geeksforgeeks.org/python-program-for-quicksort/
+      \endverb
     \endentry
     \entry{rcoreteamLanguageEnvironmentStatistical2021}{manual}{}
       \name{author}{1}{}{%
