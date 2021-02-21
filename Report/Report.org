@@ -731,21 +731,36 @@
 
     #+END_SRC
 
+    #+NAME: ordered-blobs
+    #+CAPTION: Using Machine Learned Ranking to order the points from most to least relevant
+    #+attr_html: :width 400px
+    #+attr_latex: :width 0.6\textwidth
     #+RESULTS[c249d180414d32fc6284a4c105f4845e701be68e]:
     [[file:media/ordered_blobs.png]]
 
-    # #+NAME: ordered-blobs
-    # #+CAPTION: Using Machine Learned Ranking to order the points from most to least relevant
-    # #+attr_html: :width 400px
-    # #+attr_latex: :width 0.3\textwidth
-    #+RESULTS[af6eaf094592543a31778e4c6791ecc005f66993]:
-    [[file:media/ordered_blobs.png]]
-
 *** Visualising Model Performance
+    :PROPERTIES:
+    :CUSTOM_ID: vis-mod
+    :END:
     Although the results in figure [[ordered-blobs]] appear very
-    encouraging at first site, if the same approach is for an
-    untrained model (i.e. a model with random weights that), a similar
-    pattern emerges nonetheless, this is shown[fn:15] in figure [[ranked_blobs_unordered]]
+    encouraging at first, if the same sorting approach is implemented
+    for an untrained model (i.e. a model with random weights that), an
+    uncomfortably similar, ordered pattern emerges, this is
+    shown[fn:15] in figure [[ranked_blobs_unordered]].
+
+    This could be explained by the fact that the model, trained or untrained, 
+    is continuous and so the rank of nearby points could lead the
+    emergence of an ordered pattern.
+
+    Investigating types of data where the Ranknet model will produce an ordered
+    pattern only when trained would represent a logical next step. One
+    approach would be to consider the rating of a product (e.g. the
+    quality of wine, see cite:cortezModelingWinePreferences2009) and
+    train a Ranknet model based only on whether or not one wine is
+    better than the next. The order of the returned results could be
+    compared with the order of the original dataset as well as a
+    random untrained control model in order to evaluate the efficacy
+    of the model.
 
 
     #+BEGIN_SRC R :exports results :results output graphics file :file media/ordered_blobs_untrained.png 
@@ -769,75 +784,30 @@
 
     #+END_SRC
 
+    #+NAME: ordered-blobs-untrained
+    #+CAPTION: Using Machine Learned Ranking to order the points from most to least relevant
+    #+attr_html: :width 400px
+    #+attr_latex: :width 0.6\textwidth
     #+RESULTS[30a515e8f5b11b12f0c5813c215184d538322f58]:
     [[file:media/ordered_blobs_untrained.png]]
 
-    # #+NAME: ordered-blobs-untrained
-    # #+CAPTION: Using Machine Learned Ranking to order the points from most to least relevant
-    # #+attr_html: :width 400px
-    # #+attr_latex: :width 0.3\textwidth
    
-
-    
-
-    
-
-    
-   So instead of ranking, sort the values, this produces the output.
-
-   but this is the problem, did it work? it's not clear, because even
-   if the model was not trained we get the following (put them side by side).
-
-   So this is definitely one of the hard issues.
-
-   what would be better would be to classify data with a rating
-   (i.e. wine scores), only show the model whether the wine is
-   good/bad and compare the output order with the input order, that
-   would be an effective way to see that it works. This was not yet
-   effectively implemented.
-
-** TODO Moons
-** TODO Optimisers
-** TODO Batches
-** TODO Wine
-** TODO Rank Wiki Articles
-* TODO Difficulties
-  - Don't use torch
-    - Do it by hand first because it can be hard to see if the correct
-      weights are being updated sensibly, making debugging very difficult.
-    - R or Julia would be easier because counting from 0 get's pretty
-      confusing when dealing with {1, 0}, {-1, 0, 1}.
-  - Don't use misclassification rate to measure whether the ranking
-    - In hindsight this is obvious, but at the time misclassification
-      was a tempting metric because of it's interpretability
-    was correct
-
-    Very difficult to see if the model is working
-
-  - A continuous function will still produce an ordered pattern in
-      the ranking of results, even if the model hasn't been trained,
-      so visualising isn't helpful either.
-
-  - Implement it on a data set that already has order, obfuscate the
-      order and then contrast the results
-    - or use a measurement
-
-  - Plot the loss function of the training data live, the model is
-    slow to train and waiting for it to develop was a massive time
-    drain.
-    
-
+** TODO Enhancing the Model
+   Further enhancements (such as random batches and alternative
+   optimisers) were made to the model and alternative datasets
+   implemented (see =473dce= \(\rightarrow\) =d11e607=) however the
+   results were mixed and not encouraging, rather an alternative type
+   of data should first be considered and evaluated, as already
+   discussed in \S [[#vis-mod]].
 
 * Further Research
 
   
-** Practical Improvements
-
-  - Apply this to documents to get a sorted list, like the wine data
-  - The "Quicksort" algorithm likely needs a random pivot to be efficient cite:timroughgardenQuicksortOverview2017
+** Improve the sorting algorithm
+  The "Quicksort" algorithm likely needs a random pivot to be
+  efficient cite:timroughgardenQuicksortOverview2017. 
 
 ** Evaluate performance improvements
-
   It is still not clear how the
   performance of Ranknet compares to traditional approaches
   implemented by search engines (see \S [[#search-engines-list]]), further
@@ -855,13 +825,34 @@
   cite:jarvelinCumulatedGainbasedEvaluation2002 as demonstrated in
   previous work cite:viksinghComparisonOpenSource2009.
 
+  
+   it is not yet clear:
+
+   1. How this could be applied for a broad range of queries
+   2. How to measure the performance of ranked documents
+     - There is some guidance on this by past work, see e.g. cite:viksinghComparisonOpenSource2009.
+
 ** Evaluate alternative machine learning models
    :PROPERTIES:
    :CUSTOM_ID: machine-learning-models
    :END:
-   i.e. can SVM's or trees be used instead of neural networks?
+   An open question is whether or not alternative machine learning
+   algorithms such as trees and SVMs could be used to fit the Ranknet
+   model in an effective fashion, this could be ideal for performance
+   concerns as deep neural networks can be resource intensive.
+
+   Another question is how Ranknet compares to simply using
+   classification approaches to identify documents that might be
+   relevant.  
+
 
 * Conclusion
+  The Ranknet approach to machine-learned ranking looks promising, but
+  it is difficult to implement and more study is needed to evaluate
+  whether or not it brings significant advantages over traditional
+  approaches and whether or not there are effective ways to apply the
+  model to search problems for a broad scope of queries.
+
 
 * Text and References
 Fractals are complex shapes that often occur from natural processes, in this

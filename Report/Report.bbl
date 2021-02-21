@@ -362,6 +362,53 @@
       \endverb
       \keyw{database,entreprise-search,highlighting,instant,rust,search-engine,site-search,synonyms,typo-tolerance}
     \endentry
+    \entry{cortezModelingWinePreferences2009}{article}{}
+      \name{author}{5}{}{%
+        {{hash=b626117fac1be4ebf5052761a43bcdd3}{%
+           family={Cortez},
+           familyi={C\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b95c328412f9d985b4539c0c7d98ff8c}{%
+           family={Cerdeira},
+           familyi={C\bibinitperiod},
+           given={F},
+           giveni={F\bibinitperiod}}}%
+        {{hash=dd87c4fc7e4dfd4c9e6a1240d4eec881}{%
+           family={Almedida},
+           familyi={A\bibinitperiod},
+           given={F},
+           giveni={F\bibinitperiod}}}%
+        {{hash=c51b7b0a500208697c4ea3f0cfd93cd3}{%
+           family={Matos},
+           familyi={M\bibinitperiod},
+           given={T},
+           giveni={T\bibinitperiod}}}%
+        {{hash=92995b2c2a81005aab075ab6b0edab8d}{%
+           family={Reis},
+           familyi={R\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{6c977cc1b215342b1fee6d09b55906cb}
+      \strng{fullhash}{1f38819b8f5d77509bab50a1d9e6ce6c}
+      \strng{bibnamehash}{6c977cc1b215342b1fee6d09b55906cb}
+      \strng{authorbibnamehash}{6c977cc1b215342b1fee6d09b55906cb}
+      \strng{authornamehash}{6c977cc1b215342b1fee6d09b55906cb}
+      \strng{authorfullhash}{1f38819b8f5d77509bab50a1d9e6ce6c}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Elsevier}
+      \field{number}{4}
+      \field{title}{Modeling Wine Preferences by Data Mining from Physicochemical Properties. {{In Decision Support Systems}}}
+      \field{volume}{47}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{pages}{547\bibrangedash 553}
+      \range{pages}{7}
+    \endentry
     \entry{docfetcherdevelopmentteamDocFetcherFastDocument}{online}{}
       \name{author}{1}{}{%
         {{hash=0ad26384e1f06c64a374e416acd977d9}{%
