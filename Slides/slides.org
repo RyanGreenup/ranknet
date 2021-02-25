@@ -1,0 +1,119 @@
+#+TITLE: RankNet
+:REVEAL:
+#+REVEAL_THEME: simple
+#+REVEAL: :frag (appear)
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+:END:
+:PREAMBLE:
+#+OPTIONS: broken-links:auto todo:nil H:9 tags:t
+#+STARTUP: overview
+#+AUTHOR: Ryan Greenup
+#+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]"
+#+OPTIONS: tex:t
+# #+TODO: TODO IN-PROGRESS WAITING DONE
+#+CATEGORY: TAD
+:END:
+:HTML:
+#+INFOJS_OPT: view:info toc:3
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="./resources/style.css">
+# #+CSL_STYLE: /home/ryan/Templates/CSL/nature.csl
+:END:
+:R:
+#+PROPERTY: header-args:R :session TADMain :dir ./ :cache yes :eval never-export :exports both
+#+PROPERTY: :eval never
+# exports: both (or code or whatever)
+# results: table (or output or whatever)
+:END:
+:LATEX:
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,11pt,twoside]
+#+LATEX_HEADER: \IfFileExists{./resources/style.sty}{\usepackage{./resources/style}}{}
+#+LATEX_HEADER: \IfFileExists{./resources/referencing.sty}{\usepackage{./resources/referencing}}{}
+#+LATEX_HEADER: \addbibresource{./resources/references.bib}
+#+LATEX_HEADER: \usepackage[mode=buildnew]{standalone}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{decorations.fractals}
+#+LATEX_HEADER: \usetikzlibrary{lindenmayersystems}
+:END:
+@@latex: \newpage @@
+
+
+* Introduction
+  - What is /Learning to Rank/?
+  - Why would we use it?
+  - What were we trying to find?
+    
+* Implementing the Approach
+
+** How does it work
+
+   - Fit a model: \(\enspace f(\vec{x_i}) = s_i\) 
+   - Train the model so as to minimise the error of:
+
+    \[
+    p_{ij} = \frac{1}{1+e^{\sigma \cdot (s_i-s_j)}} \quad \exists \sigma
+    \in \mathbb{R}
+    \]
+
+   
+*** What do you mean by error
+    We were using a version of BCE:
+ #+NAME: 
+ #+CAPTION: 
+ #+attr_html: :width 400px
+ #+attr_latex: :width 0.5\textwidth
+  [[../media/inkscape/classification_residual.png]]
+
+** Building the RankNet
+*** Make some Data
+
+    #+attr_html: :width 400px
+    #+attr_latex: :width 0.5\textwidth
+    [[../Report/media/SimulatedData.png]]
+
+*** Build a Neural Network
+    #+attr_html: :width 350px
+    #+attr_latex: :width 0.5\textwidth
+    [[../Report/media/nn.svg]]
+
+    # http://alexlenail.me/NN-SVG/index.html
+*** Adapt the Neural Network
+    - Identify Pairs
+    - Send each pair down one after the other
+    - Use the sigmoid of there difference to get an output value
+      
+*** Train the Model
+    #+attr_html: :width 400px
+    #+attr_latex: :width 0.5\textwidth
+    [[../Report/media/ranknet_loss.png]]
+
+**** Caveat
+     It seems not all data can be trained, see example
+* Results 
+** Trained Model
+ Apply Quicksort using the model:
+
+ #+attr_html: :width 400px
+ #+attr_latex: :width 0.5\textwidth
+ [[../Report/media/ordered_blobs.png]]
+** Untrained
+   Unfourtunately, an untrained model...
+
+ #+attr_html: :width 400px
+ #+attr_latex: :width 0.5\textwidth
+ [[../Report/media/ordered_blobs_untrained.png]]
+* Discussion
+
+** Take aways
+   - Don't use an NN library at first
+   - Start with a simple dataset
+
+** Where to from Here
+   - Look at ways to evaluate whether it's working
+   - Ways to automate the training
+     - e.g. =grep=
+   - Apply to real-world data sets like wine
+   - Adapt to work with a corpus
+   - Try and apply this within a search engine
+* Footnotes

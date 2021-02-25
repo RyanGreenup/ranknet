@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>RankNet</title>
+<meta name="author" content="(Ryan Greenup)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/simple.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel="stylesheet" type="text/css" href="./resources/style.css">
+<script type="text/javascript" src="https://orgmode.org/org-info.js">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+// @license-end
+</script>
+
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "9");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "3");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">RankNet</h1><h2 class="author">Ryan Greenup</h2><p class="date">Created: 2021-02-26 Fri 00:56</p>
+</section>
+<section id="table-of-contents"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org8091d2b">Introduction</a></li>
+<li><a href="#/slide-org82495a5">Implementing the Approach</a>
+<ul>
+<li><a href="#/slide-orgd9e03c6">How does it work</a>
+<ul>
+<li><a href="#/slide-orgb1aaa60">What do you mean by error</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org05d8b76">Building the RankNet</a>
+<ul>
+<li><a href="#/slide-orgd93b567">Make some Data</a></li>
+<li><a href="#/slide-orgc73fa49">Build a Neural Network</a></li>
+<li><a href="#/slide-orgc52e77e">Adapt the Neural Network</a></li>
+<li><a href="#/slide-orgf31f61c">Train the Model</a>
+<ul>
+<li><a href="#/slide-orgb2eb016">Caveat</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#/slide-orgcda810e">Results</a>
+<ul>
+<li><a href="#/slide-orgb6dfb70">Trained Model</a></li>
+<li><a href="#/slide-orgf383946">Untrained</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org7228e90">Discussion</a>
+<ul>
+<li><a href="#/slide-org2151e6f">Take aways</a></li>
+<li><a href="#/slide-orgfe8e286">Where to from Here</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<p>
+
+</p>
+
+
+<section>
+<section id="slide-org8091d2b">
+<h2 id="org8091d2b">Introduction</h2>
+<ul>
+<li>What is <i>Learning to Rank</i>?</li>
+<li>Why would we use it?</li>
+<li>What were we trying to find?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org82495a5">
+<h2 id="org82495a5">Implementing the Approach</h2>
+<div class="outline-text-2" id="text-org82495a5">
+</div>
+</section>
+<section id="slide-orgd9e03c6">
+<h3 id="orgd9e03c6">How does it work</h3>
+<ul>
+<li>Fit a model: \(\enspace f(\vec{x_i}) = s_i\)</li>
+<li><p>
+Train the model so as to minimise the error of:
+</p>
+
+<p>
+\[
+    p_{ij} = \frac{1}{1+e^{\sigma \cdot (s_i-s_j)}} \quad \exists \sigma
+    \in \mathbb{R}
+    \]
+</p></li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgb1aaa60">
+<h4 id="orgb1aaa60">What do you mean by error</h4>
+<p>
+We were using a version of BCE:
+</p>
+
+<div id="org56fb802" class="figure">
+<p><img src="../media/inkscape/classification_residual.png" alt="classification_residual.png" width="400px" />
+</p>
+</div>
+
+</section>
+<section id="slide-org05d8b76">
+<h3 id="org05d8b76">Building the RankNet</h3>
+<div class="outline-text-3" id="text-org05d8b76">
+</div>
+</section>
+<section id="slide-orgd93b567">
+<h4 id="orgd93b567">Make some Data</h4>
+
+<div id="orgd9a6533" class="figure">
+<p><img src="../Report/media/SimulatedData.png" alt="SimulatedData.png" width="400px" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgc73fa49">
+<h4 id="orgc73fa49">Build a Neural Network</h4>
+
+<div id="org8516fff" class="figure">
+<p><object type="image/svg+xml" data="../Report/media/nn.svg" class="org-svg" width="350px">
+Sorry, your browser does not support SVG.</object>
+</p>
+</div>
+</section>
+<section id="slide-orgc52e77e">
+<h4 id="orgc52e77e">Adapt the Neural Network</h4>
+<ul>
+<li>Identify Pairs</li>
+<li>Send each pair down one after the other</li>
+<li>Use the sigmoid of there difference to get an output value</li>
+
+</ul>
+
+</section>
+<section id="slide-orgf31f61c">
+<h4 id="orgf31f61c">Train the Model</h4>
+
+<div id="orgdb67189" class="figure">
+<p><img src="../Report/media/ranknet_loss.png" alt="ranknet_loss.png" width="400px" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgb2eb016">
+<h5 id="orgb2eb016">Caveat</h5>
+<p>
+It seems not all data can be trained, see example
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgcda810e">
+<h2 id="orgcda810e">Results</h2>
+<div class="outline-text-2" id="text-orgcda810e">
+</div>
+</section>
+<section id="slide-orgb6dfb70">
+<h3 id="orgb6dfb70">Trained Model</h3>
+<p>
+Apply Quicksort using the model:
+</p>
+
+
+<div id="org2fdf96c" class="figure">
+<p><img src="../Report/media/ordered_blobs.png" alt="ordered_blobs.png" width="400px" />
+</p>
+</div>
+</section>
+<section id="slide-orgf383946">
+<h3 id="orgf383946">Untrained</h3>
+<p>
+Unfourtunately, an untrained model&#x2026;
+</p>
+
+
+<div id="org8a6d71b" class="figure">
+<p><img src="../Report/media/ordered_blobs_untrained.png" alt="ordered_blobs_untrained.png" width="400px" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org7228e90">
+<h2 id="org7228e90">Discussion</h2>
+<div class="outline-text-2" id="text-org7228e90">
+</div>
+</section>
+<section id="slide-org2151e6f">
+<h3 id="org2151e6f">Take aways</h3>
+<ul>
+<li>Don't use an NN library at first</li>
+<li>Start with a simple dataset</li>
+
+</ul>
+
+</section>
+<section id="slide-orgfe8e286">
+<h3 id="orgfe8e286">Where to from Here</h3>
+<ul>
+<li>Look at ways to evaluate whether it's working</li>
+<li>Ways to automate the training
+<ul>
+<li>e.g. <code>grep</code></li>
+
+</ul></li>
+<li>Apply to real-world data sets like wine</li>
+<li>Adapt to work with a corpus</li>
+<li>Try and apply this within a search engine</li>
+
+</ul>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/markdown/markdown.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown,RevealZoom,RevealNotes],
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+]
+});
+
+
+</script>
+</body>
+</html>
