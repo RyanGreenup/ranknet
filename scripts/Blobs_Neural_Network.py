@@ -18,6 +18,7 @@ np.random.seed(1)
 # Set Torch Parameters
 dtype = torch.float
 dev = test_cuda()
+dev = 'cpu'
 
 # Set personal flags
 DEBUG = True
